@@ -1,5 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+@NgModule({
+  declarations: [
+    AppComponent
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminaddserviceComponent } from './adminaddservice/adminaddservice.component';
@@ -42,6 +51,7 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
     UsernavbarComponent,
     UserviewappointmentComponent,
     UserviewfeedbackComponent
+
   ],
   imports: [
     BrowserModule,
