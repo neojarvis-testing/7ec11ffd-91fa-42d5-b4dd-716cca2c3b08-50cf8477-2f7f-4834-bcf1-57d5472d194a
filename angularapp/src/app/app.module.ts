@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminaddserviceComponent } from './adminaddservice/adminaddservice.component';
