@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminaddserviceComponent } from './adminaddservice/adminaddservice.component';
@@ -52,7 +53,6 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
     UsernavbarComponent,
     UserviewappointmentComponent,
     UserviewfeedbackComponent
-
 
   ],
   imports: [
