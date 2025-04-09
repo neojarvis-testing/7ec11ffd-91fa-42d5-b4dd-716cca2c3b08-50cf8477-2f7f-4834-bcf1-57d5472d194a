@@ -22,12 +22,12 @@ import lombok.ToString;
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long feedbackId;
+    private Long feedbackId;
+    private String message;
+    private int rating;
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    User user;
-    String message;
-    int rating;
+    private User user;
     
 }
