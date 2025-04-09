@@ -1,1 +1,40 @@
-<p>adminviewappointment works!</p>
+<h1>Requested Appointments</h1>
+<table>
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>ServiceName</th>
+            <th>Price</th>
+            <th>Vehicle</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- <tr *ngFor="let appointment of appointments,index as i">
+            <td>{{1}}</td>
+            <td>{{appointment.}}</td>
+            <td>{{appointment.}}</td>
+            <td>{{appointment.}}</td>
+            <td>{{appointment.appointmentDate}}</td>
+            <td>{{appointment.location}}</td>
+            <td>{{appointment.}}</td>
+            <td>
+                <select name="" id=""></select>
+            </td>
+            <td>
+                <button>Delete</button>
+            </td>
+        </tr> -->
+    </tbody>
+</table>
+
+appointmentId?: number,
+service: VehicleMaintenance,
+appointmentDate: string,
+location: string, 
+status?: string,
+user?: User
