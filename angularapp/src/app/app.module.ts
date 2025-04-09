@@ -1,14 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
-@NgModule({
-  declarations: [
-    AppComponent
-
-
+import {HttpClientModule} from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -57,7 +49,8 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
