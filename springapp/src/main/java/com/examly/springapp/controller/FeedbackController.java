@@ -1,6 +1,7 @@
 package com.examly.springapp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,6 +63,18 @@ public class FeedbackController {
         try{
             feedbackService.deleteFeedback(id);
             return ResponseEntity.status(204).body("Feedback deleted successfully");
+        }catch(EntityNotFoundException e){
+            return ResponseEntity.status(403).body(e.getMessage());
+        }catch(Exception e){
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/api/feedback/{feedbackId}")
+    public ResponseEntity<?> getFeedbackById(@PathVariable Long feedbackId){
+        try{
+            Feedback feedback=feedbackService.getFeedbackById(feedbackId);
+            return ResponseEntity.status(200).body(feedback);
         }catch(EntityNotFoundException e){
             return ResponseEntity.status(403).body(e.getMessage());
         }catch(Exception e){
