@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminaddserviceComponent } from './adminaddservice/adminaddservice.component';
@@ -23,7 +22,7 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +44,7 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
     UsernavbarComponent,
     UserviewappointmentComponent,
     UserviewfeedbackComponent
-
+ 
   ],
   imports: [
     BrowserModule,
