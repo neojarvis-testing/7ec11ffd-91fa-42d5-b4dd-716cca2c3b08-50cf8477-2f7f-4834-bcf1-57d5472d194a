@@ -1,5 +1,5 @@
 package com.examly.springapp.service;
 
-public class AppointmentServiceImpl {
+public class AppointmentServiceImpl implements AppointmentService{
     
 }
