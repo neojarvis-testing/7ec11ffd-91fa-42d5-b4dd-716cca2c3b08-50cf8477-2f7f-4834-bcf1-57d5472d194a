@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,6 +27,4 @@ public class User {
     private String mobileNumber;
     private String userRole;
 
-
-    
 }
