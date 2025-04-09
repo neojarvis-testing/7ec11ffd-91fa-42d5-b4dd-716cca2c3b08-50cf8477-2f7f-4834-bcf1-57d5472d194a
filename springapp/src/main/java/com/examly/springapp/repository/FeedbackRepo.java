@@ -13,6 +13,6 @@ public interface FeedbackRepo extends JpaRepository<Feedback,Long> {
     
     
     @Query("SELECT f FROM Feedback f WHERE f.user.id = :userId")
-    public List<Feedback> findByUserId(Long userId);
+    public List<Feedback> findByUserId(int userId);
     
 }

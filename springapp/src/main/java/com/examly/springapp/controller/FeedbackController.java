@@ -46,7 +46,7 @@ public class FeedbackController {
     }
 
     @GetMapping("api/feedback/user/{userId}")
-    public ResponseEntity<?> getFeedbackByUserId(@PathVariable Long userId){
+    public ResponseEntity<?> getFeedbackByUserId(@PathVariable int userId){
         try{
             List<Feedback> feedbackList=feedbackService.getFeedbackByUserId(userId);
             return ResponseEntity.status(200).body(feedbackList);
