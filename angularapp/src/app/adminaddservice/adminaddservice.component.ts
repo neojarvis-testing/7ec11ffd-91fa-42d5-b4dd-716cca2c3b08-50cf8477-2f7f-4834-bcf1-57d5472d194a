@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VehicleService } from '../services/vehicle.service';
+import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 
 @Component({
   selector: 'app-adminaddservice',
@@ -8,8 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class AdminaddserviceComponent implements OnInit {
 
   constructor() { }
+  
+  vehiclemaintenance:VehicleMaintenance={serviceName:"",servicePrice:0,typeOfVehicle:""};
 
   ngOnInit(): void {
   }
+
+
 
 }
