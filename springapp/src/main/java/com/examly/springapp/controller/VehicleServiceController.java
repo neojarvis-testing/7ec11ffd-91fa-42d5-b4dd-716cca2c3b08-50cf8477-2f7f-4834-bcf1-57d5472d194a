@@ -1,6 +1,7 @@
 package com.examly.springapp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,12 @@ public class VehicleServiceController {
     {
         VehicleMaintenance vehicleMaintenance=vehicleService.addService(service);
         return ResponseEntity.status(201).body(vehicleMaintenance);
+    }
+    @GetMapping("/api/services/{id}")
+    public ResponseEntity<?> getServiceById(@PathVariable Long id)
+    {
+        Optional<VehicleMaintenance> list=vehicleService.getServiceById(id);
+        return ResponseEntity.status(200).body(list);
     }
 
     @GetMapping("/api/services/name")
