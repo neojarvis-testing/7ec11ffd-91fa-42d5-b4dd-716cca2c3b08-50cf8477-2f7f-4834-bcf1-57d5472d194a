@@ -8,21 +8,23 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+
+
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
-@ToString
-@Entity
+@Getter
 public class User {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int userId;
-  private String email;
-  private String password;
-  private String username;
-  private String mobileNumber;
-  private String userRole;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
+
+    private String email;
+    private String password;
+    private String username;
+    private String mobileNumber;
+    private String userRole;
 
 }
