@@ -22,11 +22,9 @@ public class LoginDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId ; 
 
-    private String email ; 
-    private String password ;
     private String username;
-    private String mobileNumber ; 
+    private String token ; 
     private String userRole ; 
-     
+    private String password;
 
 }
