@@ -37,13 +37,14 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
  
-   
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
+
                 .requestMatchers("/api/register", "/api/appointment/**", "/api/register/**", "/api/services/**","/api/login").permitAll()
+
                 .anyRequest().permitAll()
             )
             .sessionManagement(session -> session
@@ -69,5 +70,3 @@ public class SecurityConfig {
     }
    
 }
- 
- 

@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.delete-btn, .confirm-btn, .cancel-btn {
+    background-color: #dc3545; /* Red color for delete buttons */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover, .confirm-btn:hover, .cancel-btn:hover {
+    background-color: #c82333;
+}
+
+select[name="selectedOption"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.delete-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 5px;
+    z-index: 1000;
+    display: none; /* Initially hidden */
+}
+
+.popup-content p {
+    margin-bottom: 20px;
+}
+
+.popup-actions button {
+    margin-right: 10px;
+}
+
+/* Specific styles for different statuses */
+select[name="selectedOption"] option[value="Approved"] {
+    background-color: #28a745;
+    color: white;
+}
+
+select[name="selectedOption"] option[value="Rejected"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+select[name="selectedOption"] option[value="Pending"] {
+    background-color: #ffc107;
+    color: black;
+}
+
+.no-appointments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* Adjust this value as needed */
+    text-align: center;
+    font-size: 1.5em; /* Adjust the font size as needed */
+    color: #333; /* Adjust the text color as needed */
+}
+
+
+.blue-line {
+     border-top: 3px solid blue;
+     width: 100%;
+     margin-bottom: 20px;
+}
+    
+

@@ -12,7 +12,7 @@ import com.examly.springapp.model.Feedback;
 public interface FeedbackRepo extends JpaRepository<Feedback,Long> {
     
     
-    // @Query("SELECT f FROM Feedback f WHERE f.user.id = :userId")
-    public List<Feedback> findByUserUserId(int userId);
+    @Query("SELECT f FROM Feedback f WHERE f.user.id = :userId")
+    public List<Feedback> findByUserId(int userId);
     
 }
