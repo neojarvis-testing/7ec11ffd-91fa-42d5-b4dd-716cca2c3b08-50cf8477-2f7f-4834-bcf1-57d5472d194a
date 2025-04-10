@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
  
 @NgModule({
   declarations: [
+    
     AppComponent,
     AdminaddserviceComponent,
     AdminnavbarComponent,
@@ -42,8 +43,7 @@ import { FormsModule } from '@angular/forms';
     UseraddfeedbackComponent,
     UsernavbarComponent,
     UserviewappointmentComponent,
-    UserviewfeedbackComponent
- 
+    UserviewfeedbackComponent 
   ],
   imports: [
     BrowserModule,
