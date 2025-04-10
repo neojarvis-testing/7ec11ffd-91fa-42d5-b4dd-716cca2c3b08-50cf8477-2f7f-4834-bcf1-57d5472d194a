@@ -1,1 +1,16 @@
-<p>adminnavbar works!</p>
+<nav class="navbar">
+  <a routerLink="/home" class="text-decoration-none">Home</a>
+  <div class="dropdown">
+
+    <select class="dropdown" onchange="location = this.value;">
+      <option disabled selected>Services</option>
+      <option value="/adminaddservice">Add Service</option>
+      <option value="/adminviewservice">View Services</option>
+    </select>
+
+  </div>
+  <a routerLink="/adminviewappointment" class="text-decoration-none">Appointments</a>
+  <a routerLink="/adminviewfeedback" class="text-decoration-none">Feedbacks</a>
+  <a routerLink="/adminviewuserdetails" class="text-decoration-none">Customer</a>
+  <a routerLink="/home" type="button">Logout</a>
+</nav>

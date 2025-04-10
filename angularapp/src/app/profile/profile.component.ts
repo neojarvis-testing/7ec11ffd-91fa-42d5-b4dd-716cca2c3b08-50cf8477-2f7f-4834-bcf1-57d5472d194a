@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserdetailsService } from '../services/userdetails.service';
+import { User } from '../models/user.model';
+
 
 @Component({
   selector: 'app-profile',

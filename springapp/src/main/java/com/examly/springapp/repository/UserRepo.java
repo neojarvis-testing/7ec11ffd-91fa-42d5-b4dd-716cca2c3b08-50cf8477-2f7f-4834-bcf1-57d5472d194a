@@ -15,7 +15,12 @@ public interface UserRepo extends JpaRepository<User,Integer>{
     Optional<User> getUserByName(String name);
 
     @Query("SELECT u FROM User u WHERE u.username Like :username")
-    User findByUserName(String username);
+    Optional<User> findByUserName(String username);
 
+    @Query("SELECT u.userRole FROM User u WHERE u.username Like :username")
+    public String findUserRoleByUsername(String username);
+
+    @Query("SELECT u.userId FROM User u WHERE u.username Like :username")
+    public Integer findUserIdByUsername(String username);
 
 }

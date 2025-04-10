@@ -1,1 +1,25 @@
-<p>useraddappointment works!</p>
+<h1>Available Services</h1>
+<table id="servicesTable">
+  <thead>
+    <tr>
+      <th>S. NO</th>
+      <th>Service Name</th>
+      <th>Price</th>
+      <th>Type of Vehicle</th>
+      <th>Appointment Date</th>
+      <th>Location</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let service of services">
+      <td>{{ service.id }}</td>
+      <td>{{ service.name }}</td>
+      <td>{{ service.price }}</td>
+      <td>{{ service.vehicle }}</td>
+      <td><input type="date" class="appointment-date" (input)="onInputChange($event, $event.target.closest('tr'))"></td>
+      <td><input type="text" class="location" placeholder="Enter location" (input)="onInputChange($event, $event.target.closest('tr'))"></td>
+      <td><button class="add-appointment" disabled>Add Appointment</button></td>
+    </tr>
+  </tbody>
+</table>

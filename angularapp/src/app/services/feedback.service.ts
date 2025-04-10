@@ -1,7 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Feedback } from '../models/feedback.model';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +22,5 @@ export class FeedbackService {
     return this.httpClient.delete(this.apiUrl+"/api/feedback/"+feedbackId);
   }
   
+
 }
