@@ -1,3 +1,17 @@
-<app-home></app-home>
+<nav class="navbar">
 
-<router-outlet></router-outlet>
+  <div class="navbar-title">
+    <a [routerLink]="['/home']" >Vehicle Service</a>
+  </div>
+  
+
+  <div class="navbar-links">
+    <a [routerLink]="['/home']" >Home</a>
+    <a [routerLink]="['/registration']">Register</a>
+    <a [routerLink]="['/login']">Login</a>
+  </div>
+</nav>
+
+<div>
+  <router-outlet></router-outlet>
+</div>

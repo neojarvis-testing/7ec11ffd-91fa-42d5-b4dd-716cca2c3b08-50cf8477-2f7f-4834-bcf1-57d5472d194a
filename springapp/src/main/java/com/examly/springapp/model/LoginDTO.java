@@ -18,15 +18,9 @@ import lombok.ToString;
 @ToString
 public class LoginDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId ; 
-
-    private String email ; 
-    private String password ;
+    private String token;
     private String username;
-    private String mobileNumber ; 
-    private String userRole ; 
-     
+    private String userRole;
+    private int userId;
 
 }
