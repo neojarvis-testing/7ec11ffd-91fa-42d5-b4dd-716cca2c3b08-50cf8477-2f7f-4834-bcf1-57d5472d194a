@@ -10,7 +10,6 @@ import { AdminviewappointmentComponent } from './adminviewappointment/adminviewa
 import { AdminviewfeedbackComponent } from './adminviewfeedback/adminviewfeedback.component';
 import { AdminviewserviceComponent } from './adminviewservice/adminviewservice.component';
 import { AdminviewuserdetailsComponent } from './adminviewuserdetails/adminviewuserdetails.component';
-import { AuthguardComponent } from './authguard/authguard.component';
 import { ErrorComponent } from './error/error.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +21,7 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
+import { FormsModule } from '@angular/forms';
  
 @NgModule({
   declarations: [
@@ -32,7 +32,6 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
     AdminviewfeedbackComponent,
     AdminviewserviceComponent,
     AdminviewuserdetailsComponent,
-    AuthguardComponent,
     ErrorComponent,
     HomeComponent,
     LoginComponent,
@@ -49,7 +48,8 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
