@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Feedback } from '../models/feedback.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,7 @@ export class FeedbackService {
 
   constructor(private httpClient:HttpClient) { }
 
-  public createFeedback(feedback:Feedback):Observable<any>{
+  public createFeedback(feedback: Feedback):Observable<any>{
     return this.httpClient.post(this.apiUrl+"/api/feedback",feedback);
   }
 

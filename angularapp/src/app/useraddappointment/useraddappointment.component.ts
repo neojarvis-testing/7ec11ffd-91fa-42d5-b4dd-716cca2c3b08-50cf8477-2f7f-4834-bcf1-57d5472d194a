@@ -12,12 +12,12 @@ export class UseraddappointmentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.services = [
-      { id: 1, name: 'Car Wash', price: 500, vehicle: 'Car' },
-      { id: 2, name: 'Oil Change', price: 1200, vehicle: 'Bike' },
-      { id: 3, name: 'Tire Rotation', price: 800, vehicle: 'Car' },
-      { id: 4, name: 'Brake Inspection', price: 1500, vehicle: 'Truck' }
-    ];
+    // this.services = [
+    //   { id: 1, name: 'Car Wash', price: 500, vehicle: 'Car' },
+    //   { id: 2, name: 'Oil Change', price: 1200, vehicle: 'Bike' },
+    //   { id: 3, name: 'Tire Rotation', price: 800, vehicle: 'Car' },
+    //   { id: 4, name: 'Brake Inspection', price: 1500, vehicle: 'Truck' }
+    // ];
   }
 
   onInputChange(event: Event, row: any) {
