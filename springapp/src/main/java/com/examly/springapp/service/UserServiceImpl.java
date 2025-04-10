@@ -5,10 +5,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.core.Authentication;
+
 import org.springframework.stereotype.Service;
 
 import com.examly.springapp.exceptions.*;
@@ -41,11 +45,14 @@ public class UserServiceImpl implements UserService{
     }
 
 
-
-    //review again
     @Override
     public User loadUserByUsername(String userName) {
-        return userRepo.findByUserName(userName).get();
+        User user = userRepo.findByUserName(userName);
+        if (user == null) {
+            throw new EntityNotFoundException("User not found with username: " + userName);
+        }
+        return user;
+
     }
 
     @Override
@@ -67,19 +74,21 @@ public class UserServiceImpl implements UserService{
         userRepo.deleteById(userId);
     }
 
-    @Override
-    public User updateUser(User user) {
-        Optional<User> opt=userRepo.findById(user.getUserId());
-        if(opt.isEmpty()){
+    public User updateUser(int userId, User user) {
+        Optional<User> opt = userRepo.findById(userId);
+        if (opt.isEmpty()) {
             throw new EntityNotFoundException("UserId not found");
         }
+        user.setUserId(userId); 
         return userRepo.save(user);
     }
+
 
     @Override
     public Optional<User> getUserByName(String name) {
         return userRepo.getUserByName(name);
     }
+
 
 
     @Override
@@ -119,4 +128,5 @@ public class UserServiceImpl implements UserService{
 
     
     }
+
 }

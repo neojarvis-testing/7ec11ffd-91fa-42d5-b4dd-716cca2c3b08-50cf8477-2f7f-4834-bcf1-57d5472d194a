@@ -12,7 +12,7 @@ public interface UserService {
     public List<User> findAllUsers();
     public User getByUserId(int userId);
     public void deleteUser(int userId);
-    public User updateUser(User user);
+    public User updateUser(int userId,User user);
     public Optional<User> getUserByName(String name);
     public AuthUser loginUser(LoginDTO user);
     public User registerUser(User user);
