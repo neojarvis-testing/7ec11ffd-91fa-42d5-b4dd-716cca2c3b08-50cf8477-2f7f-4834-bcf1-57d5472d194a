@@ -10,21 +10,18 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
- 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-            // .requestMatchers("/api/register", "/api/login").permitAll()
 
-            // .requestMatchers("/api/user/**").hasRole("ADMIN")
-            .anyRequest().permitAll()
-
+                // .requestMatchers("/api/register", "/api/login").permitAll()
+ 
+                // .requestMatchers("/api/user/**").hasRole("ADMIN")
+                .anyRequest().permitAll()
             )
             .httpBasic(withDefaults());
         return http.build();
     }
 }
 
- 
