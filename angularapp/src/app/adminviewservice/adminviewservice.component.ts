@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { VehicleService } from '../services/vehicle.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 
 @Component({
   selector: 'app-adminviewservice',
@@ -7,9 +10,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminviewserviceComponent implements OnInit {
 
-  constructor() { }
+  constructor(private vehicleService: VehicleService, private router: Router, private activatedroute: ActivatedRoute) { }
+  
+  newSearchVehicle: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "" };
+  searchData: string = "";
+  vehiclemaintainance: VehicleMaintenance[] = [];
 
   ngOnInit(): void {
+    this.getAllServices();
   }
 
+  public getAllServices() {
+    this.vehicleService.getAllServices().subscribe(data => {
+      this.vehiclemaintainance = data;
+    });
+  }
+
+  public searchByServiceName() {
+    this.vehiclemaintainance = this.vehiclemaintainance.filter(service => 
+      service.serviceName.toLowerCase().includes(this.searchData.toLowerCase())
+    );
+  }
+
+  public deleteService(id: number) {
+    this.vehicleService.deleteService(id).subscribe(() => {
+      this.getAllServices();
+    });
+  }
+
+  public editService(id: number) {
+    this.router.navigate(['/adminaddservice', id]);
+  }
 }
