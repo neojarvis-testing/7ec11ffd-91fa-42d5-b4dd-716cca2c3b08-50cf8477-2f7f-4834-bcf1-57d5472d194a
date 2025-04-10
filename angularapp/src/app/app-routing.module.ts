@@ -36,9 +36,8 @@ const routes: Routes = [
   {path:"usernavbar",component:UsernavbarComponent},
   {path:"userviewappointment",component:UserviewappointmentComponent},
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
+  {path:"adminaddservice/:id",component:AdminaddserviceComponent},
   {path:"**",component:ErrorComponent}
-  
-
 ];
 
 @NgModule({
