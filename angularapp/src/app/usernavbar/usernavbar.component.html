@@ -1,1 +1,20 @@
-<p>usernavbar works!</p>
+<nav class="navbar">
+  <a routerLink="/home" class="text-decoration-none">Home</a>
+  
+  <select class="dropdown" onchange="location = this.value;">
+    <option value="" disabled selected>Appointments</option>
+    <option value="/useraddappointment">Book Appointment</option>
+    <option value="/userviewappointment">My Appointments</option>
+  </select>
+  
+  <select class="dropdown" onchange="location = this.value;">
+    <option value="" disabled selected>Feedback</option>
+    <option value="/useraddfeedback">Add Feedback</option>
+    <option value="/userviewappointment">My Feedbacks</option>
+  </select>
+  
+  <a routerLink="/profile" class="text-decoration-none">
+    <img src="profile-icon.png" alt="Profile" class="profile-icon">
+  </a>
+  <a routerLink="/home" type="button">Logout</a>
+</nav>

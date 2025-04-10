@@ -1,1 +1,53 @@
-<p>userviewappointment works!</p>
+<h1>My Appointments</h1>
+<div class="blue-line"></div>
+
+<label for="status">Filter by Status:</label>
+<!-- <select id="status" [(ngModel)]="selectedStatus" (change)="getAppoinmentsByFilter()">
+                <option value="All">All</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Pending">Pending</option>
+            </select> -->
+<select id="status" [(ngModel)]="selectedStatus">
+    <option value="All">All</option>
+    <option value="Approved">Approved</option>
+    <option value="Rejected">Rejected</option>
+    <option value="Pending">Pending</option>
+</select>
+
+<body>
+    <div class="container" *ngIf="appointments.length>0">
+        <div class="filter">
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.NO</th>
+                            <th>Service Name</th>
+                            <th>Price</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let appointment of appointments, index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{appointment.service.serviceName}}</td>
+                            <td>{{appointment.service.servicePrice}}</td>
+                            <td>{{appointment.service.typeOfVehicle}}</td>
+                            <td>{{appointment.location}}</td>
+                            <td>{{appointment.appointmentDate}}</td>
+                            <td>{{appointment.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<div *ngIf="appointments.length==0" class="no-appointments">
+    No appointments available</div>
