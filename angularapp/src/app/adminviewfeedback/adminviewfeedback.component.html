@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- <h2>Feedback Details</h2>
 
 <form #feedbackForm="ngForm" (ngSubmit)="addFeedback(feedbackForm)">
@@ -22,3 +23,29 @@
         </tbody>
     </table>
 </form> -->
+=======
+<table border="1">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>User Name</th>
+            <th>Feedback</th>
+            <th>Ratings</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="feedbacks.length === 0">
+            <td colspan="5">No data found !</td>
+        </tr>
+        <tr *ngFor="let feedback of feedbacks; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ feedback.user.username }}</td>
+            <td>{{ feedback.message }}</td>
+            <td>{{ feedback.rating }}</td>
+            <td><button type="button" (click)="viewProfile(feedback.feedbackId)">Show Profile</button></td>
+        </tr>
+    </tbody>
+</table>
+
+>>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde

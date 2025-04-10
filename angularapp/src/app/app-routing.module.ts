@@ -20,6 +20,10 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
 
 const routes: Routes = [
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
   {path:"home",component:HomeComponent},
   {path:"adminaddservice",component:AdminaddserviceComponent},
   {path:"adminnavbar",component:AdminnavbarComponent},
@@ -36,8 +40,13 @@ const routes: Routes = [
   {path:"usernavbar",component:UsernavbarComponent},
   {path:"userviewappointment",component:UserviewappointmentComponent},
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
+<<<<<<< HEAD
   {path:"**",component:ErrorComponent}
   
+=======
+  {path:"adminaddservice/:id",component:AdminaddserviceComponent},
+  {path:"**",component:ErrorComponent}
+>>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
 
 ];
 

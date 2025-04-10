@@ -13,6 +13,4 @@ public interface AppointmentService {
     public List<Appointment> getAppointmentByUserId(int userId);
     public Appointment updateAppointment(Long appointmentId, Appointment appointment);
 
-
-    
 }
