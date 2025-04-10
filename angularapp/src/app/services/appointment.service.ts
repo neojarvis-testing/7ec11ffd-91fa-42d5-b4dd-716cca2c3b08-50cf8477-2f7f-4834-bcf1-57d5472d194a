@@ -13,22 +13,27 @@ export class AppointmentService {
   constructor(private httpClient:HttpClient) { }
 
   getAppointments():Observable<any>{
-    return this.httpClient.get(this.apiUrl+"/appointment");
+    return this.httpClient.get(this.apiUrl+"/api/appointment");
+  }
+
+  getAppointment(appointmentId: number): Observable<any>{
+    return this.httpClient.get(this.apiUrl+"/api/appointment/"+appointmentId);
   }
 
   getAppointmentsByUser(userId: number):Observable<any>{
-    return this.httpClient.get(this.apiUrl+"/appointment/user/"+userId);
+    return this.httpClient.get(this.apiUrl+"/api/appointment/user/"+userId);
   }
 
   addAppointment(appointment: Appointment):Observable<any>{
-    return this.httpClient.post(this.apiUrl+"/appointment",appointment);
+    return this.httpClient.post(this.apiUrl+"/api/appointment",appointment);
   }
 
   updateAppointment(appointmentId: number, appointment: Appointment):Observable<any>{
-    return this.httpClient.put(this.apiUrl+"/appointment/"+appointmentId,appointment);
+    return this.httpClient.put(this.apiUrl+"/api/appointment/"+appointmentId,appointment);
   }
 
   deleteAppointment(appointmentId: number): Observable<any>{
-    return this.httpClient.delete(this.apiUrl+"/appointment/"+appointmentId);
+    return this.httpClient.delete(this.apiUrl+"/api/appointment/"+appointmentId);
   }
+
 }

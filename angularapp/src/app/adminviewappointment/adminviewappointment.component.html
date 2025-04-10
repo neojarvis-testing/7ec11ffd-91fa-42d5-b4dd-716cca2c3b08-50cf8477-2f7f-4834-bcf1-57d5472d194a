@@ -1,4 +1,5 @@
 <h1>Requested Appointments</h1>
+<div class="blue-line"></div>
 <table>
     <thead>
         <tr>
@@ -14,27 +15,40 @@
         </tr>
     </thead>
     <tbody>
-        <!-- <tr *ngFor="let appointment of appointments,index as i">
-            <td>{{1}}</td>
-            <td>{{appointment.}}</td>
-            <td>{{appointment.}}</td>
-            <td>{{appointment.}}</td>
+        <!-- <tr *ngIf="!appointments">
+            <td>Oops! No Appointment found.</td>
+        </tr> -->
+        <tr *ngFor="let appointment of appointments,index as i">
+            <td>{{i+1}}</td>
+            <td>{{appointment.service.serviceName}}</td>
+            <td>{{appointment.service.servicePrice}}</td>
+            <td>{{appointment.service.typeOfVehicle}}</td>
             <td>{{appointment.appointmentDate}}</td>
             <td>{{appointment.location}}</td>
-            <td>{{appointment.}}</td>
+            <td>{{appointment.user.username}}</td>
             <td>
-                <select name="" id=""></select>
+                <select name="selectedOption" [(ngModel)]="appointment.status">
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Pending">Pending</option>
+                </select>
             </td>
             <td>
-                <button>Delete</button>
+                <button (click)="showPopup(appointment.appointmentId)" class="delete-btn">Delete</button>
             </td>
-        </tr> -->
+        </tr>
     </tbody>
+   
 </table>
 
-appointmentId?: number,
-service: VehicleMaintenance,
-appointmentDate: string,
-location: string, 
-status?: string,
-user?: User
+<div *ngIf="showDeletePopup" class="delete-popup">
+    <div class="popup-contenr">
+        <p>Are you sure you want to delete this appointment?</p>
+        <div class="popup-actions">
+            <button (click)="deleteAppointment(appointmentId)" class="confirm-btn">Yes</button>
+            <button (click)="showLogoutPopup = false" class="cancel-btn">No</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="appointments.length==0" class="no-appointments">
+    Oops! No Appointment found.</div>
