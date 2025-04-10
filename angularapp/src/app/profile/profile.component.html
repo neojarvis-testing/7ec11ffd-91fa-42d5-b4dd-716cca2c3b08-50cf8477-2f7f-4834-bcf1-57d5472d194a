@@ -1,1 +1,98 @@
-<p>profile works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    
+</head>
+<body>
+    <div class="profile-container">
+        <h2>User Profile 
+            <a href="javascript:void(0);" class="edit-icon" (click)="showEditForm()"><i class="bi bi-pencil-square"></i></a>
+        </h2>
+        <div id="user-details" *ngIf="!isEditMode">
+            <div class="profile-content">
+                <div class="profile-icon">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="profile-info">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Mobile Number:</strong> {{ user.mobileNumber }}</p>
+                </div>
+            </div>
+        </div>
+        <div id="edit-form" *ngIf="isEditMode">
+            <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
+                <div class="profile-content">
+                    <div class="profile-icon">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="profile-info">
+                        <p><strong>Username:</strong> <input type="text" name="username" [(ngModel)]="user.username" required></p>
+                        <p><strong>Email:</strong> <input type="email" name="email" [(ngModel)]="user.email" required></p>
+                        <p><strong>Mobile Number:</strong> <input type="tel" name="mobileNumber" [(ngModel)]="user.mobileNumber" required></p>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!profileForm.valid">Update Profile</button>
+                <button type="button" (click)="cancelEdit()">Cancel</button>
+            </form>
+        </div>
+        <div *ngIf="isProfileUpdated" class="success-message">
+            Profile updated successfully!
+        </div>
+    </div>
+</body>
+</html>
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css">
+    
+</head>
+<body>
+    <div class="profile-container">
+        <h2>User Profile 
+            <a href="javascript:void(0);" class="edit-icon" (click)="showEditForm()"><i class="bi bi-pencil-square"></i></a>
+        </h2>
+        <div id="user-details" *ngIf="!isEditMode">
+            <div class="profile-content">
+                <div class="profile-icon">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="profile-info">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Mobile Number:</strong> {{ user.mobileNumber }}</p>
+                </div>
+            </div>
+        </div>
+        <div id="edit-form" *ngIf="isEditMode">
+            <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)">
+                <div class="profile-content">
+                    <div class="profile-icon">
+                        <i class="bi bi-person-circle"></i>
+                    </div>
+                    <div class="profile-info">
+                        <p><strong>Username:</strong> <input type="text" name="username" [(ngModel)]="user.username" required></p>
+                        <p><strong>Email:</strong> <input type="email" name="email" [(ngModel)]="user.email" required></p>
+                        <p><strong>Mobile Number:</strong> <input type="tel" name="mobileNumber" [(ngModel)]="user.mobileNumber" required></p>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!profileForm.valid">Update Profile</button>
+                <button type="button" (click)="cancelEdit()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+ -->

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UserdetailsService } from '../services/userdetails.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,11 +8,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  isEditMode: boolean = false;
+  isProfileUpdated: boolean = false;
 
-  constructor() { }
+  user = {
+    username: 'User1',
+    email: 'user1@gmail.com',
+    mobileNumber: '1234567890'
+  };
 
-  ngOnInit(): void {
+  constructor(private userDetails: UserdetailsService) { }
+
+  ngOnInit(): void { }
+
+  showEditForm() {
+    this.isEditMode = true;
+    this.isProfileUpdated = false;
   }
 
-}
+  cancelEdit() {
+    this.isEditMode = false;
+  }
 
+  onSubmit(form: NgForm) {
+    if (form.valid) {
+      // Update user details
+      this.user.username = form.value.username;
+      this.user.email = form.value.email;
+      this.user.mobileNumber = form.value.mobileNumber;
+      this.isEditMode = false;
+      this.isProfileUpdated = true;
+    }
+  }
+}
