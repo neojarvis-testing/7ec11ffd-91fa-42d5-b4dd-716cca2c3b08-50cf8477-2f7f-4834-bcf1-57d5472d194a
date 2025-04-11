@@ -20,53 +20,52 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
  
-import jakarta.persistence.criteria.CriteriaBuilder.In;
  
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
  
-<<<<<<< HEAD
-=======
+
     @Autowired
     private MyUserDetailsService userService;
  
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    // @Autowired
+    // private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
  
    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
->>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
+
  
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-<<<<<<< HEAD
-                .anyRequest().permitAll()
- 
-                // .requestMatchers("/api/services/**").permitAll()
-                // .anyRequest().permitAll()
- 
-=======
 
-                .requestMatchers("/api/register", "/api/appointment/**", "/api/register/**", "/api/services/**","/api/login").permitAll()
+                .requestMatchers("/api/register", "/api/login", "/api/home").permitAll()
 
                 .anyRequest().permitAll()
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
->>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
+
             )
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
+        
     }
- 
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
  
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -75,16 +74,11 @@ public class SecurityConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
- 
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
    
 }
-<<<<<<< HEAD
 
- 
-
-=======
->>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
