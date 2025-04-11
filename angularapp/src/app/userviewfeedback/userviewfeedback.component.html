@@ -1,7 +1,17 @@
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete this feedback?</p>
+    <button class="btn-danger" (click)="confirmDelete()">Yes, Delete</button>
+    <button class="btn-grey" (click)="cancelDelete()">Cancel</button>
+  </div>
+</div>
+
+
 <h2>My Feedback</h2>
 
-<table border="1">
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
       <th>S.No</th>
       <th>User Name</th>
@@ -19,7 +29,7 @@
       <td>{{ feedback.user.username }}</td>
       <td>{{ feedback.message }}</td>
       <td>{{ feedback.rating }}</td>
-      <td><button type="button" (click)="deleteFeedback(feedback.feedbackId)">Delete</button></td>
+      <td><button class="btn-danger" type="button" (click)="showDeletePopup(feedback.feedbackId)">Delete</button></td>
     </tr>
   </tbody>
 </table>

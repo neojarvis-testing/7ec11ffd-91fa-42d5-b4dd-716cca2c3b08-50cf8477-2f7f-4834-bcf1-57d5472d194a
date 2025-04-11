@@ -13,8 +13,6 @@ export class FeedbackService {
 
   public apiUrl="https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080"
   
-
-
   constructor(private httpClient:HttpClient) { }
 
   public createFeedback(feedback:Feedback):Observable<any>{
@@ -39,6 +37,14 @@ export class FeedbackService {
 
   public  deleteFeedback(feedbackId: number):Observable<any>{
     return this.httpClient.delete(this.apiUrl+"/api/feedback/"+feedbackId);
+  }
+
+  public getFeedbackById(feedbackId:number):Observable<any>{
+    return this.httpClient.get(this.apiUrl+"/api/feedback/"+feedbackId);
+  }
+
+  public updateFeedbackById(feedbackId:number,feedback:Feedback):Observable<any>{
+    return this.httpClient.put(this.apiUrl+"/api/feedback/"+feedbackId,feedback);
   }
   
 
