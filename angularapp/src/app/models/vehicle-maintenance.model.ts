@@ -1,8 +1,7 @@
 export interface VehicleMaintenance {
-    id?: number; 
+    serviceId?: number; 
     serviceName: string;
     servicePrice: number;
     typeOfVehicle: string;
 
 }
-

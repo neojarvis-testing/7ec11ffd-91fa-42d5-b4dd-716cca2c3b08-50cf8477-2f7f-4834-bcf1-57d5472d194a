@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.examly.springapp.service.VehicleService;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*",origins = "*")
 public class VehicleServiceController {
 
     @Autowired
@@ -62,13 +64,9 @@ public class VehicleServiceController {
     @DeleteMapping("/api/services/{id}")
     public ResponseEntity<?> deleteService(@PathVariable Long id)
     {
-        try{
             vehicleService.deleteSerivce(id);
             return ResponseEntity.status(204).body("Deleted Successfully");
-        }
-        catch(EntityNotFoundException e){
-            return ResponseEntity.status(404).body(e.getMessage());
-        }
+        
     }
     
 }

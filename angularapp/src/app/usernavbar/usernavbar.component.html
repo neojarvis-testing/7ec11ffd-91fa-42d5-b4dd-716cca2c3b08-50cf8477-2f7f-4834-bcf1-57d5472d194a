@@ -1,20 +1,36 @@
-<nav class="navbar">
-  <a routerLink="/home" class="text-decoration-none">Home</a>
-  
-  <select class="dropdown" onchange="location = this.value;">
-    <option value="" disabled selected>Appointments</option>
-    <option value="/useraddappointment">Book Appointment</option>
-    <option value="/userviewappointment">My Appointments</option>
-  </select>
-  
-  <select class="dropdown" onchange="location = this.value;">
-    <option value="" disabled selected>Feedback</option>
-    <option value="/useraddfeedback">Add Feedback</option>
-    <option value="/userviewappointment">My Feedbacks</option>
-  </select>
-  
-  <a routerLink="/profile" class="text-decoration-none">
-    <img src="profile-icon.png" alt="Profile" class="profile-icon">
-  </a>
-  <a routerLink="/home" type="button">Logout</a>
-</nav>
+
+<body>
+    <header>
+        <div class="navbar">
+            <h1>FoodMart</h1>
+            <div class="admin-section">
+                <nav>
+                    <ul>
+                        <li>{{userName}}/{{userRole}}</li>
+                        <li><a href="#">Home</a></li>
+                        <li class="hover-card">
+                            <a>Appointments</a>
+                            <div class="card">
+                                <button onclick="location.href='/useraddappointment'">Book Appointments</button>
+                                <button onclick="location.href='/userviewappointment'">My Appointments</button>
+                            </div>
+                        </li>
+                        <li class="hover-card">
+                            <a>Feedback</a>
+                            <div class="card">
+                                <button onclick="location.href='/useraddfeedback'">Add Feedback</button>
+                                <button onclick="location.href='/userviewfeedback'">My Feedbacks</button>
+                            </div>
+                        </li>
+                        <li><a class="logout" (click)="logout()" type="button">Logout</a></li>
+                    </ul>
+                </nav>  
+            </div>
+        </div>
+    </header>
+    
+    <footer>
+     
+    </footer>
+ 
+</body>

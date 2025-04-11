@@ -18,6 +18,10 @@ export class AdminviewfeedbackComponent implements OnInit {
   ngOnInit(): void {
   }
 
+<<<<<<< HEAD
+  
+
+=======
 
   getAllFeedbacks() {
     this.feedbackService.getAllFeedback().subscribe(data=>{
@@ -29,6 +33,7 @@ export class AdminviewfeedbackComponent implements OnInit {
   viewProfile(feedbackId: number){
     this.router.navigate(['/profile',feedbackId]);
   }
+>>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
 
 }
 

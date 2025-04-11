@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
 })
 export class UserdetailsService {
 
-  public apiUrl:string="https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080/";
+  public apiUrl:string="https://ide-ffeffbaeceacebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080/api";
 
   constructor(private httpClient:HttpClient) { }
   

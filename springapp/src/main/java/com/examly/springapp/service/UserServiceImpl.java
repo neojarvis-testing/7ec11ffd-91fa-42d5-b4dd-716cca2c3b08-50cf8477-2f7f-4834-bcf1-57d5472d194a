@@ -31,17 +31,22 @@ public class UserServiceImpl implements UserService{
     private UserRepo userRepo;
 
     @Autowired
-    private AuthenticationManager authManager ;
+    private AuthenticationManager authenticationManager ;
 
     @Autowired
     private PasswordEncoder passwordEncoder ; 
 
-    @Autowired
-    private JwtUtils JwtUtils;
+
 
     @Override
-    public User createUser(User user) {
-        return userRepo.save(user);
+    public User registerUser(User user){
+        Optional<User> opt= userRepo.findByUserName(user.getUsername());  
+        if(opt.isPresent()){
+            throw new DuplicateUserException("User already exists.");
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User newUser = userRepo.save(user);
+        return newUser ; 
     }
 
 
@@ -52,7 +57,6 @@ public class UserServiceImpl implements UserService{
             throw new EntityNotFoundException("User not found with username: " + userName);
         }
         return user;
-
     }
 
     @Override
@@ -90,43 +94,17 @@ public class UserServiceImpl implements UserService{
     }
 
 
-
     @Override
-    public User registerUser(User user){
-        Optional<User> opt= userRepo.findByUserName(user.getUsername());  
-        if(opt.isPresent()){
-            throw new DuplicateUserException("User already exists.");
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        User newUser = userRepo.save(user);
-        return newUser ; 
+    public User createUser(User user) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
     }
+
 
     @Override
     public AuthUser loginUser(LoginDTO user) {
-        Authentication authentication = authManager.authenticate(
-            new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
-            );
-        if(authentication.isAuthenticated()){
-        List<String> roleList=authentication.getAuthorities().stream().map(r->r.getAuthority()).collect(Collectors.toList());
-        if(roleList.isEmpty()){
-            throw new IllegalStateException("User has no role");
-        }
-        String role=roleList.get(0);
-        AuthUser authUser=new AuthUser();
-        authUser.setUserName(user.getUsername());
-        authUser.setToken(JwtUtils.generateToken(user.getUsername()));
-        authUser.setRole(role);
-        authUser.setUserId(userRepo.findUserIdByUsername(user.getUsername()));
-        // authUser.setName(userRepo.findUserRoleByUsername(user.getUsername()));
-        return authUser;
-       }
-       else{
-        throw new InvalidCredentialsException("Invalid User Name or Password");
-       }
-
-    
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'loginUser'");
     }
 
 }

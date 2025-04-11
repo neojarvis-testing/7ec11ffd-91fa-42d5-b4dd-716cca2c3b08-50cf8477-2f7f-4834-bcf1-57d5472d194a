@@ -1,59 +1,66 @@
-<form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)" class="registration-form">
+<form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
+  <!-- Username -->
   <div>
     <label for="username">Username:</label>
-    <input id="username" name="username" ngModel required placeholder="Enter your username">
-    <div *ngIf="!registrationForm.form.controls.username?.valid && registrationForm.form.controls.username?.touched">
-      Username is required.
+    <input type="text" id="username" name="username" [(ngModel)]="user.username" required #username="ngModel">
+    <div *ngIf="username.invalid && username.touched">
+      <span *ngIf="username.errors?.required">Username is required.</span>
     </div>
   </div>
 
+  <!-- Email -->
   <div>
     <label for="email">Email:</label>
-    <input id="email" name="email" type="email" ngModel required placeholder="Enter your email">
-    <div *ngIf="!registrationForm.form.controls.email?.valid && registrationForm.form.controls.email?.touched">
-      Valid email is required.
+    <input type="email" id="email" name="email" [(ngModel)]="user.email" required #email="ngModel">
+    <div *ngIf="email.invalid && email.touched">
+      <span *ngIf="email.errors?.required">Email is required.</span>
+      <span *ngIf="email.errors?.email">Enter a valid email.</span>
     </div>
   </div>
 
+  <!-- Password -->
   <div>
     <label for="password">Password:</label>
-    <input id="password" name="password" type="password" [(ngModel)]="password" required
-      pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}"
-      placeholder="Enter your password">
-    <div *ngIf="!registrationForm.form.controls.password?.valid && registrationForm.form.controls.password?.touched">
-      Password must include uppercase, lowercase, a digit, and a special character.
+    <input type="password" id="password" name="password" [(ngModel)]="user.password" required minlength="6" #password="ngModel">
+    <div *ngIf="password.invalid && password.touched">
+      <span *ngIf="password.errors?.required">Password is required.</span>
+      <span *ngIf="password.errors?.minlength">Password must be at least 6 characters long.</span>
     </div>
   </div>
 
+  <!-- Confirm Password -->
   <div>
     <label for="confirmPassword">Confirm Password:</label>
-    <input id="confirmPassword" name="confirmPassword" type="password" [(ngModel)]="confirmPassword" required
-      placeholder="Confirm your password">
-    <div *ngIf="password !== confirmPassword && registrationForm.form.controls.confirmPassword?.touched">
-      Passwords do not match.
+    <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+    <div *ngIf="confirmPassword !== user.password && confirmPassword.length > 0">
+      <span>Passwords do not match.</span>
     </div>
   </div>
 
+  <!-- Mobile Number -->
   <div>
     <label for="mobileNumber">Mobile Number:</label>
-    <input id="mobileNumber" name="mobileNumber" type="tel" ngModel required pattern="[0-9]{10}"
-      placeholder="Enter your mobile number">
-    <div *ngIf="!registrationForm.form.controls.mobileNumber?.valid && registrationForm.form.controls.mobileNumber?.touched">
-      Valid mobile number is required.
+    <input type="text" id="mobileNumber" name="mobileNumber" [(ngModel)]="user.mobileNumber" required pattern="^[0-9]{10}$" #mobileNumber="ngModel">
+    <div *ngIf="mobileNumber.invalid && mobileNumber.touched">
+      <span *ngIf="mobileNumber.errors?.required">Mobile number is required.</span>
+      <span *ngIf="mobileNumber.errors?.pattern">Enter a valid 10-digit mobile number.</span>
     </div>
   </div>
 
+  <!-- User Role -->
   <div>
-    <label for="role">Role:</label>
-    <select id="role" name="role" ngModel required>
-      <option value="" disabled selected>Select your role</option>
-      <option value="admin">Admin</option>
-      <option value="user">User</option>
+    <label for="userRole">User Role:</label>
+    <select id="userRole" name="userRole" [(ngModel)]="user.userRole" required #userRole="ngModel">
+      <option value="" disabled>Select Role</option>
+      <option value="Admin">Admin</option>
+      <option value="User">User</option>
     </select>
-    <div *ngIf="!registrationForm.form.controls.role?.valid && registrationForm.form.controls.role?.touched">
-      Role is required.
+    <div *ngIf="userRole.invalid && userRole.touched">
+      <span *ngIf="userRole.errors?.required">User role is required.</span>
     </div>
   </div>
 
-  <button type="submit" [disabled]="registrationForm.invalid">Register</button>
+  <button type="submit" [disabled]="registerForm.invalid || confirmPassword !== user.password">
+    Register
+  </button>
 </form>

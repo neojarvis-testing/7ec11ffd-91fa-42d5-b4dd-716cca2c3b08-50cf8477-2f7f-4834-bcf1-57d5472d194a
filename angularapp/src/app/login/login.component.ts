@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { Login } from '../models/login.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,23 +11,23 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-
-  username: string = '';
-  password: string = '';
-
-  constructor(private authService: AuthService) {}
-
+  loginData: Login = { username: '', password: '' };
+  errorMessage: string = '';
+ 
+  constructor(private authService: AuthService,private router:Router) {}
+  
   ngOnInit(): void {
+    
+  }
+ 
+  onSubmit(form: NgForm): void {
+    if (form.valid) {
+      this.authService.login(form.value);
+      this.router.navigate(['/home']);
+    } else {
+      this.errorMessage = 'Please enter valid credentials.';
+    }
   }
 
-  login() {
-    // this.authService.login(this.username, this.password).subscribe(response => {
-    //   localStorage.setItem('token', response.token);
-    //   alert('Login successful!');
-    // }, error => {
-    //   alert('Login failed! Please check your credentials.');
-    // });
-  }
-
-
+    
 }
