@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../models/user.model';
-import { Login } from '../models/login.model';
 import { Router } from '@angular/router';
 import { Authresponse } from '../models/authresponse.model';
+import { Login } from '../models/login.model';
+import { UserStoreService } from '../helpers/user-store.service';
+import { User } from '../models/user.model';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class AuthService {
   private baseUrl = "https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";  
   
   constructor(private httpClient: HttpClient, private router: Router) {}
+
 
   // Register a new user
   register(user: User): Observable<any> {
@@ -69,3 +72,5 @@ export class AuthService {
   }
 
 }
+
+

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
+import { VehicleService } from '../services/vehicle.service';
+import { AppointmentService } from '../services/appointment.service';
+import { Appointment } from '../models/appointment.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-useraddappointment',
@@ -7,28 +11,43 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
   styleUrls: ['./useraddappointment.component.css']
 })
 export class UseraddappointmentComponent implements OnInit {
-  services: VehicleMaintenance[];
+  services: VehicleMaintenance[] = [];
+  appointmentDates: string[] = [];
+  locations: string[] = [];
 
-  constructor() { }
-
+  constructor(private vehicleService: VehicleService, private appointmentService: AppointmentService) { }
+  userId: number = 2;
+  id : number = 1;
+  user : User;
   ngOnInit(): void {
-    // this.services = [
-    //   { id: 1, name: 'Car Wash', price: 500, vehicle: 'Car' },
-    //   { id: 2, name: 'Oil Change', price: 1200, vehicle: 'Bike' },
-    //   { id: 3, name: 'Tire Rotation', price: 800, vehicle: 'Car' },
-    //   { id: 4, name: 'Brake Inspection', price: 1500, vehicle: 'Truck' }
-    // ];
+    this.getAllServices();
   }
 
-  onInputChange(event: Event, row: any) {
-    const date = (row.querySelector('.appointment-date') as HTMLInputElement).value;
-    const location = (row.querySelector('.location') as HTMLInputElement).value;
-    const button = row.querySelector('.add-appointment') as HTMLButtonElement;
+  getAllServices() {
+    this.vehicleService.getAllServices().subscribe(data => {
+      this.services = data;
+    });
+  }
 
-    if (date && location) {
-      button.disabled = false;
-    } else {
-      button.disabled = true;
-    }
+  addAppointment(index: number) {
+    const newAppointment: Appointment = {
+        service: { serviceId: this.id } as VehicleMaintenance,
+        appointmentDate: this.appointmentDates[index],
+        location: this.locations[index],
+        status: 'Pending',
+        user: { userId: this.userId } as User
+    };
+    console.log(newAppointment);
+    this.appointmentService.addAppointment(newAppointment).subscribe(response => {
+        console.log('Appointment added successfully', response);
+    }, error => {
+        console.error('Error adding appointment', error);
+    });
+}
+
+
+  // Add the onInputChange method
+  onInputChange(index: number): void {
+    console.log(`Input changed at index: ${index}`);
   }
 }

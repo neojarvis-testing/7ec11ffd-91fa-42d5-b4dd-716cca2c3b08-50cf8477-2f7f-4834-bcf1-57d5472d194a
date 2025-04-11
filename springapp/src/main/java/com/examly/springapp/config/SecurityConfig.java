@@ -1,3 +1,4 @@
+
 package com.examly.springapp.config;
  
 import javax.swing.Spring;
@@ -25,6 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
  
+
     @Autowired
     private MyUserDetailsService userService;
  
@@ -34,7 +36,11 @@ public class SecurityConfig {
     // @Autowired
     // private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
  
-   
+   @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
  
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -48,6 +54,7 @@ public class SecurityConfig {
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
             )
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -74,3 +81,4 @@ public class SecurityConfig {
     }
    
 }
+

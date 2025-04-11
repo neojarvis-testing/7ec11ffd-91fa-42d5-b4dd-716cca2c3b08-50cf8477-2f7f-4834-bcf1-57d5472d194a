@@ -19,12 +19,12 @@ export class AdminaddserviceComponent implements OnInit {
 
   vehiclemaintenance: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "" };
   showPopup: boolean = false;
-  id: number | null = null;
+  serviceId: number | null = null;
 
   ngOnInit(): void {
-    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
-    if (this.id) {
-      this.vehicleService.getServiceById(this.id).subscribe(data => {
+    this.serviceId = parseInt(this.route.snapshot.paramMap.get('serviceId'));
+    if (this.serviceId) {
+      this.vehicleService.getServiceById(this.serviceId).subscribe(data => {
         this.vehiclemaintenance = data;
       });
     }
@@ -32,8 +32,8 @@ export class AdminaddserviceComponent implements OnInit {
 
   public addService(serviceForm: NgForm) {
     if (serviceForm.valid) {
-      if (this.id) {
-        this.vehicleService.updateService(this.id, this.vehiclemaintenance).subscribe(() => {
+      if (this.serviceId) {
+        this.vehicleService.updateService(this.serviceId, this.vehiclemaintenance).subscribe(() => {
           this.showPopup = true;
         });
       } else {
