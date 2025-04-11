@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Feedback } from '../models/feedback.model';
 import { FeedbackService } from '../services/feedback.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-userviewfeedback',
   templateUrl: './userviewfeedback.component.html',
   styleUrls: ['./userviewfeedback.component.css']
 })
+
 export class UserviewfeedbackComponent implements OnInit {
 
   feedbacks: Feedback[] = [];
+  showPopup: boolean = false;
+  feedbackIdToDelete: number | null = null;
 
-  constructor(private feedbackService: FeedbackService, private router: Router) { }
+  constructor(private feedbackService: FeedbackService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAllFeedbacks();
@@ -24,13 +27,24 @@ export class UserviewfeedbackComponent implements OnInit {
     });
   }
 
-  viewProfile(feedbackId: number): void {
-    this.router.navigate(['/profile', feedbackId]);
+  showDeletePopup(feedbackId: number): void {
+    this.feedbackIdToDelete = feedbackId;
+    this.showPopup = true;
   }
 
-  deleteFeedback(feedbackId: number): void {
-    this.feedbackService.deleteFeedback(feedbackId).subscribe(() => {
-      this.getAllFeedbacks(); 
-    });
+  confirmDelete(): void {
+    if (this.feedbackIdToDelete !== null) {
+      this.feedbackService.deleteFeedback(this.feedbackIdToDelete).subscribe(() => {
+        this.getAllFeedbacks();
+        this.showPopup = false;
+        this.feedbackIdToDelete = null;
+      });
+    }
+  }
+
+  cancelDelete(): void {
+    this.showPopup = false;
+    this.feedbackIdToDelete = null;
   }
 }
+
