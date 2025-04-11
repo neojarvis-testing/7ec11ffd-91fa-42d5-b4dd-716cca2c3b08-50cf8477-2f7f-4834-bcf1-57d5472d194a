@@ -32,13 +32,13 @@ export class AdminviewserviceComponent implements OnInit {
     );
   }
 
-  public deleteService(id: number) {
-    this.vehicleService.deleteService(id).subscribe(() => {
+  public deleteService(serviceId: number) {
+    this.vehicleService.deleteService(serviceId).subscribe(() => {
       this.getAllServices();
     });
   }
 
-  public editService(id: number) {
-    this.router.navigate(['/adminaddservice', id]);
+  public editService(serviceId: number) {
+    this.router.navigate(['/adminaddservice', serviceId]);
   }
 }

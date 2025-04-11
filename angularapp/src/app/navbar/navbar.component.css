@@ -1,0 +1,54 @@
+.navbar {
+    background-color: #333;
+    overflow: hidden;
+    padding: 10px 20px;
+}
+
+.navbar-title {
+    color: #fff;
+    float: left;
+    font-size: 24px;
+    margin: 0;
+}
+
+.navbar-links {
+    float: right;
+}
+
+.navbar-menu {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+.navbar-link:hover {
+    background-color: #575757;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+.user-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.user-item {
+    color: #fff;
+}
+
+.user-item app-adminnav,
+.user-item app-usernav {
+    display: inline-block;
+}
