@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>{{ id ? 'Edit Service' : 'Add Service' }}</h2>
+  <h2>{{ serviceId ? 'Edit Service' : 'Add Service' }}</h2>
   <form #serviceForm="ngForm" (ngSubmit)="addService(serviceForm)">
     <div>
       <label for="serviceName">Service Name:</label>
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <button type="submit" [disabled]="serviceForm.invalid">{{ id ? 'Update Service' : 'Add Service' }}</button>
+    <button type="submit" [disabled]="serviceForm.invalid">{{ serviceId ? 'Update Service' : 'Add Service' }}</button>
   </form>
 </div>
 
