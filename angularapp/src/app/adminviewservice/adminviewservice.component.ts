@@ -33,7 +33,10 @@ export class AdminviewserviceComponent implements OnInit {
   }
 
   public deleteService(serviceId: number) {
-    this.vehicleService.deleteService(serviceId).subscribe(() => {
+
+    console.log(serviceId);
+    this.vehicleService.deleteService(serviceId).subscribe(data => {
+
       this.getAllServices();
     });
   }

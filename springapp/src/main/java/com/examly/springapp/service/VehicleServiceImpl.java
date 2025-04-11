@@ -40,11 +40,6 @@ public class VehicleServiceImpl implements VehicleService{
 
     @Override
     public void deleteSerivce(Long serviceId) {
-        Optional<VehicleMaintenance> op=vehicleServiceRepo.findById(serviceId);
-        if(op.isEmpty())
-        {
-            throw new EntityNotFoundException("Not Found");
-        }
         vehicleServiceRepo.deleteById(serviceId);
     }
 

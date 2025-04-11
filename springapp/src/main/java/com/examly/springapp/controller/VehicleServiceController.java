@@ -62,13 +62,9 @@ public class VehicleServiceController {
     @DeleteMapping("/api/services/{id}")
     public ResponseEntity<?> deleteService(@PathVariable Long id)
     {
-        try{
             vehicleService.deleteSerivce(id);
             return ResponseEntity.status(204).body("Deleted Successfully");
-        }
-        catch(EntityNotFoundException e){
-            return ResponseEntity.status(404).body(e.getMessage());
-        }
+        
     }
     
 }
