@@ -1,3 +1,4 @@
+
 package com.examly.springapp.config;
  
 import javax.swing.Spring;
@@ -26,6 +27,8 @@ import jakarta.persistence.criteria.CriteriaBuilder.In;
 @EnableMethodSecurity
 public class SecurityConfig {
  
+<<<<<<< HEAD
+=======
     @Autowired
     private MyUserDetailsService userService;
  
@@ -36,12 +39,20 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+>>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
  
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
+<<<<<<< HEAD
+                .anyRequest().permitAll()
+ 
+                // .requestMatchers("/api/services/**").permitAll()
+                // .anyRequest().permitAll()
+ 
+=======
 
                 .requestMatchers("/api/register", "/api/appointment/**", "/api/register/**", "/api/services/**","/api/login").permitAll()
 
@@ -49,6 +60,7 @@ public class SecurityConfig {
             )
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+>>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
             )
             .authenticationProvider(authenticationProvider())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -70,3 +82,9 @@ public class SecurityConfig {
     }
    
 }
+<<<<<<< HEAD
+
+ 
+
+=======
+>>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde

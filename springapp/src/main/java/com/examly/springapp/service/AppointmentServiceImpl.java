@@ -18,11 +18,13 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
+
     @Autowired
     private AppointmentRepo appoinmentRepo;
 
     @Autowired
     private UserRepo userRepo;
+
 
     @Autowired
     private VehicleServiceRepo vehicleServiceRepo;
@@ -30,6 +32,7 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Override
     public Appointment addAppointment(Appointment appointment) {
         User user = userRepo.findById(appointment.getUser().getUserId()).get();
+
         VehicleMaintenance vehicle = vehicleServiceRepo.findById(appointment.getService().getServiceId()).get();
         appointment.setUser(user);
         appointment.setService(vehicle);
@@ -62,7 +65,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 
     @Override
     public List<Appointment> getAppointmentByUserId(int userId) {
-        List<Appointment> appointmentList = appoinmentRepo.findByUserId(userId);
+        List<Appointment> appointmentList = appoinmentRepo.findByUserUserId(userId);
         return appointmentList;
     }
 

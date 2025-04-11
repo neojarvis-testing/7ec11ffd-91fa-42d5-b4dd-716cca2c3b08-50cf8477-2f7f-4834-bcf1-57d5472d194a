@@ -7,6 +7,8 @@ import { AdminviewappointmentComponent } from './adminviewappointment/adminviewa
 import { AdminviewfeedbackComponent } from './adminviewfeedback/adminviewfeedback.component';
 import { AdminviewserviceComponent } from './adminviewservice/adminviewservice.component';
 import { AdminviewuserdetailsComponent } from './adminviewuserdetails/adminviewuserdetails.component';
+
+import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -16,7 +18,7 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
-import { ErrorComponent } from './error/error.component';
+
 
 const routes: Routes = [
 
@@ -37,8 +39,12 @@ const routes: Routes = [
   {path:"usernavbar",component:UsernavbarComponent},
   {path:"userviewappointment",component:UserviewappointmentComponent},
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
+
+ 
   {path:"adminaddservice/:serviceId",component:AdminaddserviceComponent},
+
   {path:"**",component:ErrorComponent}
+
 
 ];
 
