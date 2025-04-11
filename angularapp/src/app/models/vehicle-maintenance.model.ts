@@ -5,4 +5,3 @@ export interface VehicleMaintenance {
     typeOfVehicle: string;
 
 }
-
