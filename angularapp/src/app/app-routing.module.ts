@@ -7,6 +7,7 @@ import { AdminviewappointmentComponent } from './adminviewappointment/adminviewa
 import { AdminviewfeedbackComponent } from './adminviewfeedback/adminviewfeedback.component';
 import { AdminviewserviceComponent } from './adminviewservice/adminviewservice.component';
 import { AdminviewuserdetailsComponent } from './adminviewuserdetails/adminviewuserdetails.component';
+
 import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,12 +19,10 @@ import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
 
+
 const routes: Routes = [
 
-<<<<<<< HEAD
-=======
 
->>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
   {path:"home",component:HomeComponent},
   {path:"adminaddservice",component:AdminaddserviceComponent},
   {path:"adminnavbar",component:AdminnavbarComponent},
@@ -40,13 +39,12 @@ const routes: Routes = [
   {path:"usernavbar",component:UsernavbarComponent},
   {path:"userviewappointment",component:UserviewappointmentComponent},
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
-<<<<<<< HEAD
+
+ 
+  {path:"adminaddservice/:serviceId",component:AdminaddserviceComponent},
+
   {path:"**",component:ErrorComponent}
-  
-=======
-  {path:"adminaddservice/:id",component:AdminaddserviceComponent},
-  {path:"**",component:ErrorComponent}
->>>>>>> d026229d3d9c9af112f489cdfece69f7d27fefde
+
 
 ];
 

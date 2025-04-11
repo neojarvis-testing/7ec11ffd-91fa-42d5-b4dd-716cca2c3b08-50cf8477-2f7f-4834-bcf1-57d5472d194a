@@ -38,14 +38,5 @@ public class Appointment {
     @ManyToOne 
     @JoinColumn(name="userId")
     private User user;
-    
-
-    
-    
-
-
-
-
-
-    
+        
 }

@@ -25,14 +25,17 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Autowired
     private UserRepo userRepo;
 
-    @Autowired VehicleServiceRepo vehicleServiceRepo;
+
+    @Autowired
+    private VehicleServiceRepo vehicleServiceRepo;
 
     @Override
     public Appointment addAppointment(Appointment appointment) {
         User user = userRepo.findById(appointment.getUser().getUserId()).get();
-        VehicleMaintenance vehicleMaintenance = vehicleServiceRepo.findById(appointment.getService().getServiceId()).get();
+
+        VehicleMaintenance vehicle = vehicleServiceRepo.findById(appointment.getService().getServiceId()).get();
         appointment.setUser(user);
-        appointment.setService(vehicleMaintenance);
+        appointment.setService(vehicle);
         return appoinmentRepo.save(appointment);
     }
 

@@ -25,30 +25,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // @PostMapping("/api/register")
-    // public ResponseEntity<?> createUser(@RequestBody User user) {
-    //     User savedUser = userService.createUser(user); 
-    //     return ResponseEntity.status(201).body(savedUser); 
-    // }
-
-    //review again
-        @PostMapping("/api/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginDTO loginDTO) {
-        try {
-            // Retrieve the user details using the username
-            User user = userService.loadUserByUsername(loginDTO.getUsername());
-
-            if (user.getPassword().equals(loginDTO.getToken())) { // Assuming "token" represents the password
-                return ResponseEntity.status(200).body(user); // Returning the User object directly
-            } else {
-                return ResponseEntity.status(400).body("Invalid login credentials."); // Status 400 (Bad Request)
-            }
-        } catch (UsernameNotFoundException e) {
-            // Handle the exception and return a meaningful response
-            return ResponseEntity.status(404).body("User not found: " + e.getMessage()); // Status 404 (Not Found)
-        }
-    }
-
     
     @GetMapping("/api/user")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -62,15 +38,7 @@ public class UserController {
         return ResponseEntity.status(200).body(updatedUser);
     }
 
-    // @GetMapping("/api/user/{userId}")
-    // public ResponseEntity<?> getUserById(@PathVariable int userId) {
-    //     User user = userService.getByUserId(userId); 
-    //     if (user != null) {
-    //         return ResponseEntity.status(200).body(user); 
-    //     } else {
-    //         return ResponseEntity.status(403).body("Access is forbidden."); 
-    //     }
-    // }
+  
 
     @DeleteMapping("/api/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable int id) {

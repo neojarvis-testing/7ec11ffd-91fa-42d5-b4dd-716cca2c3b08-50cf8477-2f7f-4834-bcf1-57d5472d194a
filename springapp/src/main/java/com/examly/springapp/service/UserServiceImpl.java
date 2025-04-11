@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User loadUserByUsername(String userName) {
-        User user = userRepo.findByUserName(userName);
+        User user = userRepo.findByUserName(userName).get();
         if (user == null) {
             throw new EntityNotFoundException("User not found with username: " + userName);
         }

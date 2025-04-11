@@ -1,63 +1,22 @@
- 
-<div class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-        <a class="navbar-brand fw-bold fs-3 " routerLink="/">Book MyShow</a>
-        <ul class="navbar-nav d-flex text-white">
-            <ng-container *ngIf="!isLoggedIn">
-                <li class="nav-item">
-                    <a class="nav-link text-white" routerLink="/signup">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" routerLink="/login">Login</a>
-                </li>
-            </ng-container>
-            <ng-container *ngIf="isLoggedIn"  class="justify-content-center align-items-center flex-wrap gap-3 ">
-                <li class="nav-item d-flex justify-content-center align-items-center" >
-                    <span class="user-info">
-                        ({{username}}) - ({{userRole}})
-                    </span>
-                </li>
-                <li class="nav-item d-flex justify-content-center align-items-center">
-                    <a class="nav-link text-white" routerLink="/">Home</a>
-                </li>
-                <ng-container *ngIf="userRole==='ADMIN' ">
-                    <app-adminnav></app-adminnav>
-                </ng-container>
-                <ng-container *ngIf="userRole==='USER'">
-                    <app-usernav></app-usernav>
-                </ng-container>
-                <li class="nav-item d-flex justify-content-center align-items-center">
-                    <button class="nav-item btn btn-danger" (click)="showLogoutPopup = true"  data-bs-toggle="modal" data-bs-target="#logoutModal">
-                        Logout
-                    </button>
-                </li>
-            </ng-container>
+ <nav class="navbar">
+    <h2 class="navbar-title">Vehicle Service</h2>
+    <div class="navbar-links">
+      <nav class="navbar-menu" *ngIf="!isLoggedIn">
+        <a class="navbar-link" routerLink="/registration">Register</a>
+        <a class="navbar-link" routerLink="/login">Login</a>
+      </nav>
+      <div class="user-section" *ngIf="isLoggedIn">
+        <ul class="user-nav">
+          <li class="user-item" *ngIf="userRole === 'ROLE_ADMIN'">
+            <app-adminnav></app-adminnav>
+          </li>
+          <li class="user-item" *ngIf="userRole === 'ROLE_USER'">
+            <app-usernav></app-usernav>
+          </li>
         </ul>
+      </div>
     </div>
-</div>
+  </nav>
  
- 
-<div *ngIf="showLogoutPopup" class="modal fade show d-block" >
- 
-    <div class="modal-dialog modal-dialog-centered">
- 
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">
-                    <h3 style="color: red;" class="modal-title text-center">Confirm Logout</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to logout</p>
-                </div>
-                <div class="modal-footer">
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-danger" (click)="logout()">Logout</button>
-                        <button (click)="showLogoutPopup=false" class="btn btn-dark ms-3" >Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
- 
+   
  

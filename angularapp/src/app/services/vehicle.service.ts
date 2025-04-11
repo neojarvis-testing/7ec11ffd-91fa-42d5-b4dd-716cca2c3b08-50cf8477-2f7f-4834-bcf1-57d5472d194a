@@ -7,9 +7,9 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
   providedIn: 'root'
 })
 export class VehicleService {
-  public apiUrl: string = "https://ide-efbfbaedcaefecebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";
+  public apiUrl: string = "https://ide-ffeffbaeceacebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   public getAllServices(): Observable<any> {
     return this.httpClient.get(this.apiUrl + "/api/services");
@@ -34,4 +34,5 @@ export class VehicleService {
   public getServiceById(serviceId: number): Observable<any> {
     return this.httpClient.get(this.apiUrl + "/api/services/" + serviceId);
   }
+  
 }
