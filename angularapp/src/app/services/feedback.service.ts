@@ -27,18 +27,6 @@ export class FeedbackService {
     return this.httpClient.delete(this.apiUrl+"/feedback/"+feedbackId);
   }
 
-  public createFeedback(feedback: Feedback):Observable<any>{
-    return this.httpClient.post(this.apiUrl+"/api/feedback",feedback);
-  }
-
-  public getAllFeedback():Observable<any>{
-    return this.httpClient.get(this.apiUrl+"/api/feedback")
-  }
-
-  public  deleteFeedback(feedbackId: number):Observable<any>{
-    return this.httpClient.delete(this.apiUrl+"/api/feedback/"+feedbackId);
-  }
-
   public getFeedbackById(feedbackId:number):Observable<any>{
     return this.httpClient.get(this.apiUrl+"/api/feedback/"+feedbackId);
   }
@@ -47,5 +35,4 @@ export class FeedbackService {
     return this.httpClient.put(this.apiUrl+"/api/feedback/"+feedbackId,feedback);
   }
   
-
 }

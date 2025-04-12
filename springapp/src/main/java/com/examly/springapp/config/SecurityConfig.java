@@ -32,15 +32,6 @@ public class SecurityConfig {
  
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    // @Autowired
-    // private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
- 
-   @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
  
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
