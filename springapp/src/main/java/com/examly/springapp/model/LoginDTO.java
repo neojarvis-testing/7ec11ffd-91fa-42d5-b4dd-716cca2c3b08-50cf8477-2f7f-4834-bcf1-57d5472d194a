@@ -29,7 +29,7 @@ public class LoginDTO{
 
     private String username;
     private String token; 
-    private String role; 
+    private String userRole; 
     private String password;
 
 

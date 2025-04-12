@@ -18,7 +18,7 @@ import com.examly.springapp.service.FeedbackService;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-@CrossOrigin(allowedHeaders = "*",origins = "*")
+
 
 public class FeedbackController {
     

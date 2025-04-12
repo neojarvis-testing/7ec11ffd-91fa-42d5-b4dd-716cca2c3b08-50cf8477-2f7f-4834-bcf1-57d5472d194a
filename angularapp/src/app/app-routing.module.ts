@@ -31,7 +31,7 @@ const routes: Routes = [
   {path:"adminviewservice",component:AdminviewserviceComponent},
   {path:"adminviewuserdetails",component:AdminviewuserdetailsComponent},
   {path:"login",component:LoginComponent},
-  {path:"navbar",component:NavbarComponent},
+  
   {path:"profile",component:ProfileComponent},
   {path:"registration",component:RegistrationComponent},
   {path:"useraddappointment",component:UseraddappointmentComponent},
@@ -39,11 +39,9 @@ const routes: Routes = [
   {path:"usernavbar",component:UsernavbarComponent},
   {path:"userviewappointment",component:UserviewappointmentComponent},
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
-
- 
   {path:"adminaddservice/:serviceId",component:AdminaddserviceComponent},
-
-  {path:"**",component:ErrorComponent}
+  {path:"error",component:ErrorComponent},
+  // {path:"**",component:HomeComponent},
 
 
 ];

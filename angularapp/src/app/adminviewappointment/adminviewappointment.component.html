@@ -22,11 +22,11 @@
             <td>{{appointment.service.serviceName}}</td>
             <td>{{appointment.service.servicePrice}}</td>
             <td>{{appointment.service.typeOfVehicle}}</td>
-            <td>{{appointment.appointmentDate | date:'dd/mm/yyyy'}}</td>
+            <td>{{appointment.appointmentDate | date:'dd/MM/yyyy'}}</td>
             <td>{{appointment.location}}</td>
             <td>{{appointment.user.username}}</td>
             <td>
-                <select name="selectedOption" [(ngModel)]="appointment.status" id="statusSelect" class="status-select" (change)="updateStatusColor($event)">
+                <select name="selectedOption" [(ngModel)]="status" id="statusSelect" class="status-select" (change)="updateStatus(i+1)">
                     <option value="Approved" class="status-approved">Approved</option>
                     <option value="Rejected" class="status-rejected">Rejected</option>
                     <option value="Pending" class="status-pending">Pending</option>
@@ -38,7 +38,7 @@
         </tr>
     </tbody>
 </table>
-
+ 
 <div *ngIf="showDeletePopup" class="overlay"></div>
 <div *ngIf="showDeletePopup" class="delete-popup">
     <div class="popup-content">
@@ -52,17 +52,14 @@
 <div *ngIf="appointments.length == 0" class="no-appointments">
     Oops! No Appointment found.
 </div>
-
-<script>
-    function updateStatusColor(event) {
-        const selectBox = event.target;
-        const selectedOption = selectBox.options[selectBox.selectedIndex];
-        selectBox.className = 'status-select ' + selectedOption.className;
-    }
-
-    // Initialize the color based on the default selected option
-    document.querySelectorAll('#statusSelect').forEach(selectBox => {
-        const selectedOption = selectBox.options[selectBox.selectedIndex];
-        selectBox.className = 'status-select ' + selectedOption.className;
-    });
-</script>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

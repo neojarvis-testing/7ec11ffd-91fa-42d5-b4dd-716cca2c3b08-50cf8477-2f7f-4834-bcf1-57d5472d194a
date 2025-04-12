@@ -1,7 +1,6 @@
 export interface AuthUser {
-    userId:number;
-    userName:string;
-    token:string;
-    role:string;
-    name:string;
+        token: string;       // Matches the 'token' key in the response
+        userRole: string;    // Matches the 'userRole' key in the response
+        username: string;    // Matches the 'username' key in the response
+        userId: string;      // Matches the 'userId' key in the response
 }

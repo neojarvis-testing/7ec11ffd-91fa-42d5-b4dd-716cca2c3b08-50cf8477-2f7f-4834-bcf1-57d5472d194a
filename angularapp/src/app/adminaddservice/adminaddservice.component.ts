@@ -3,6 +3,7 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 import { VehicleService } from '../services/vehicle.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-adminaddservice',
@@ -33,11 +34,11 @@ export class AdminaddserviceComponent implements OnInit {
   public addService(serviceForm: NgForm) {
     if (serviceForm.valid) {
       if (this.serviceId) {
-        this.vehicleService.updateService(this.serviceId, this.vehiclemaintenance).subscribe(() => {
+        this.vehicleService.updateService(this.serviceId, this.vehiclemaintenance).subscribe(data => {
           this.showPopup = true;
         });
       } else {
-        this.vehicleService.addService(this.vehiclemaintenance).subscribe(() => {
+        this.vehicleService.addService(this.vehiclemaintenance).subscribe(data => {
           serviceForm.reset();
           this.showPopup = true;
         });

@@ -1,6 +1,6 @@
 <h1>My Appointments</h1>
 <div class="blue-line"></div>
-
+ 
 <label for="status">Filter by Status:</label>
 <select id="status" [(ngModel)]="selectedStatus" (change)="getAppoinmentsByFilter()">
     <option value="All">All</option>
@@ -8,10 +8,10 @@
     <option value="Rejected">Rejected</option>
     <option value="Pending">Pending</option>
 </select>
-
+ 
 <label for="search">Search Bar:</label>
 <input type="text" name="search" id="search" [(ngModel)]="inp" (keyup)="searchData()">
-
+ 
 <body>
     <div class="container" *ngIf="appointments.length>0">
         <div class="filter">
@@ -35,16 +35,16 @@
                             <td>{{appointment.service.servicePrice}}</td>
                             <td>{{appointment.service.typeOfVehicle}}</td>
                             <td>{{appointment.location}}</td>
-                            <td>{{appointment.appointmentDate |  date:'dd/mm/yyyy'}}</td>
+                            <td>{{appointment.appointmentDate | date :'shortDate'}}</td>
                             <td>{{appointment.status}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
+ 
         </div>
     </div>
 </body>
-
+ 
 <div *ngIf="appointments.length==0" class="no-appointments">
     No appointments available</div>

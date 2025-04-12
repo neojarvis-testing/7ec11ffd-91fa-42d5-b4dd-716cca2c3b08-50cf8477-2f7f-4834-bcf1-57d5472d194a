@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm): void {
     if (form.valid) {
       this.authService.login(form.value);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/adminnavbar']);
     } else {
       this.errorMessage = 'Please enter valid credentials.';
     }
   }
 
-    
+  
 }

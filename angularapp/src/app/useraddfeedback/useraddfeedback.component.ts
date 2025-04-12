@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Feedback } from '../models/feedback.model';
 import { FeedbackService } from '../services/feedback.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-useraddfeedback',
@@ -11,11 +12,12 @@ import { Router } from '@angular/router';
 })
 export class UseraddfeedbackComponent implements OnInit {
 
-  feedback: Feedback = { message: "", rating: null, user: { userId: 1, email: "", password: "", username: "", mobileNumber: "", userRole: "" } };
+  feedback: Feedback = { message: "", rating: null, user: { userId: null, email: "", password: "", username: "", mobileNumber: "", userRole: "" } };
 
-  constructor(private feedbackService: FeedbackService, private router: Router) { }
+  constructor(private feedbackService: FeedbackService, private router: Router,private authService : AuthService) { }
 
   ngOnInit(): void {
+    this.feedback.user.userId = parseInt(this.authService.getUserId());
   }
 
   submitFeedback(form: NgForm) {

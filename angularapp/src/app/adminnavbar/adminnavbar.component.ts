@@ -22,8 +22,8 @@ export class AdminnavbarComponent implements OnInit {
     this.loadUserFromLocalStorage();
     this.userStore.user$.subscribe((user:AuthUser | null )=>{
       if(user){
-        this.userName = user.name;
-        this.userRole = user.role;
+        this.userName = user.username;
+        this.userRole = user.userRole;
       }
     })
   }

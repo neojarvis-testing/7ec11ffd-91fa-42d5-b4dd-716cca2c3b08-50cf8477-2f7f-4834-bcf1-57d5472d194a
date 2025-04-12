@@ -27,11 +27,15 @@ export class AdminviewserviceComponent implements OnInit {
   }
 
   public searchByServiceName() {
-    this.vehiclemaintainance = this.vehiclemaintainance.filter(service => 
-      service.serviceName.toLowerCase().includes(this.searchData.toLowerCase())
-    );
+    this.vehicleService.getAllServices().subscribe(data => {
+      this.vehiclemaintainance = data;
+      this.vehiclemaintainance = this.vehiclemaintainance.filter(service => 
+        service.serviceName.toLowerCase().includes(this.searchData.toLowerCase())
+      );
+    });
   }
 
+  
   public deleteService(serviceId: number) {
 
     console.log(serviceId);

@@ -72,7 +72,7 @@ public class AuthController {
             response.setToken((jwtUtils.generateToken(user.getUsername())));
             response.setUserId(responsUser.getUserId());
             response.setUsername(responsUser.getUsername());
-            response.setRole(responsUser.getUserRole());
+            response.setUserRole(responsUser.getUserRole());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         }
