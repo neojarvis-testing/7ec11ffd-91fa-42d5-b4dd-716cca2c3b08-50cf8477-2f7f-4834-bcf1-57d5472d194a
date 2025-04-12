@@ -1,4 +1,6 @@
 <h1>Requested Appointments</h1>
+<label for="search">Search Bar:</label>
+<input type="text" name="search" id="search" [(ngModel)]="inp" (keyup)="searchData()">
 <div class="blue-line"></div>
 <table>
     <thead>
@@ -15,22 +17,19 @@
         </tr>
     </thead>
     <tbody>
-        <!-- <tr *ngIf="!appointments">
-            <td>Oops! No Appointment found.</td>
-        </tr> -->
-        <tr *ngFor="let appointment of appointments,index as i">
-            <td>{{i+1}}</td>
+        <tr *ngFor="let appointment of appointments; index as i">
+            <td>{{i + 1}}</td>
             <td>{{appointment.service.serviceName}}</td>
             <td>{{appointment.service.servicePrice}}</td>
             <td>{{appointment.service.typeOfVehicle}}</td>
-            <td>{{appointment.appointmentDate}}</td>
+            <td>{{appointment.appointmentDate | date:'dd/mm/yyyy'}}</td>
             <td>{{appointment.location}}</td>
             <td>{{appointment.user.username}}</td>
             <td>
-                <select name="selectedOption" [(ngModel)]="appointment.status">
-                    <option value="Approved">Approved</option>
-                    <option value="Rejected">Rejected</option>
-                    <option value="Pending">Pending</option>
+                <select name="selectedOption" [(ngModel)]="appointment.status" id="statusSelect" class="status-select" (change)="updateStatusColor($event)">
+                    <option value="Approved" class="status-approved">Approved</option>
+                    <option value="Rejected" class="status-rejected">Rejected</option>
+                    <option value="Pending" class="status-pending">Pending</option>
                 </select>
             </td>
             <td>
@@ -38,17 +37,32 @@
             </td>
         </tr>
     </tbody>
-   
 </table>
 
+<div *ngIf="showDeletePopup" class="overlay"></div>
 <div *ngIf="showDeletePopup" class="delete-popup">
-    <div class="popup-contenr">
+    <div class="popup-content">
         <p>Are you sure you want to delete this appointment?</p>
         <div class="popup-actions">
             <button (click)="deleteAppointment(appointmentId)" class="confirm-btn">Yes</button>
-            <button (click)="showLogoutPopup = false" class="cancel-btn">No</button>
+            <button (click)="hidePopup()" class="cancel-btn">No</button>
         </div>
     </div>
 </div>
-<div *ngIf="appointments.length==0" class="no-appointments">
-    Oops! No Appointment found.</div>
+<div *ngIf="appointments.length == 0" class="no-appointments">
+    Oops! No Appointment found.
+</div>
+
+<script>
+    function updateStatusColor(event) {
+        const selectBox = event.target;
+        const selectedOption = selectBox.options[selectBox.selectedIndex];
+        selectBox.className = 'status-select ' + selectedOption.className;
+    }
+
+    // Initialize the color based on the default selected option
+    document.querySelectorAll('#statusSelect').forEach(selectBox => {
+        const selectedOption = selectBox.options[selectBox.selectedIndex];
+        selectBox.className = 'status-select ' + selectedOption.className;
+    });
+</script>
