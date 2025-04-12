@@ -1,6 +1,13 @@
-
-<!-- <app-navbar></app-navbar> -->
-<!-- <app-usernavbar></app-usernavbar> -->
-<app-adminnavbar></app-adminnavbar>
+<div class="container">
+    <div *ngIf="authService.isAdmin()">
+        <app-adminnavbar ></app-adminnavbar> 
+    </div>
+    <div *ngIf="authService.isUser()">
+        <app-usernavbar ></app-usernavbar>
+    </div>
+    <div *ngIf="authService.isGuest()">
+        <app-navbar></app-navbar>
+    </div>
+</div>
 <router-outlet></router-outlet>
 

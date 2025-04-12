@@ -19,7 +19,13 @@
       <td>{{ service.typeOfVehicle }}</td>
       <td><input type="date" [(ngModel)]="appointmentDates[i]" (input)="onInputChange(i)"></td>
       <td><input type="text" [(ngModel)]="locations[i]" placeholder="Enter location" (input)="onInputChange(i)"></td>
-      <td><button class="add-appointment" (click)="addAppointment(i)" [disabled]="!appointmentDates[i] || !locations[i]">Add Appointment</button></td>
+      <td><button class="add-appointment" (click)="addAppointment(service.serviceId,i)" [disabled]="!appointmentDates[i] || !locations[i]">Add Appointment</button></td>
     </tr>
   </tbody>
 </table>
+<div *ngIf="showPopup" class="popup">
+  <p>{{ serviceId ? 'Service Updated Successfully' : 'Appointment Added Successfully' }}</p>
+  <button (click)="closePopup()">Ok</button>
+</div>
+ 
+ 

@@ -20,12 +20,14 @@ import { UserStoreService } from '../helpers/user-store.service';
     constructor(private userStore :UserStoreService,private authService :AuthService,private router :Router) { }
    
     ngOnInit(): void {
+      console.log(this.isLoggedIn);
+      
       this.loadUserFromLocalStorage();
       this.userStore.user$.subscribe((user: AuthUser | null) => {
         if (user) {
           this.isLoggedIn = true;
-          this.userName = user.name;
-          this.userRole = user.role;
+          this.userName = user.username;
+          this.userRole = user.userRole;
         } else {
           this.isLoggedIn = false;
           this.userName = '';
@@ -56,9 +58,11 @@ import { UserStoreService } from '../helpers/user-store.service';
    
     updateUserState(){
       this.isLoggedIn = this.userStore.isLoggedIn();
-      this.userName = this.userStore.authUser?.name;
-      this.userRole = this.userStore.authUser?.role;
+      this.userName = this.userStore.authUser?.username;
+      this.userRole = this.userStore.authUser?.userRole;
     }
+
+    
    
   }
    

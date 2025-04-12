@@ -63,7 +63,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/api/appointment/user/{userId}")
-    public ResponseEntity<?> getAppointmentByUserId(int userId){
+    public ResponseEntity<?> getAppointmentByUserId(@PathVariable int userId){
         List<Appointment> appointmentList = appointmentService.getAppointmentByUserId(userId);
         return ResponseEntity.status(200).body(appointmentList);
     }

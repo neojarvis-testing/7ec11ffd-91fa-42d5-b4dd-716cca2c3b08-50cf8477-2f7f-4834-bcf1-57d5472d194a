@@ -2,17 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { Authresponse } from '../models/authresponse.model';
 import { Login } from '../models/login.model';
 import { UserStoreService } from '../helpers/user-store.service';
 import { User } from '../models/user.model';
 import {tap} from 'rxjs/operators';
+import { AuthUser } from '../models/auth-user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = "https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";  
+  private baseUrl = "https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";  
   
   constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -24,22 +24,17 @@ export class AuthService {
 
   // Login function with token storage
   login(loginData: Login): void {
-    this.httpClient.post<Authresponse>(this.baseUrl+"/api/login", loginData)
+    this.httpClient.post<AuthUser>(this.baseUrl+"/api/login", loginData)
       .subscribe(response => {
-        localStorage.setItem('token', response.jwtToken);
-        localStorage.setItem('userRole', response.userRole);
-        localStorage.setItem('username', response.username);
-        localStorage.setItem('userId', response.userId);
+        localStorage.setItem('token', response.token);
+          localStorage.setItem('userRole', response.userRole);
+          localStorage.setItem('username', response.username);
+          localStorage.setItem('userId', response.userId);
+
+        console.log(localStorage);
+
+        this.router.navigate(["/home"]);
         
-        if (response.userRole === 'Admin') {
-
-          this.router.navigate(['/home']);
-
-        } else if (response.userRole === 'User') {
-
-          this.router.navigate(['/usernavbar']);
-
-        }
       }, error => {
         console.error('Login failed:', error);
       });
@@ -69,6 +64,30 @@ export class AuthService {
   // Check if the user is authenticated
   isAuthenticated(): boolean {
     return !!this.getToken();  // Returns true if token exists
+  }
+
+  public isAdmin() : boolean {
+    if(localStorage.getItem('userRole') == 'Admin'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public isUser() : boolean {
+    if(localStorage.getItem('userRole') == 'User'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  public isGuest() : boolean {
+    if(localStorage.getItem('userRole') ==  null){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

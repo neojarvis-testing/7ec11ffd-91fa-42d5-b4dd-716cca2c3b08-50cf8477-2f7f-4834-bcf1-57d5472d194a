@@ -23,6 +23,7 @@ import { UserviewappointmentComponent } from './userviewappointment/userviewappo
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { RouterModule } from '@angular/router';
  
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

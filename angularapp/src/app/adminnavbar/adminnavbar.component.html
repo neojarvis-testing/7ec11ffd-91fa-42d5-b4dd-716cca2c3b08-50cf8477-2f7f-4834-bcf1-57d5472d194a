@@ -4,7 +4,7 @@
         <div class="admin-section">
             <nav>
                 <ul>
-                    <li>Welcome {{userName}}/{{userRole}}</li>
+                    <!-- <li> {{userName}}/{{userRole}}</li> -->
                     <li><a href="#">Home</a></li>
                     <li class="hover-card">
                         <a href="#">Services</a>
@@ -13,12 +13,13 @@
                             <button onclick="location.href='/adminviewservice'">View Services</button>
                         </div>
                     </li>
-                    <li><a Link="/adminviewappointment">Appointments</a></li>
-                    <li><a Link="/adminviewfeedback">Feedbacks</a></li>
-                    <li><a Link="/adminviewuserdetails">Customer</a></li>
+                    <li><a routerLink="/adminviewappointment">Appointment</a></li>
+                    <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
+                    <li><a routerLink="/adminviewuserdetails">Customer</a></li>
                     <li><a class="logout" (click)="logout()" type="button">Logout</a></li>
                 </ul>
             </nav>
         </div>
     </div>
 </nav>
+<router-outlet></router-outlet>

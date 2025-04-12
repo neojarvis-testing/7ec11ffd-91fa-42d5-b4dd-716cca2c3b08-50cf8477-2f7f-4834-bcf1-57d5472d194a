@@ -1,21 +1,11 @@
  <nav class="navbar">
+
     <h2 class="navbar-title">Vehicle Service</h2>
-    <div class="navbar-links">
-      <nav class="navbar-menu" *ngIf="!isLoggedIn">
-        <a class="navbar-link" routerLink="/registration">Register</a>
-        <a class="navbar-link" routerLink="/login">Login</a>
-      </nav>
-      <div class="user-section" *ngIf="isLoggedIn">
-        <ul class="user-nav">
-          <li class="user-item" *ngIf="userRole === 'ROLE_ADMIN'">
-            <app-adminnav></app-adminnav>
-          </li>
-          <li class="user-item" *ngIf="userRole === 'ROLE_USER'">
-            <app-usernav></app-usernav>
-          </li>
-        </ul>
-      </div>
-    </div>
+
+          <a class="navbar-link" routerLink="/home">Home</a>
+          <a class="navbar-link" routerLink="/registration">Register</a>
+          <a class="navbar-link" routerLink="/login">Login</a>
+
   </nav>
  
    

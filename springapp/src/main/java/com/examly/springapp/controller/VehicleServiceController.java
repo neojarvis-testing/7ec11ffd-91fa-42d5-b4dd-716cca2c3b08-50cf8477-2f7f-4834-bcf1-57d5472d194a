@@ -17,17 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.service.VehicleService;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-@CrossOrigin(allowedHeaders = "*",origins = "*")
 public class VehicleServiceController {
 
     @Autowired
     private VehicleService vehicleService;
-
+    
+    @PreAuthorize("permitAll()")
     @PostMapping("/api/services")
+    
     public ResponseEntity<?> addService(@RequestBody VehicleMaintenance service)
     {
         VehicleMaintenance vehicleMaintenance=vehicleService.addService(service);
