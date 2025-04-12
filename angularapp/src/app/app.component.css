@@ -28,3 +28,12 @@
   .navbar-links a:hover {
     color: lightgray;
   }
+  
+.background {
+  background-image: url('../assets/background.webp');
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Adjust as needed */
+  width: 100%;
+   }
+  

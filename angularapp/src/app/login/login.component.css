@@ -1,0 +1,7 @@
+.background {
+    background-image: url('/home/coder/project/workspace/angularapp/src/assets');
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Adjust as needed */
+    width: 100%;
+     }
