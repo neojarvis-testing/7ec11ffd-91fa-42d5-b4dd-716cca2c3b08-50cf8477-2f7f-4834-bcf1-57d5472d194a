@@ -14,7 +14,7 @@ import {tap} from 'rxjs/operators';
 export class AuthService {
   private baseUrl = "https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";  
   
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(private httpClient: HttpClient) {}
 
 
   // Register a new user
@@ -31,15 +31,15 @@ export class AuthService {
         localStorage.setItem('username', response.username);
         localStorage.setItem('userId', response.userId);
         
-        if (response.userRole === 'Admin') {
+        // if (response.userRole === 'Admin') {
 
-          this.router.navigate(['/home']);
+        //   this.router.navigate(['/home']);
 
-        } else if (response.userRole === 'User') {
+        // } else if (response.userRole === 'User') {
 
-          this.router.navigate(['/usernavbar']);
+        //   this.router.navigate(['/usernavbar']);
 
-        }
+        // }
       }, error => {
         console.error('Login failed:', error);
       });
@@ -63,7 +63,7 @@ export class AuthService {
     localStorage.removeItem('userId');
     
     // Navigate to login page after logout
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
   }
 
   // Check if the user is authenticated

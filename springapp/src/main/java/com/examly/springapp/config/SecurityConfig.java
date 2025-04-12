@@ -36,10 +36,10 @@ public class SecurityConfig {
     // @Autowired
     // private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
  
-   @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//     public PasswordEncoder passwordEncoder() {
+//         return new BCryptPasswordEncoder();
+//     }
 
  
     @Bean
