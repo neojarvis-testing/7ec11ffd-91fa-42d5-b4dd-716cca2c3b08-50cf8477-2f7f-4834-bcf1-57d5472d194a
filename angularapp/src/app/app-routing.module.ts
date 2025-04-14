@@ -7,6 +7,8 @@ import { AdminviewappointmentComponent } from './adminviewappointment/adminviewa
 import { AdminviewfeedbackComponent } from './adminviewfeedback/adminviewfeedback.component';
 import { AdminviewserviceComponent } from './adminviewservice/adminviewservice.component';
 import { AdminviewuserdetailsComponent } from './adminviewuserdetails/adminviewuserdetails.component';
+
+import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -16,11 +18,10 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
-import { ErrorComponent } from './error/error.component';
+import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
+
 
 const routes: Routes = [
-
-
   {path:"home",component:HomeComponent},
   {path:"adminaddservice",component:AdminaddserviceComponent},
   {path:"adminnavbar",component:AdminnavbarComponent},
@@ -29,7 +30,7 @@ const routes: Routes = [
   {path:"adminviewservice",component:AdminviewserviceComponent},
   {path:"adminviewuserdetails",component:AdminviewuserdetailsComponent},
   {path:"login",component:LoginComponent},
-  {path:"navbar",component:NavbarComponent},
+  
   {path:"profile",component:ProfileComponent},
   {path:"registration",component:RegistrationComponent},
   {path:"useraddappointment",component:UseraddappointmentComponent},
@@ -38,9 +39,10 @@ const routes: Routes = [
   {path:"userviewappointment",component:UserviewappointmentComponent},
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
   {path:"adminaddservice/:serviceId",component:AdminaddserviceComponent},
-  {path:"**",component:ErrorComponent}
-
+  {path:"error",component:ErrorComponent},
+  { path: 'adminviewdescription/:serviceId', component: AdminviewdescriptionComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

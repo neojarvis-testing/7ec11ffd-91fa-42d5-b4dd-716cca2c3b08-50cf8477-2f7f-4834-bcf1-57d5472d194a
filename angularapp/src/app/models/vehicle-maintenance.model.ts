@@ -3,6 +3,6 @@ export interface VehicleMaintenance {
     serviceName: string;
     servicePrice: number;
     typeOfVehicle: string;
+    description?:string;
 
 }
-

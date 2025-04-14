@@ -1,4 +1,10 @@
 <h1>Available Services</h1>
+<div class="search-container">
+  <label for="searchInput">Search Service Name:</label><br>
+  <input type="text" id="searchInput" [(ngModel)]="searchData" placeholder="Enter service name"
+    class="form-control" />
+  <button (click)="searchByService()" class="btn btn-primary">Search</button>
+</div>
 <table id="servicesTable">
   <thead>
     <tr>
@@ -12,14 +18,20 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let service of services">
-      <td>{{ service.id }}</td>
-      <td>{{ service.name }}</td>
-      <td>{{ service.price }}</td>
-      <td>{{ service.vehicle }}</td>
-      <td><input type="date" class="appointment-date" (input)="onInputChange($event, $event.target.closest('tr'))"></td>
-      <td><input type="text" class="location" placeholder="Enter location" (input)="onInputChange($event, $event.target.closest('tr'))"></td>
-      <td><button class="add-appointment" disabled>Add Appointment</button></td>
+    <tr *ngFor="let service of services; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{ service.serviceName }}</td>
+      <td>{{ service.servicePrice }}</td>
+      <td>{{ service.typeOfVehicle }}</td>
+      <td><input type="date" [(ngModel)]="appointmentDates[i]" (input)="onInputChange(i)"></td>
+      <td><input type="text" [(ngModel)]="locations[i]" placeholder="Enter location" (input)="onInputChange(i)"></td>
+      <td><button class="add-appointment" (click)="addAppointment(service.serviceId,i)" [disabled]="!appointmentDates[i] || !locations[i]">Add Appointment</button></td>
     </tr>
   </tbody>
 </table>
+<div *ngIf="showPopup" class="popup">
+  <p>{{ serviceId ? 'Service Updated Successfully' : 'Appointment Added Successfully' }}</p>
+  <button (click)="closePopup()">Ok</button>
+</div>
+ 
+ 

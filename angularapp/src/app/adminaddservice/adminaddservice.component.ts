@@ -17,7 +17,7 @@ export class AdminaddserviceComponent implements OnInit {
     private router: Router
   ) { }
 
-  vehiclemaintenance: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "" };
+  vehiclemaintenance: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "", description: "" };
   showPopup: boolean = false;
   serviceId: number | null = null;
 
@@ -33,11 +33,11 @@ export class AdminaddserviceComponent implements OnInit {
   public addService(serviceForm: NgForm) {
     if (serviceForm.valid) {
       if (this.serviceId) {
-        this.vehicleService.updateService(this.serviceId, this.vehiclemaintenance).subscribe(() => {
+        this.vehicleService.updateService(this.serviceId, this.vehiclemaintenance).subscribe(data => {
           this.showPopup = true;
         });
       } else {
-        this.vehicleService.addService(this.vehiclemaintenance).subscribe(() => {
+        this.vehicleService.addService(this.vehiclemaintenance).subscribe(data => {
           serviceForm.reset();
           this.showPopup = true;
         });

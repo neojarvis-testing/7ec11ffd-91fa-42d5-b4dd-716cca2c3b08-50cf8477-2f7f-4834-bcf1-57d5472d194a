@@ -1,41 +1,119 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  table {
-    width: 90%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin: 0 auto;
-  }
-  
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  input[type="date"], input[type="text"] {
-    width: 90%;
-    padding: 5px;
-    margin: 5px 0;
-  }
-  
-  input[type="text"]::placeholder {
-    color: #aaa;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Search Container */
+.search-container {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.search-container label {
+  font-weight: bold;
+}
+
+.search-container input {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 200px;
+  display: block;
+}
+
+.search-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: block;
+}
+
+.search-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Table Styles */
+#servicesTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#servicesTable th, #servicesTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#servicesTable th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+#servicesTable tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#servicesTable tr:hover {
+  background-color: #ddd;
+}
+
+/* Input Styles */
+input[type="date"], input[type="text"] {
+  padding: 5px;
+  width: 90%;
+  box-sizing: border-box;
+}
+
+/* Button Styles */
+.add-appointment {
+  padding: 5px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.add-appointment:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.add-appointment:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.popup p {
+  margin-bottom: 20px;
+}
+
+.popup button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #0056b3;
+}
