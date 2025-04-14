@@ -1,0 +1,15 @@
+<div class="service-details-container">
+    <h2>Service Details</h2>
+    <div *ngIf="serviceDetails">
+      <p><strong>Service Name:</strong> {{ serviceDetails.serviceName }}</p>
+      <p><strong>Service Price:</strong> {{ serviceDetails.servicePrice }}</p>
+      <p><strong>Type of Vehicle:</strong> {{ serviceDetails.typeOfVehicle }}</p>
+      <p><strong>Description:</strong> {{ serviceDetails.description }}</p>
+    </div>
+    <div *ngIf="!serviceDetails">
+      <p>Loading service details...</p>
+    </div>
+    <button class="btn btn-primary" (click)="goBack()">Go Back</button>
+  </div>
+ 
+  

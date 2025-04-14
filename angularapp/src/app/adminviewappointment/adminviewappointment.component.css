@@ -1,46 +1,31 @@
-/* General styles */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
     text-align: center;
+    margin: 20px 0;
     color: #333;
 }
 
-label {
-    font-weight: bold;
-}
-
-input[type="text"] {
-    padding: 5px;
-    margin-bottom: 10px;
-    width: 200px;
-}
-
-.blue-line {
-    height: 2px;
-    background-color: #007bff;
-    margin-bottom: 20px;
-}
-
-/* Table styles */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin: 20px 0;
+    background-color: #fff;
 }
 
 th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
 }
 
 th {
     background-color: #f2f2f2;
-    color: #333;
 }
 
 tr:nth-child(even) {
@@ -48,102 +33,81 @@ tr:nth-child(even) {
 }
 
 tr:hover {
-    background-color: #f1f1f1;
+    background-color: #ddd;
 }
 
-/* Status select box styles */
-.status-select {
-    width: 150px;
-    padding: 5px;
-}
-
-.status-approved {
-    background-color: green;
-    color: white;
-}
-
-.status-pending {
-    background-color: orange;
-    color: white;
-}
-
-.status-rejected {
-    background-color: red;
-    color: white;
-}
-
-/* Button styles */
-.delete-btn {
-    background-color: #d9534f;
+.delete-btn, .confirm-btn, .cancel-btn {
+    background-color: #dc3545; /* Red color for delete buttons */
     color: white;
     border: none;
     padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
-    border-radius: 4px;
 }
 
-.delete-btn:hover {
-    background-color: #c9302c;
+.delete-btn:hover, .confirm-btn:hover, .cancel-btn:hover {
+    background-color: #c82333;
 }
 
-/* Popup styles */
+select[name="selectedOption"] {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
 .delete-popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
     padding: 20px;
-    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 5px;
+    z-index: 1000;
+    display: none; /* Initially hidden */
 }
 
-.popup-content {
-    text-align: center;
+.popup-content p {
+    margin-bottom: 20px;
 }
 
-.popup-actions {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+.popup-actions button {
+    margin-right: 10px;
 }
 
-.confirm-btn, .cancel-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.confirm-btn {
-    background-color: #d9534f;
+/* Specific styles for different statuses */
+select[name="selectedOption"] option[value="Approved"] {
+    background-color: #28a745;
     color: white;
 }
 
-.cancel-btn {
-    background-color: #5bc0de;
+select[name="selectedOption"] option[value="Rejected"] {
+    background-color: #dc3545;
     color: white;
 }
 
-/* Overlay styles */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+select[name="selectedOption"] option[value="Pending"] {
+    background-color: #ffc107;
+    color: black;
 }
 
-/* No appointments message */
 .no-appointments {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh; /* Adjust this value as needed */
     text-align: center;
-    color: #d9534f;
-    font-weight: bold;
-    margin-top: 20px;
+    font-size: 1.5em; /* Adjust the font size as needed */
+    color: #333; /* Adjust the text color as needed */
 }
+
+
+.blue-line {
+     border-top: 3px solid blue;
+     width: 100%;
+     margin-bottom: 20px;
+}
+    
+

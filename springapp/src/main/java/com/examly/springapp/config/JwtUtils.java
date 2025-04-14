@@ -16,7 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtUtils {
  
-    private static final byte[] SECRET_KEY = "abCDEfgHijkLMnoPQrsTUVWXyZ1234567890.abcdefGHIJklmnOPQRSTuvWXyz7891234560.ABCdefGhijKLmnOPqrSTUvWXYz4561237890".getBytes();
+    private static final String SECRET_KEY = "thisismysecretkey";
     private Date CURRENT_DATE = new Date();
     private Date EXPIRATION_DATE = new Date((System.currentTimeMillis() + (24*60*60*1000)));
  
