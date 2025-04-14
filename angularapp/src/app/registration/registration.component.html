@@ -1,67 +1,212 @@
-<form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
-  <h4>Register</h4>
-  <!-- Username -->
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" [(ngModel)]="user.username" required #username="ngModel">
-    <div *ngIf="username.invalid && username.touched">
-      <span *ngIf="username.errors?.required">Username is required.</span>
-    </div>
-  </div>
+<!-- registration.component.html -->
 
-  <!-- Email -->
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" [(ngModel)]="user.email" required #email="ngModel">
-    <div *ngIf="email.invalid && email.touched">
-      <span *ngIf="email.errors?.required">Email is required.</span>
-      <span *ngIf="email.errors?.email">Enter a valid email.</span>
-    </div>
-  </div>
+<!-- Registration Form (visible only when OTP has not been sent) -->
+<div *ngIf="!otpSent">
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
+    <h4 class="text-center mb-4">Register</h4>
 
-  <!-- Password -->
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" [(ngModel)]="user.password" required minlength="6" #password="ngModel">
-    <div *ngIf="password.invalid && password.touched">
-      <span *ngIf="password.errors?.required">Password is required.</span>
-      <span *ngIf="password.errors?.minlength">Password must be at least 6 characters long.</span>
+    <!-- Username Field -->
+    <div class="form-group mb-3">
+      <label for="username">Username</label>
+      <div class="input-with-feedback position-relative">
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          [(ngModel)]="user.username"
+          required
+          (blur)="onUsernameBlur()"
+          #username="ngModel"
+          placeholder="Enter your username"
+        />
+        <span *ngIf="!usernameExists && user.username && username.touched && username.valid"
+              class="feedback-tick text-success position-absolute"
+              style="left: 12px; top: 50%; transform: translateY(-50%);">
+          &#10004;
+        </span>
+      </div>
+      <div *ngIf="username.invalid && username.touched">
+        <small *ngIf="username.errors?.required" class="text-danger">Username is required.</small>
+      </div>
+      <div *ngIf="usernameExists">
+        <small class="text-danger">Username already exists.</small>
+      </div>
     </div>
-  </div>
 
-  <!-- Confirm Password -->
-  <div>
-    <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
-    <div *ngIf="confirmPassword !== user.password && confirmPassword.length > 0">
-      <span>Passwords do not match.</span>
+    <!-- Email Field -->
+    <div class="form-group mb-3">
+      <label for="email">Email</label>
+      <div class="input-with-feedback position-relative">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-control"
+        [(ngModel)]="user.email"
+        required
+        pattern="[a-z0-9._%+-]+@[-a-z0-9.]+\.[a-z]{2,}"
+        (blur)="onEmailBlur()"
+        #email="ngModel"
+        placeholder="Enter your email"
+      />
+
+        <span *ngIf="!emailExists && user.email && email.touched && email.valid"
+              class="feedback-tick text-success position-absolute"
+              style="left: 12px; top: 50%; transform: translateY(-50%);">
+          &#10004;
+        </span>
+      </div>
+      <div *ngIf="email.invalid && email.touched">
+        <small *ngIf="email.errors?.required" class="text-danger">Email is required.</small>
+        <small *ngIf="email.errors?.email || email.errors?.pattern" class="text-danger">
+          Enter a valid email.
+        </small>
+      </div>
+      <div *ngIf="emailExists">
+        <small class="text-danger">Email is already registered.</small>
+      </div>
     </div>
-  </div>
 
-  <!-- Mobile Number -->
-  <div>
-    <label for="mobileNumber">Mobile Number:</label>
-    <input type="text" id="mobileNumber" name="mobileNumber" [(ngModel)]="user.mobileNumber" required pattern="^[0-9]{10}$" #mobileNumber="ngModel">
-    <div *ngIf="mobileNumber.invalid && mobileNumber.touched">
-      <span *ngIf="mobileNumber.errors?.required">Mobile number is required.</span>
-      <span *ngIf="mobileNumber.errors?.pattern">Enter a valid 10-digit mobile number.</span>
+        <!-- Password Field -->
+    <div class="form-group mb-3">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+        [(ngModel)]="user.password"
+        required
+        minlength="8"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
+        #password="ngModel"
+        placeholder="Create a password"
+      />
+      <div *ngIf="password.invalid && password.touched">
+        <small *ngIf="password.errors?.required" class="text-danger">Password is required.</small>
+        <small *ngIf="password.errors?.minlength" class="text-danger">
+          Password must be at least 8 characters long.
+        </small>
+        <small *ngIf="password.errors?.pattern" class="text-danger">
+          Must include uppercase, lowercase, number, and special character.
+        </small>
+      </div>
     </div>
-  </div>
 
-  <!-- User Role -->
-  <div>
-    <label for="userRole">User Role:</label>
-    <select id="userRole" name="userRole" [(ngModel)]="user.userRole" required #userRole="ngModel">
-      <option value="" disabled>Select Role</option>
-      <option value="Admin">Admin</option>
-      <option value="User">User</option>
-    </select>
-    <div *ngIf="userRole.invalid && userRole.touched">
-      <span *ngIf="userRole.errors?.required">User role is required.</span>
+
+    <!-- Confirm Password Field -->
+    <div class="form-group mb-3">
+      <label for="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        class="form-control"
+        [(ngModel)]="confirmPassword"
+        required
+        placeholder="Re-enter your password"
+      />
+      <div *ngIf="confirmPassword !== user.password && confirmPassword.length > 0">
+        <small class="text-danger">Passwords do not match.</small>
+      </div>
     </div>
-  </div>
 
-  <button type="submit" [disabled]="registerForm.invalid || confirmPassword !== user.password">
-    Register
-  </button>
-</form>
+    <!-- Mobile Number Field -->
+    <div class="form-group mb-3">
+      <label for="mobileNumber">Mobile Number</label>
+      <div class="input-with-feedback position-relative">
+        <input
+          type="text"
+          id="mobileNumber"
+          name="mobileNumber"
+          class="form-control"
+          [(ngModel)]="user.mobileNumber"
+          required
+          pattern="^[0-9]{10}$"
+          (blur)="onMobileBlur()"
+          #mobileNumber="ngModel"
+          placeholder="Enter your 10-digit mobile number"
+        />
+        <span *ngIf="!mobileExists && user.mobileNumber && mobileNumber.touched && mobileNumber.valid"
+              class="feedback-tick text-success position-absolute"
+              style="left: 12px; top: 50%; transform: translateY(-50%);">
+          &#10004;
+        </span>
+      </div>
+      <div *ngIf="mobileNumber.invalid && mobileNumber.touched">
+        <small *ngIf="mobileNumber.errors?.required" class="text-danger">Mobile number is required.</small>
+        <small *ngIf="mobileNumber.errors?.pattern" class="text-danger">
+          Enter a valid 10-digit mobile number.
+        </small>
+      </div>
+      <div *ngIf="mobileExists">
+        <small class="text-danger">Mobile number already exists.</small>
+      </div>
+    </div>
+
+    <!-- User Role Field -->
+    <div class="form-group mb-3">
+      <label for="userRole">User Role</label>
+      <select
+        id="userRole"
+        name="userRole"
+        class="form-control"
+        [(ngModel)]="user.userRole"
+        required
+        #userRole="ngModel"
+      >
+        <option value="" disabled>Select Role</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+      </select>
+      <div *ngIf="userRole.invalid && userRole.touched">
+        <small *ngIf="userRole.errors?.required" class="text-danger">
+          User role is required.
+        </small>
+      </div>
+    </div>
+
+    <!-- "Send OTP & Register" Button -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary"
+              [disabled]="registerForm.invalid || confirmPassword !== user.password">
+        Send OTP & Register
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- OTP Verification Popup -->
+<div *ngIf="otpSent" class="modal">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <form (ngSubmit)="verifyOtp()" novalidate>
+      <h4 class="mb-3">OTP Confirmation</h4>
+      <p class="mb-2">
+        An OTP has been sent to <strong>{{ getMaskedEmail() }}</strong>
+      </p>
+      <p class="mb-2">
+        Time remaining: <strong>{{ otpTimeDisplay }}</strong>
+      </p>
+      <div class="form-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="otp"
+          name="otp"
+          placeholder="Enter OTP"
+          required
+        />
+        <div *ngIf="!otp && otpSubmitted" class="text-danger mt-1">
+          OTP is required.
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button type="submit" class="btn btn-success me-2">Verify OTP</button>
+        <button *ngIf="otpTime <= 0" type="button" class="btn btn-link" (click)="resendOtp()">Resend OTP</button>
+        <button type="button" class="btn btn-secondary" (click)="closeOtpPopup()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
