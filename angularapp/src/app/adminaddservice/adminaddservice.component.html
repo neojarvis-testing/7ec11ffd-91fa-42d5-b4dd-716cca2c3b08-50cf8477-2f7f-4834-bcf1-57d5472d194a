@@ -18,6 +18,7 @@
         Service Price is required and must be a positive number.
       </div>
     </div>
+
     <div>
       <label for="vehicleType">Type of Vehicle:</label>
       <select id="vehicleType" name="vehicleType" [(ngModel)]="vehiclemaintenance.typeOfVehicle" ngModel required
@@ -32,6 +33,16 @@
       </div>
     </div>
 
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" [(ngModel)]="vehiclemaintenance.description" ngModel
+        required #description="ngModel" rows="4" cols="60" placeholder="Describe Vehicle Problem"></textarea>
+      <div *ngIf="description.invalid && description.touched">
+        Description is required.
+      </div>
+    </div>
+    
+    
     <button type="submit" [disabled]="serviceForm.invalid">{{ serviceId ? 'Update Service' : 'Add Service' }}</button>
   </form>
 </div>

@@ -1,85 +1,41 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
 .navbar {
+  overflow: hidden;
   background-color: #333;
-  color: #fff;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-family: Arial;
 }
 
-.navbar h1 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.admin-section nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 15px;
-}
-
-.admin-section nav ul li {
-  position: relative;
-}
-
-.admin-section nav ul li a {
-  color: #fff;
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
-  padding: 10px 15px;
-  display: block;
-  transition: background-color 0.3s;
 }
 
-.admin-section nav ul li a:hover {
-  background-color: #575757;
-}
-
-.logout {
-  background-color: #ff4d4d;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.logout:hover {
-  background-color: #ff1a1a;
-}
-
-.hover-card .card {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  z-index: 1;
-}
-
-.hover-card:hover .card {
-  display: block;
-}
-
-.card button {
-  display: block;
-  margin: 5px 0;
-  padding: 10px;
+/* The select dropdown */
+.navbar select {
+  float: left;
+  font-size: 16px;
+  color: white;
   background-color: #333;
-  color: #fff;
   border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  padding: 14px 16px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-.card button:hover {
-  background-color: #575757;
+/* Add a red background color to navbar links and select on hover */
+.navbar a:hover, .navbar select:hover {
+  background-color: red;
+}
+
+/* Style the dropdown options */
+.navbar select option {
+  background-color: #333;
+  color: white;
+  padding: 14px 16px;
 }

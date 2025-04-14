@@ -1,13 +1,16 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AppointmentService } from '../services/appointment.service';
 import { Appointment } from '../models/appointment.model';
+
 import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-userviewappointment',
   templateUrl: './userviewappointment.component.html',
   styleUrls: ['./userviewappointment.component.css']
 })
+
 export class UserviewappointmentComponent implements OnInit, AfterViewInit {
 
   appointments: Appointment[] = [];

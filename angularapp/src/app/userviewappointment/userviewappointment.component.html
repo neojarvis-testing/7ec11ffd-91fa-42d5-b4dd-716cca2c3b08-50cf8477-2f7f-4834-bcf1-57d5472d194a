@@ -2,6 +2,7 @@
 <div class="blue-line"></div>
 
 <label for="status">Filter by Status:</label>
+
 <select id="status" [(ngModel)]="selectedStatus" (change)="getAppointmentsByFilter()">
   <option value="All">All</option>
   <option value="Approved">Approved</option>
@@ -60,6 +61,7 @@
           <div class="modal-title">
             <h3 class="text-center">Payment Gateway</h3>
           </div>
+
         </div>
         <div class="modal-body">
           <p>Your payment code: <strong>{{ paymentCode }}</strong></p>
@@ -110,4 +112,9 @@
         </div>
       </div>
     </div>
-  </div>
+
+</body>
+
+<div *ngIf="appointments.length==0" class="no-appointments">
+    No appointments available</div>
+

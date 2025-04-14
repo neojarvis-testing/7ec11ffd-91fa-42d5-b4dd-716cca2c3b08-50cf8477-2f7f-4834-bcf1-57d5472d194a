@@ -18,11 +18,10 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
+import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
 
 
 const routes: Routes = [
-
-
   {path:"home",component:HomeComponent},
   {path:"adminaddservice",component:AdminaddserviceComponent},
   {path:"adminnavbar",component:AdminnavbarComponent},
@@ -41,10 +40,9 @@ const routes: Routes = [
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
   {path:"adminaddservice/:serviceId",component:AdminaddserviceComponent},
   {path:"error",component:ErrorComponent},
-  // {path:"**",component:HomeComponent},
-
-
+  { path: 'adminviewdescription/:serviceId', component: AdminviewdescriptionComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

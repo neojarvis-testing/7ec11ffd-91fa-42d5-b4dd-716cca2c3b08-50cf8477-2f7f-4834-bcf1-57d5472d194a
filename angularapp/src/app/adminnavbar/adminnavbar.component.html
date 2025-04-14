@@ -1,25 +1,16 @@
-<nav>
-    <div class="navbar">
-        <h1>Vehicle Service</h1>
-        <div class="admin-section">
-            <nav>
-                <ul>
-                    <!-- <li> {{userName}}/{{userRole}}</li> -->
-                    <li><a href="#">Home</a></li>
-                    <li class="hover-card">
-                        <a href="#">Services</a>
-                        <div class="card">
-                            <button onclick="location.href='/adminaddservice'">Add Service</button>
-                            <button onclick="location.href='/adminviewservice'">View Services</button>
-                        </div>
-                    </li>
-                    <li><a routerLink="/adminviewappointment">Appointment</a></li>
-                    <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
-                    <li><a routerLink="/adminviewuserdetails">Customer</a></li>
-                    <li><a class="logout" (click)="logout()" type="button">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+<nav class="navbar">
+  <a routerLink="/home" class="text-decoration-none">Home</a>
+  <div class="dropdown">
+
+    <select class="dropdown" onchange="location = this.value;">
+      <option disabled selected>Services</option>
+      <option value="/adminaddservice">Add Service</option>
+      <option value="/adminviewservice">View Services</option>
+    </select>
+
+  </div>
+  <a routerLink="/adminviewappointment" class="text-decoration-none">Appointments</a>
+  <a routerLink="/adminviewfeedback" class="text-decoration-none">Feedbacks</a>
+  <a routerLink="/adminviewuserdetails" class="text-decoration-none">Customer</a>
+  <a routerLink="/home" type="button">Logout</a>
 </nav>
-<router-outlet></router-outlet>
