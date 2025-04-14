@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,12 +26,17 @@ import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { RouterModule } from '@angular/router';
 
+import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.component';
+
+
+
 import { UserNotificationComponent } from './usernotification/usernotification.component';
 import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
 
 import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
 
  
+
 @NgModule({
   declarations: [
     
@@ -53,6 +59,9 @@ import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewd
     UserviewappointmentComponent,
     UserviewfeedbackComponent,
 
+    AdminviewreportsComponent
+
+
     UserNotificationComponent,
     AdminNotificationComponent,
 
@@ -64,7 +73,8 @@ import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewd
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

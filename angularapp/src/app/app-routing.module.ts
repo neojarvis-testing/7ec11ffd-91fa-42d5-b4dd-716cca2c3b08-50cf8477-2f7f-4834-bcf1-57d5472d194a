@@ -18,6 +18,7 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
+import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.component';
 
 import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
 import { UserNotificationComponent } from './usernotification/usernotification.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:"adminviewfeedback",component:AdminviewfeedbackComponent},
   {path:"adminviewservice",component:AdminviewserviceComponent},
   {path:"adminviewuserdetails",component:AdminviewuserdetailsComponent},
+  {path:"adminviewreports",component:AdminviewreportsComponent},
   {path:"login",component:LoginComponent},
   
   {path:"profile/:feedbackId",component:ProfileComponent},
