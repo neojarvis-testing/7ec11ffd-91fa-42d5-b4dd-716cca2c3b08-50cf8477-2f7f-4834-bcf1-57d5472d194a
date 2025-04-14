@@ -24,6 +24,8 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { RouterModule } from '@angular/router';
+import { UserNotificationComponent } from './usernotification/usernotification.component';
+import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
  
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { RouterModule } from '@angular/router';
     UsernavbarComponent,
     UserviewappointmentComponent,
     UserviewfeedbackComponent,
+    UserNotificationComponent,
+    AdminNotificationComponent,
   
   ],
   imports: [

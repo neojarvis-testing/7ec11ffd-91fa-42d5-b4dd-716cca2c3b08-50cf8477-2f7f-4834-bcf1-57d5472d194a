@@ -1,11 +1,10 @@
 <nav>
     <div class="navbar">
-        <h1>Vehicle Service</h1>
+        <h1>Vehicle Service/ Admin</h1>
         <div class="admin-section">
             <nav>
                 <ul>
-                    <!-- <li> {{userName}}/{{userRole}}</li> -->
-                    <li><a href="#">Home</a></li>
+                    <li><a routerLink="/">Home</a></li>
                     <li class="hover-card">
                         <a href="#">Services</a>
                         <div class="card">
@@ -16,7 +15,14 @@
                     <li><a routerLink="/adminviewappointment">Appointment</a></li>
                     <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
                     <li><a routerLink="/adminviewuserdetails">Customer</a></li>
-                    <li><a class="logout" (click)="logout()" type="button">Logout</a></li>
+                    <li class="profile-dropdown">
+                        <a href="#"><i class="bi bi-person-circle"></i></a>
+                        <div class="dropdown-menu">
+                            <a routerLink="/myprofile">My Profile</a>
+                            <a style="cursor: pointer" (click)="logout()">Logout</a>
+                        </div>
+                    </li>
+                    <li><a routerLink="/adminnotification"><i class="bi bi-bell"></i></a></li>
                 </ul>
             </nav>
         </div>

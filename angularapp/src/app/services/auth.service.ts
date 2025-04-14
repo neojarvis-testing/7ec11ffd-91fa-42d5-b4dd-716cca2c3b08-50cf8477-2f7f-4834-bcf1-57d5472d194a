@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Login } from '../models/login.model';
-import { UserStoreService } from '../helpers/user-store.service';
 import { User } from '../models/user.model';
-import {tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { AuthUser } from '../models/auth-user.model';
 
 @Injectable({
@@ -16,20 +15,19 @@ export class AuthService {
   
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-
   // Register a new user
   register(user: User): Observable<any> {
-    return this.httpClient.post(this.baseUrl+"/api/register", user);
+    return this.httpClient.post(this.baseUrl + "/api/register", user);
   }
 
   // Login function with token storage
   login(loginData: Login): void {
-    this.httpClient.post<AuthUser>(this.baseUrl+"/api/login", loginData)
+    this.httpClient.post<AuthUser>(this.baseUrl + "/api/login", loginData)
       .subscribe(response => {
         localStorage.setItem('token', response.token);
-          localStorage.setItem('userRole', response.userRole);
-          localStorage.setItem('username', response.username);
-          localStorage.setItem('userId', response.userId);
+        localStorage.setItem('userRole', response.userRole);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('userId', response.userId);
 
         console.log(localStorage);
 
@@ -50,6 +48,11 @@ export class AuthService {
     return localStorage.getItem('userId');
   }
 
+  // Get stored username
+  getUsername(): string | null {
+    return localStorage.getItem('username'); // Retrieves the username from localStorage
+  }
+
   // Logout function
   logout(): void {
     localStorage.removeItem('token');
@@ -66,30 +69,15 @@ export class AuthService {
     return !!this.getToken();  // Returns true if token exists
   }
 
-  public isAdmin() : boolean {
-    if(localStorage.getItem('userRole') == 'Admin'){
-      return true;
-    }else{
-      return false;
-    }
+  public isAdmin(): boolean {
+    return localStorage.getItem('userRole') === 'Admin';
   }
 
-  public isUser() : boolean {
-    if(localStorage.getItem('userRole') == 'User'){
-      return true;
-    }else{
-      return false;
-    }
+  public isUser(): boolean {
+    return localStorage.getItem('userRole') === 'User';
   }
 
-  public isGuest() : boolean {
-    if(localStorage.getItem('userRole') ==  null){
-      return true;
-    }else{
-      return false;
-    }
+  public isGuest(): boolean {
+    return localStorage.getItem('userRole') === null;
   }
-
 }
-
-

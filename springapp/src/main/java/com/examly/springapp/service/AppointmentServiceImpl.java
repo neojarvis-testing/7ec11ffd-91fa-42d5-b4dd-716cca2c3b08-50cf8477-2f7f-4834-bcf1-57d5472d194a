@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.examly.springapp.model.Appointment;
 import com.examly.springapp.model.Feedback;
+import com.examly.springapp.model.Notification;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.AppointmentRepo;
+import com.examly.springapp.repository.NotificationRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
 
@@ -20,10 +22,13 @@ import jakarta.persistence.EntityNotFoundException;
 public class AppointmentServiceImpl implements AppointmentService{
 
     @Autowired
-    private AppointmentRepo appoinmentRepo;
+    private AppointmentRepo appointmentRepo;
 
     @Autowired
     private UserRepo userRepo;
+
+    @Autowired
+    private NotificationRepo notificationRepo;
 
 
     @Autowired
@@ -36,50 +41,69 @@ public class AppointmentServiceImpl implements AppointmentService{
         VehicleMaintenance vehicle = vehicleServiceRepo.findById(appointment.getService().getServiceId()).get();
         appointment.setUser(user);
         appointment.setService(vehicle);
-        return appoinmentRepo.save(appointment);
+        return appointmentRepo.save(appointment);
     }
 
     @Override
     public void deleteAppointment(Long appointmentId) {
-        Optional<Appointment> opt = appoinmentRepo.findById(appointmentId);
+        Optional<Appointment> opt = appointmentRepo.findById(appointmentId);
         if(opt.isEmpty()){
             throw new EntityNotFoundException("Not Found");
         }
-        appoinmentRepo.deleteById(appointmentId);
+        appointmentRepo.deleteById(appointmentId);
     }
 
     @Override
     public Optional<Appointment> getAppointmentById(Long appointmentId) {
-        Optional<Appointment> opt = appoinmentRepo.findById(appointmentId);
+        Optional<Appointment> opt = appointmentRepo.findById(appointmentId);
         if(opt.isEmpty()){
             throw new EntityNotFoundException("Not Found");
         }
-        return appoinmentRepo.findById(appointmentId);
+        return appointmentRepo.findById(appointmentId);
     }
 
     @Override
     public List<Appointment> getAllAppointments() {
-        List<Appointment> appointmentList = appoinmentRepo.findAll();
+        List<Appointment> appointmentList = appointmentRepo.findAll();
         return appointmentList;
     }
 
     @Override
     public List<Appointment> getAppointmentByUserId(int userId) {
-        List<Appointment> appointmentList = appoinmentRepo.findByUserUserId(userId);
+        List<Appointment> appointmentList = appointmentRepo.findByUserUserId(userId);
         return appointmentList;
     }
 
     @Override
     public Appointment updateAppointment(Long appointmentId, Appointment appointment) {
-        Optional<Appointment> opt = appoinmentRepo.findById(appointmentId);
+        Optional<Appointment> opt = appointmentRepo.findById(appointmentId);
         if(opt.isEmpty())
         {
             throw new EntityNotFoundException("Not Found");
         }
         
         appointment.setAppointmentId(appointmentId);
-        return appoinmentRepo.save(appointment);
-    }
-    
+        return appointmentRepo.save(appointment);
+    }    
+
+
+    @Override
+    public void requestPayment(Long appointmentId) {
+    Appointment appointment = appointmentRepo.findById(appointmentId)
+            .orElseThrow(() -> new EntityNotFoundException("Appointment not found with ID: " + appointmentId));
+
+    // Update appointment status
+    appointment.setStatus("Payment Requested");
+    appointmentRepo.save(appointment);
+
+    // Create a notification for the user
+
+    Notification notification = new Notification();
+    notification.setUser(appointment.getUser()); // Set the user
+    notification.setAppointment(appointment); // Link the appointment
+    notification.setMessage("Payment requested for your appointment. Please proceed to payment.");
+    notification.setRead(false); // Mark as unread
+    notificationRepo.save(notification); // Save the notification
+}
     
 }

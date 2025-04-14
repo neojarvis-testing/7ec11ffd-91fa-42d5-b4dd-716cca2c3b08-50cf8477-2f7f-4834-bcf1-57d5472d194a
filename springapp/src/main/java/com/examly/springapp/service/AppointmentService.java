@@ -12,5 +12,5 @@ public interface AppointmentService {
     public List<Appointment> getAllAppointments();
     public List<Appointment> getAppointmentByUserId(int userId);
     public Appointment updateAppointment(Long appointmentId, Appointment appointment);
-
+    public void requestPayment(Long appointmentId);
 }

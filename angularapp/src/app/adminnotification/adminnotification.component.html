@@ -1,0 +1,21 @@
+<div class="notification-container">
+  <h2>New Appointments</h2>
+  <table class="notification-table">
+    <thead>
+      <tr>
+        <th>S. No</th>
+        <th>Notification</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of appointments; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ appointment.user?.username }} has booked an appointment.</td>
+        <td>
+          <button class="request-payment-btn" (click)="requestPayment(appointment)">Request Payment</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

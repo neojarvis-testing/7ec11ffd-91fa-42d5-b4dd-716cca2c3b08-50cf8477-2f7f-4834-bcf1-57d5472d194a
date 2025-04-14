@@ -1,0 +1,16 @@
+<div class="notification-container">
+  <h2>Hey {{ username }}, You have a new notification</h2>
+  <ul>
+    <li *ngFor="let notification of notifications; let i = index" class="notification-item">
+      <div class="notification-header">
+        <i class="bi bi-x close-icon" (click)="removeNotification(i)"></i>
+      </div>
+      <div class="notification-message">{{ notification.message }}</div>
+      <div class="notification-actions">
+        <button (click)="handlePayment(notification)" class="payment-button">
+          Make Payment
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
