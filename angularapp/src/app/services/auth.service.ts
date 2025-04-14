@@ -1,35 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { Router } from '@angular/router';
 import { Login } from '../models/login.model';
-import { UserStoreService } from '../helpers/user-store.service';
 import { User } from '../models/user.model';
-import {tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { AuthUser } from '../models/auth-user.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = "https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";  
-  
-  constructor(private httpClient: HttpClient, private router: Router) {}
 
+  private baseUrl = "https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";  
+ 
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   // Register a new user
   register(user: User): Observable<any> {
-    return this.httpClient.post(this.baseUrl+"/api/register", user);
+    return this.httpClient.post(this.baseUrl + "/api/register", user);
   }
 
   // Login function with token storage
   login(loginData: Login): void {
-    this.httpClient.post<AuthUser>(this.baseUrl+"/api/login", loginData)
+    this.httpClient.post<AuthUser>(this.baseUrl + "/api/login", loginData)
       .subscribe(response => {
         localStorage.setItem('token', response.token);
-          localStorage.setItem('userRole', response.userRole);
-          localStorage.setItem('username', response.username);
-          localStorage.setItem('userId', response.userId);
+        localStorage.setItem('userRole', response.userRole);
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('userId', response.userId);
 
         console.log(localStorage);
 
@@ -50,6 +51,11 @@ export class AuthService {
     return localStorage.getItem('userId');
   }
 
+  // Get stored username
+  getUsername(): string | null {
+    return localStorage.getItem('username'); // Retrieves the username from localStorage
+  }
+
   // Logout function
   logout(): void {
     localStorage.removeItem('token');
@@ -61,35 +67,41 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // Check if the user is authenticated
-  isAuthenticated(): boolean {
-    return !!this.getToken();  // Returns true if token exists
+  private apiUrl = 'https://your-api.com/auth';
+
+  constructor(private http: HttpClient) {}
+
+
+  // login(username: string, password: string): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/login`, { username, password }).subscribe(response => {
+  //     localStorage.setItem('token', response.token);
+  //   });
+  // }
+
+
+  public isAdmin(): boolean {
+    return localStorage.getItem('userRole') === 'Admin';
   }
 
-  public isAdmin() : boolean {
-    if(localStorage.getItem('userRole') == 'Admin'){
-      return true;
-    }else{
-      return false;
-    }
+  public isUser(): boolean {
+    return localStorage.getItem('userRole') === 'User';
   }
 
-  public isUser() : boolean {
-    if(localStorage.getItem('userRole') == 'User'){
-      return true;
-    }else{
-      return false;
-    }
+  public isGuest(): boolean {
+    return localStorage.getItem('userRole') === null;
   }
-
-  public isGuest() : boolean {
-    if(localStorage.getItem('userRole') ==  null){
-      return true;
-    }else{
-      return false;
-    }
-  }
-
 }
 
+  // logout(): void {
+  //   localStorage.removeItem('token');
+  // }
+
+  // isLoggedIn(): boolean {
+  //   const token = localStorage.getItem('token');
+  //   return !!token;
+  // }
+
+  
+
+}
 

@@ -20,10 +20,14 @@ import { UserviewappointmentComponent } from './userviewappointment/userviewappo
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
 import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.component';
 
+import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
+import { UserNotificationComponent } from './usernotification/usernotification.component';
+
+import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
+
+
 
 const routes: Routes = [
-
-
   {path:"home",component:HomeComponent},
   {path:"adminaddservice",component:AdminaddserviceComponent},
   {path:"adminnavbar",component:AdminnavbarComponent},
@@ -34,7 +38,9 @@ const routes: Routes = [
   {path:"adminviewreports",component:AdminviewreportsComponent},
   {path:"login",component:LoginComponent},
   
-  {path:"profile",component:ProfileComponent},
+  {path:"profile/:feedbackId",component:ProfileComponent},
+  { path: 'adminnotification', component: AdminNotificationComponent },
+  { path: 'usernotification', component: UserNotificationComponent },
   {path:"registration",component:RegistrationComponent},
   {path:"useraddappointment",component:UseraddappointmentComponent},
   {path:"useraddfeedback",component:UseraddfeedbackComponent},
@@ -43,10 +49,9 @@ const routes: Routes = [
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
   {path:"adminaddservice/:serviceId",component:AdminaddserviceComponent},
   {path:"error",component:ErrorComponent},
-  // {path:"**",component:HomeComponent},
-
-
+  { path: 'adminviewdescription/:serviceId', component: AdminviewdescriptionComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

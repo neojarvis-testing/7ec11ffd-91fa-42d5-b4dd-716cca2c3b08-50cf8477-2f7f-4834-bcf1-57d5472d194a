@@ -6,29 +6,38 @@
             <div class="admin-section">
                 <nav>
                     <ul>
-                        <!-- <li>{{userName}}/{{userRole}}</li> -->
-                        <li><a href="#">Home</a></li>
+                        <li><a routerLink="/home">Home</a></li>
                         <li class="hover-card">
-                            <a>Appointments</a>
+                            <a style="cursor: pointer">Appointments</a>
                             <div class="card">
-                                <button onclick="location.href='/useraddappointment'">Book Appointments</button>
-                                <button onclick="location.href='/userviewappointment'">My Appointments</button>
+                                <button style="cursor: pointer" onclick="location.href='/useraddappointment'">Book Appointments</button>
+                                <button style="cursor: pointer" onclick="location.href='/userviewappointment'">My Appointments</button>
                             </div>
                         </li>
                         <li class="hover-card">
-                            <a>Feedback</a>
+                            <a style="cursor: pointer">Feedback</a>
                             <div class="card">
                                 <button onclick="location.href='/useraddfeedback'">Add Feedback</button>
                                 <button onclick="location.href='/userviewfeedback'">My Feedbacks</button>
                             </div>
                         </li>
-                        <li><a class="logout" (click)="logout()" type="button">Logout</a></li>
+                        <li class="profile-dropdown">
+                            <a href="#"><i class="bi bi-person-circle"></i></a>
+                            <div class="dropdown-menu">
+                                <a routerLink="/myprofile">My Profile</a>
+                                <a style="cursor: pointer" (click)="logout()">Logout</a>
+                            </div>
+                        </li>
+                        <!-- Updated bell icon to navigate to usernotification -->
+                        <li>
+                            <a style="cursor: pointer;" (click)="navigateToNotifications()"><i class="bi bi-bell"></i></a>
+                        </li>
                     </ul>
                 </nav>  
             </div>
         </div>
     </header>
-    
 </body>
 
 <router-outlet></router-outlet>
+

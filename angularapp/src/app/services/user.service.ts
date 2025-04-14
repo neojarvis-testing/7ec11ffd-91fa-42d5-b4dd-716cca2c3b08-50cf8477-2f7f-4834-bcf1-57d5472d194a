@@ -1,38 +1,42 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private baseUrl = "https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080"; // Base API URL
 
-  constructor(private http: HttpClient) {}
+  public apiUrl = "https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080"; // Base API URL
+
+  constructor(private httpClient: HttpClient) { }
 
   // Retrieve all users
-  getAllUsers(): Observable<any> {
-    return this.http.get(this.baseUrl + '/user');
+  public getAllUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(this.apiUrl + '/api/users');
   }
 
   // Update user details
-  updateUserProfile(userData: any): Observable<any> {
-    return this.http.put(this.baseUrl + '/user/view/profile', userData);
+  public updateUserProfile(userId: number, userData: User): Observable<User> {
+    return this.httpClient.put<User>(this.apiUrl + '/api/user/' + userId, userData);
   }
 
   // Retrieve a user by ID
-  getUserById(userId: string): Observable<any> {
-    return this.http.get(this.baseUrl + '/user/' + userId);
+  public getUserById(userId: string): Observable<User> {
+    return this.httpClient.get<User>(this.apiUrl + '/api/user/' + userId);
   }
 
   // Delete a user by ID
-  deleteUser(userId: string): Observable<any> {
-    return this.http.delete(this.baseUrl + '/' + userId);
+  public deleteUser(userId: string): Observable<void> {
+    return this.httpClient.delete<void>(this.apiUrl + '/api/user/' + userId);
   }
 
   // Retrieve a user by name
-  getUserByName(name: string): Observable<any> {
-    return this.http.get(this.baseUrl + '/name/' + name);
+  public getUserByName(name: string): Observable<User> {
+    return this.httpClient.get<User>(this.apiUrl + '/api/user/name/' + name);
   }
+
 }

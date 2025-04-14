@@ -1,22 +1,23 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
 .navbar {
+  overflow: hidden;
   background-color: #333;
+
   color: #fff;
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .navbar h1 {
   margin: 0;
   font-size: 24px;
+}
+
+.admin-section {
+  flex-grow: 1;
 }
 
 .admin-section nav ul {
@@ -25,6 +26,8 @@ body {
   padding: 0;
   display: flex;
   gap: 15px;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .admin-section nav ul li {
@@ -36,11 +39,54 @@ body {
   text-decoration: none;
   padding: 10px 15px;
   display: block;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, border-radius 0.3s;
 }
 
 .admin-section nav ul li a:hover {
   background-color: #575757;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.admin-section nav ul li a i {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.profile-dropdown .dropdown-menu,
+.hover-card .card {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #333;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 150px;
+}
+
+.profile-dropdown:hover .dropdown-menu,
+.hover-card:hover .card {
+  display: block;
+}
+
+.profile-dropdown .dropdown-menu a,
+.hover-card .card button {
+  color: #fff;
+  padding: 10px 15px;
+  display: block;
+  text-decoration: none;
+  background-color: #333;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s, border-radius 0.3s;
+}
+
+.profile-dropdown .dropdown-menu a:hover,
+.hover-card .card button:hover {
+  background-color: #575757;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
 
 .logout {
@@ -54,32 +100,19 @@ body {
   background-color: #ff1a1a;
 }
 
-.hover-card .card {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  z-index: 1;
-}
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-.hover-card:hover .card {
-  display: block;
-}
+  .admin-section nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 
-.card button {
-  display: block;
-  margin: 5px 0;
-  padding: 10px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.card button:hover {
-  background-color: #575757;
+  .admin-section nav ul li a {
+    padding: 10px;
+  }
 }

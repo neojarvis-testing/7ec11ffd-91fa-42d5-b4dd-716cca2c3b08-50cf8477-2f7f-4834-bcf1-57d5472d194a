@@ -10,25 +10,26 @@ import { Appointment } from '../models/appointment.model';
 export class AdminviewappointmentComponent implements OnInit {
 
   appointments: Appointment[] = [];
-  updateAppointment: Appointment = {
-    appointmentId: null,
-    service: {
-      serviceId: null,
-      serviceName: "",
-      servicePrice: null,
-      typeOfVehicle: ""
-    },
-    appointmentDate: "",
-    location: "",
-    status: "",
-    user: {
-      userId: null,
-      email: "",
-      username: "",
-      mobileNumber: "",
-      userRole: ""
-    }
-  };
+
+  updateAppoinment:Appointment={ appointmentId:null ,
+  service: {
+    serviceId: null,
+    serviceName: "",
+    servicePrice: null,
+    typeOfVehicle: "",
+    description:""
+  },
+  appointmentDate: "",
+  location: "",
+  status: "",
+  user: {
+    userId: null,
+    email: "",
+    username: "",
+    mobileNumber: "",
+    userRole: ""
+  }}
+ 
 
   showDeletePopup: boolean = false;
   appointmentId: number | null = null;

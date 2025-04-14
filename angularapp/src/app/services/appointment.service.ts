@@ -8,33 +8,51 @@ import { Appointment } from '../models/appointment.model';
 })
 export class AppointmentService {
 
+
   public apiUrl="https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";
   
 
   constructor(private httpClient:HttpClient) { }
 
-  getAppointments():Observable<any>{
-    return this.httpClient.get(this.apiUrl+"/api/appointment");
+  // Fetch all appointments
+  getAppointments(): Observable<any> {
+    return this.httpClient.get(this.apiUrl + "/api/appointment");
   }
 
-  getAppointment(appointmentId: number): Observable<any>{
-    return this.httpClient.get(this.apiUrl+"/api/appointment/"+appointmentId);
+  // Fetch a single appointment by ID
+  getAppointment(appointmentId: number): Observable<any> {
+    return this.httpClient.get(this.apiUrl + "/api/appointment/" + appointmentId);
   }
 
-  getAppointmentsByUser(userId: number):Observable<any>{
-    return this.httpClient.get(this.apiUrl+"/api/appointment/user/"+userId);
+  // Fetch appointments by user ID
+  getAppointmentsByUser(userId: number): Observable<any> {
+    return this.httpClient.get(this.apiUrl + "/api/appointment/user/" + userId);
   }
 
-  addAppointment(appointment: Appointment):Observable<any>{
-    return this.httpClient.post(this.apiUrl+"/api/appointment",appointment);
+  // Add a new appointment
+  addAppointment(appointment: Appointment): Observable<any> {
+    return this.httpClient.post(this.apiUrl + "/api/appointment", appointment);
   }
 
-  updateAppointment(appointmentId: number, appointment: Appointment):Observable<any>{
-    return this.httpClient.put(this.apiUrl+"/api/appointment/"+appointmentId,appointment);
+  // Update an existing appointment
+  updateAppointment(appointmentId: number, appointment: Appointment): Observable<any> {
+    return this.httpClient.put(this.apiUrl + "/api/appointment/" + appointmentId, appointment);
   }
 
-  deleteAppointment(appointmentId: number): Observable<any>{
-    return this.httpClient.delete(this.apiUrl+"/api/appointment/"+appointmentId);
+  // Delete an appointment
+  deleteAppointment(appointmentId: number): Observable<any> {
+    return this.httpClient.delete(this.apiUrl + "/api/appointment/" + appointmentId);
   }
+
+
+  // New method: Request payment for an appointment
+  requestPayment(appointmentId: number, options: any = {}): Observable<any> {
+    return this.httpClient.put(this.apiUrl + `/api/appointment/${appointmentId}/request-payment`, {}, options);
+  }
+
+  addPayment(paymentDetails: any): Observable<any> {
+    return this.httpClient.post<any>("/api/payments", paymentDetails);
+  }
+
 
 }

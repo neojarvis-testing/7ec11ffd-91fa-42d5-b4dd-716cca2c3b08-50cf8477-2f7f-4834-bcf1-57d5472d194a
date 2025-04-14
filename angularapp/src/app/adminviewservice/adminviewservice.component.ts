@@ -12,7 +12,10 @@ export class AdminviewserviceComponent implements OnInit {
 
   constructor(private vehicleService: VehicleService, private router: Router, private activatedroute: ActivatedRoute) { }
   
-  newSearchVehicle: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "" };
+  newSearchVehicle: VehicleMaintenance = {
+    serviceName: "", servicePrice: 0, typeOfVehicle: "",
+    description: ''
+  };
   searchData: string = "";
   vehiclemaintainance: VehicleMaintenance[] = [];
 
@@ -47,5 +50,10 @@ export class AdminviewserviceComponent implements OnInit {
 
   public editService(serviceId: number) {
     this.router.navigate(['/adminaddservice', serviceId]);
+  }
+
+  public viewServiceDescription(serviceId:number)
+  {
+    this.router.navigate(['/adminviewdescription',serviceId])
   }
 }

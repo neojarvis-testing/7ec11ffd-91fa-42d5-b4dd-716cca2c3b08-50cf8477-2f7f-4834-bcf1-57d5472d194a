@@ -1,11 +1,11 @@
 package com.examly.springapp.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.springapp.model.Appointment;
+import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.service.AppointmentService;
+import com.examly.springapp.service.AppointmentServiceImpl;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -29,8 +31,6 @@ public class AppointmentController {
     public ResponseEntity<?> addAppointment(@RequestBody Appointment appointment){
         Appointment newAppointment = appointmentService.addAppointment(appointment);
         return ResponseEntity.status(201).body(newAppointment);
-
-
     }
     
     @DeleteMapping("/api/appointment/{appointmentId}")
@@ -53,17 +53,16 @@ public class AppointmentController {
         }catch(EntityNotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }
-        
     }
 
     @GetMapping("/api/appointment")
     public ResponseEntity<?> getAllAppointments(){
-        List<Appointment> list=appointmentService.getAllAppointments();
+        List<Appointment> list = appointmentService.getAllAppointments();
         return ResponseEntity.status(200).body(list);
     }
 
     @GetMapping("/api/appointment/user/{userId}")
-    public ResponseEntity<?> getAppointmentByUserId(@PathVariable int userId){
+    public ResponseEntity<?> getAppointmentByUserId(int userId){
         List<Appointment> appointmentList = appointmentService.getAppointmentByUserId(userId);
         return ResponseEntity.status(200).body(appointmentList);
     }
@@ -77,8 +76,19 @@ public class AppointmentController {
         catch(EntityNotFoundException e){
             return ResponseEntity.status(404).body(e.getMessage());
         }
-
     }
 
-    
+    // New Endpoint: Request Payment for an Appointment
+    @PutMapping("/api/appointment/{appointmentId}/request-payment")
+public ResponseEntity<?> requestPayment(@PathVariable Long appointmentId) {
+    try {
+        ((AppointmentServiceImpl) appointmentService).requestPayment(appointmentId);
+        // Return a JSON response
+        return ResponseEntity.ok().body(Map.of("message", "Payment request sent successfully."));
+    } catch (EntityNotFoundException e) {
+        return ResponseEntity.status(404).body(Map.of("error", e.getMessage()));
+    } catch (Exception e) {
+        return ResponseEntity.status(500).body(Map.of("error", "Error requesting payment: " + e.getMessage()));
+    }
+}
 }

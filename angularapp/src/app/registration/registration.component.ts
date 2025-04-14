@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { User } from '../models/user.model';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
@@ -11,28 +8,27 @@ import { User } from '../models/user.model';
 })
 export class RegistrationComponent implements OnInit {
 
-  user: User = { username: '', email: '', mobileNumber: '', password: '', userRole: '' }; 
+  password: string = '';
   confirmPassword: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor() { }
 
-  ngOnInit(): void {}
-
-  onSubmit(registerForm: NgForm): void {
-    if (!registerForm.valid) {
-      alert('Please fill in all required fields correctly!');
-      return;
-    }
-
-    this.authService.register(this.user).subscribe(
-      (data) => {
-        console.log(data);
-        alert('User registered successfully!');
-        this.router.navigate(['/login']); 
-      },
-      () => {
-        alert('Registration failed. Please try again.');
-      }
-    );
+  ngOnInit(): void {
   }
+
+  onSubmit(form: FormGroup): void {
+    console.log('Form value:', form.value);
+    console.log('Password:', this.password);
+    console.log('Confirm Password:', this.confirmPassword);
+
+    if (form.valid && this.password === this.confirmPassword) {
+      const formData = form.value;
+      alert("Registration successful:");
+      console.log('Registration successful:', formData);
+      // Add your registration logic here
+    } else {
+      console.log('Form is invalid or passwords do not match');
+    }
+  }
+
 }
