@@ -24,5 +24,6 @@ public class VehicleMaintenance {
     private String serviceName;
     private int servicePrice;
     private String typeOfVehicle;
+    private String description;
   
 }

@@ -9,7 +9,7 @@
   <table class="table table-bordered mt-3">
     <thead>
       <tr>
-        <th>Service ID</th>
+        <th>S No</th>
         <th>Service Name</th>
         <th>Service Price</th>
         <th>Type of Vehicle</th>
@@ -17,17 +17,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let service of vehiclemaintainance;index as i">
-        <td>{{ i+1 }}</td>
+      <tr *ngFor="let service of vehiclemaintainance; index as i">
+        <td>{{ i + 1 }}</td>
         <td>{{ service.serviceName }}</td>
         <td>{{ service.servicePrice }}</td>
         <td>{{ service.typeOfVehicle }}</td>
         <td>
-          <button class="btn btn-success" (click)="editService(service.serviceId)">
+          <button class="btn btn-success spacing" (click)="editService(service.serviceId)">
             Edit
-          </button>
-          <button class="btn btn-danger" (click)="deleteService(service.serviceId)">
+          </button>&nbsp;&nbsp;
+          <button class="btn btn-danger spacing" (click)="deleteService(service.serviceId)">
             Delete
+          </button>&nbsp;&nbsp;
+          <button class="btn btn-success spacing" (click)="viewServiceDescription(service.serviceId)">
+            View
           </button>
         </td>
       </tr>

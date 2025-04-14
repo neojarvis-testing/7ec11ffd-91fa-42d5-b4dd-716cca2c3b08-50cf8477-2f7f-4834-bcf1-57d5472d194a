@@ -17,6 +17,7 @@ export class UseraddappointmentComponent implements OnInit {
   appointmentDates: string[] = [];
   locations: string[] = [];
   showPopup: boolean = false;
+  searchData:string="";
  
   constructor(private vehicleService: VehicleService, private appointmentService: AppointmentService,private authService : AuthService,private router: Router) { }
   userId : number | null = null;
@@ -55,6 +56,16 @@ closePopup() {
   // Add the onInputChange method
   onInputChange(index: number): void {
     console.log(`Input changed at index: ${index}`);
+  }
+
+  searchByService()
+  {
+    this.vehicleService.getAllServices().subscribe(data => {
+      this.services = data;
+      this.services = this.services.filter(service => 
+        service.serviceName.toLowerCase().includes(this.searchData.toLowerCase())
+      );
+    });
   }
   
 }

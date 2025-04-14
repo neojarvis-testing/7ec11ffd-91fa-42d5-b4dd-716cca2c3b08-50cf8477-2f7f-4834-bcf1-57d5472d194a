@@ -1,34 +1,22 @@
-<div class="login-container">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-    <h4>Login</h4><br><br>
-    <label for="username">Username:</label>
-    <input
-      type="text"
-      id="username"
-      name="username"
-      ngModel
-      required
-      #username="ngModel"
-    />
-    <div *ngIf="username.invalid && username.touched" class="error">
-      Username is required.
+<form #loginForm="ngForm" (ngSubmit)="login()" class="login-form">
+    <div>
+      <label for="username">Username:</label>
+      <input id="username" name="username" ngModel required placeholder="Enter your username">
+      <div *ngIf="!loginForm.form.controls.username?.valid && loginForm.form.controls.username?.touched">
+        Username is required.
+      </div>
     </div>
-
-    <label for="password">Password:</label>
-    <input
-      type="password"
-      id="password"
-      name="password"
-      ngModel
-      required
-      #password="ngModel"
-    />
-    <div *ngIf="password.invalid && password.touched" class="error">
-      Password is required.
+  
+    <div>
+      <label for="password">Password:</label>
+      <input id="password" name="password" type="password" ngModel required placeholder="Enter your password">
+      <div *ngIf="!loginForm.form.controls.password?.valid && loginForm.form.controls.password?.touched">
+        Password is required.
+      </div>
     </div>
-
+  
     <button type="submit" [disabled]="loginForm.invalid">Login</button>
   </form>
-
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-</div>
+  <div class="background">
+    <h1>Welcome to My Angular App</h1>
+    </div>

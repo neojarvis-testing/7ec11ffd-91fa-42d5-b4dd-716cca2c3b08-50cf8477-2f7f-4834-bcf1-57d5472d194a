@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.examly.springapp.model.Appointment;
 import com.examly.springapp.model.Feedback;
+
 import com.examly.springapp.model.Notification;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.VehicleMaintenance;
@@ -16,12 +17,13 @@ import com.examly.springapp.repository.NotificationRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
 
+
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
-
     @Autowired
+
     private AppointmentRepo appointmentRepo;
 
     @Autowired
@@ -42,6 +44,7 @@ public class AppointmentServiceImpl implements AppointmentService{
         appointment.setUser(user);
         appointment.setService(vehicle);
         return appointmentRepo.save(appointment);
+
     }
 
     @Override
@@ -71,6 +74,7 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Override
     public List<Appointment> getAppointmentByUserId(int userId) {
         List<Appointment> appointmentList = appointmentRepo.findByUserUserId(userId);
+
         return appointmentList;
     }
 

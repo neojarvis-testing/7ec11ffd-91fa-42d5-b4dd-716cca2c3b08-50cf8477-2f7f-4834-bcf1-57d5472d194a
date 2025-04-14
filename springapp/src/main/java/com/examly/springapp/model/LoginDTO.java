@@ -1,10 +1,5 @@
 package com.examly.springapp.model;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,15 +16,16 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LoginDTO{
+public class LoginDTO {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId ; 
 
     private String username;
-    private String token; 
-    private String userRole; 
+    private String token ; 
+    private String userRole ; 
     private String password;
 
 

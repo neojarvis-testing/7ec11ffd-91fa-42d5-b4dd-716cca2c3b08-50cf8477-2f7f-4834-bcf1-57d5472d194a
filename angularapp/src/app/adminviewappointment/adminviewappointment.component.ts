@@ -15,7 +15,8 @@ export class AdminviewappointmentComponent implements OnInit {
     serviceId: null,
     serviceName: "",
     servicePrice: null,
-    typeOfVehicle: ""
+    typeOfVehicle: "",
+    description:""
   },
   appointmentDate: "",
   location: "",

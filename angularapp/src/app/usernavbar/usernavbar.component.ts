@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserStoreService } from '../helpers/user-store.service';
-import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { AuthUser } from '../models/auth-user.model';
 
 @Component({
   selector: 'app-usernavbar',
@@ -10,6 +6,7 @@ import { AuthUser } from '../models/auth-user.model';
   styleUrls: ['./usernavbar.component.css']
 })
 export class UsernavbarComponent implements OnInit {
+
 
   userName: any;
   userRole: any;
@@ -42,6 +39,7 @@ export class UsernavbarComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
 
   navigateToNotifications(): void {
     this.router.navigate(['/usernotification']);

@@ -61,4 +61,13 @@ public class UserController {
             return ResponseEntity.status(400).body(e.getMessage()); // Bad Request
         }
     }
+  @GetMapping("/api/name/{name}")
+    public ResponseEntity<?> getUserByName(@PathVariable String name) {
+        User user = userService.getUserByName(name).get(); 
+        if (user != null) {
+            return ResponseEntity.status(200).body(user); 
+        } else {
+            return ResponseEntity.status(404).body("User not found.");
+        }
+    }
 }

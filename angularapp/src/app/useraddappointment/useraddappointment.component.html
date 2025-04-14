@@ -1,4 +1,10 @@
 <h1>Available Services</h1>
+<div class="search-container">
+  <label for="searchInput">Search Service Name:</label><br>
+  <input type="text" id="searchInput" [(ngModel)]="searchData" placeholder="Enter service name"
+    class="form-control" />
+  <button (click)="searchByService()" class="btn btn-primary">Search</button>
+</div>
 <table id="servicesTable">
   <thead>
     <tr>

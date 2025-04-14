@@ -1,11 +1,5 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
 .navbar {
+  overflow: hidden;
   background-color: #333;
   color: #fff;
   padding: 15px 20px;
@@ -33,15 +27,18 @@ body {
   gap: 15px;
   align-items: center;
   justify-content: flex-end;
+
 }
 
-.admin-section nav ul li {
-  position: relative;
-}
-
-.admin-section nav ul li a {
-  color: #fff;
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
   text-decoration: none;
+
   padding: 10px 15px;
   display: block;
   transition: background-color 0.3s, box-shadow 0.3s, border-radius 0.3s;
@@ -97,12 +94,11 @@ body {
 .logout {
   background-color: #ff4d4d;
   border: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.logout:hover {
-  background-color: #ff1a1a;
+  padding: 14px 16px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 @media (max-width: 768px) {
@@ -120,4 +116,5 @@ body {
   .admin-section nav ul li a {
     padding: 10px;
   }
+
 }

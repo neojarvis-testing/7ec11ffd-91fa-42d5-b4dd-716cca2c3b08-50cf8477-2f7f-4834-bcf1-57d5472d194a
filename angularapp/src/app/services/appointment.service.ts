@@ -8,8 +8,10 @@ import { Appointment } from '../models/appointment.model';
 })
 export class AppointmentService {
 
+
   public apiUrl="https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";
   
+
   constructor(private httpClient:HttpClient) { }
 
   // Fetch all appointments
@@ -42,8 +44,15 @@ export class AppointmentService {
     return this.httpClient.delete(this.apiUrl + "/api/appointment/" + appointmentId);
   }
 
+
   // New method: Request payment for an appointment
   requestPayment(appointmentId: number, options: any = {}): Observable<any> {
     return this.httpClient.put(this.apiUrl + `/api/appointment/${appointmentId}/request-payment`, {}, options);
   }
+
+  addPayment(paymentDetails: any): Observable<any> {
+    return this.httpClient.post<any>("/api/payments", paymentDetails);
+  }
+
+
 }

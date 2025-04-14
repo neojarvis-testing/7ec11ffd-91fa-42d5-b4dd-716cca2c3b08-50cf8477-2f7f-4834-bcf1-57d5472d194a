@@ -1,18 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { Router } from '@angular/router';
 import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
 import { tap } from 'rxjs/operators';
 import { AuthUser } from '../models/auth-user.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
   private baseUrl = "https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";  
-  
+ 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   // Register a new user
@@ -64,10 +67,17 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // Check if the user is authenticated
-  isAuthenticated(): boolean {
-    return !!this.getToken();  // Returns true if token exists
-  }
+  private apiUrl = 'https://your-api.com/auth';
+
+  constructor(private http: HttpClient) {}
+
+
+  // login(username: string, password: string): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/login`, { username, password }).subscribe(response => {
+  //     localStorage.setItem('token', response.token);
+  //   });
+  // }
+
 
   public isAdmin(): boolean {
     return localStorage.getItem('userRole') === 'Admin';
@@ -81,3 +91,17 @@ export class AuthService {
     return localStorage.getItem('userRole') === null;
   }
 }
+
+  // logout(): void {
+  //   localStorage.removeItem('token');
+  // }
+
+  // isLoggedIn(): boolean {
+  //   const token = localStorage.getItem('token');
+  //   return !!token;
+  // }
+
+  
+
+}
+

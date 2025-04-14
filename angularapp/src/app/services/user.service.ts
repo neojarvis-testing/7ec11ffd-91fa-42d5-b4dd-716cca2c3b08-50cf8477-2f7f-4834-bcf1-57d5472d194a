@@ -1,12 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
 
   public apiUrl = "https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080"; // Base API URL
 
@@ -36,4 +38,5 @@ export class UserService {
   public getUserByName(name: string): Observable<User> {
     return this.httpClient.get<User>(this.apiUrl + '/api/user/name/' + name);
   }
+
 }
