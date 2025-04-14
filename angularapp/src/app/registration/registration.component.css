@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.background {
+  background-image: url('/assets/registration.jpeg');
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.form-container h4 {
+  text-align: center;
+  color: #333;
+}
+
+.form-container label {
+  color: #333;
+}
+
+.form-container input, .form-container select, .form-container button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-container button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+
+.form-container .error {
+  color: red;
+}

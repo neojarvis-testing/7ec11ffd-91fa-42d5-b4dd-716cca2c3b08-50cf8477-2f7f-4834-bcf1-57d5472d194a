@@ -1,66 +1,130 @@
-<form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
-  <!-- Username -->
-  <div>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" [(ngModel)]="user.username" required #username="ngModel">
-    <div *ngIf="username.invalid && username.touched">
-      <span *ngIf="username.errors?.required">Username is required.</span>
-    </div>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      height: 150vh;
+      display: flex;
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+      background-image: url('/assets/registration.jpeg');
+      background-size: cover;
+      background-position: center;
+    }
 
-  <!-- Email -->
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" [(ngModel)]="user.email" required #email="ngModel">
-    <div *ngIf="email.invalid && email.touched">
-      <span *ngIf="email.errors?.required">Email is required.</span>
-      <span *ngIf="email.errors?.email">Enter a valid email.</span>
-    </div>
-  </div>
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 15px; /* Reduced padding */
+      padding-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
 
-  <!-- Password -->
-  <div>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" [(ngModel)]="user.password" required minlength="6" #password="ngModel">
-    <div *ngIf="password.invalid && password.touched">
-      <span *ngIf="password.errors?.required">Password is required.</span>
-      <span *ngIf="password.errors?.minlength">Password must be at least 6 characters long.</span>
-    </div>
-  </div>
+    .form-container h4 {
+      text-align: center;
+      color: #333;
+    }
 
-  <!-- Confirm Password -->
-  <div>
-    <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
-    <div *ngIf="confirmPassword !== user.password && confirmPassword.length > 0">
-      <span>Passwords do not match.</span>
-    </div>
-  </div>
+    .form-container label {
+      color: #333;
+    }
 
-  <!-- Mobile Number -->
-  <div>
-    <label for="mobileNumber">Mobile Number:</label>
-    <input type="text" id="mobileNumber" name="mobileNumber" [(ngModel)]="user.mobileNumber" required pattern="^[0-9]{10}$" #mobileNumber="ngModel">
-    <div *ngIf="mobileNumber.invalid && mobileNumber.touched">
-      <span *ngIf="mobileNumber.errors?.required">Mobile number is required.</span>
-      <span *ngIf="mobileNumber.errors?.pattern">Enter a valid 10-digit mobile number.</span>
-    </div>
-  </div>
+    .form-container input, .form-container select, .form-container button {
+      width: 100%;
+      padding: 8px; /* Reduced padding */
+      margin: 8px 0; /* Reduced margin */
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
 
-  <!-- User Role -->
-  <div>
-    <label for="userRole">User Role:</label>
-    <select id="userRole" name="userRole" [(ngModel)]="user.userRole" required #userRole="ngModel">
-      <option value="" disabled>Select Role</option>
-      <option value="Admin">Admin</option>
-      <option value="User">User</option>
-    </select>
-    <div *ngIf="userRole.invalid && userRole.touched">
-      <span *ngIf="userRole.errors?.required">User role is required.</span>
-    </div>
-  </div>
+    .form-container button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
 
-  <button type="submit" [disabled]="registerForm.invalid || confirmPassword !== user.password">
-    Register
-  </button>
-</form>
+    .form-container .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
+      <h4 class="form-title">Register</h4>
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" [(ngModel)]="user.username" required #username="ngModel" class="form-input">
+        <div *ngIf="username.invalid && username.touched" class="error-message">
+          <span *ngIf="username.errors?.required">Username is required.</span>
+        </div>
+      </div>
+    
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="user.email" required #email="ngModel" class="form-input">
+        <div *ngIf="email.invalid && email.touched" class="error-message">
+          <span *ngIf="email.errors?.required">Email is required.</span>
+          <span *ngIf="email.errors?.email">Enter a valid email.</span>
+        </div>
+      </div>
+    
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="user.password" required minlength="6" #password="ngModel" class="form-input">
+        <div *ngIf="password.invalid && password.touched" class="error-message">
+          <span *ngIf="password.errors?.required">Password is required.</span>
+          <span *ngIf="password.errors?.minlength">Password must be at least 6 characters long.</span>
+        </div>
+      </div>
+    
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required class="form-input">
+        <div *ngIf="confirmPassword !== user.password && confirmPassword.length > 0" class="error-message">
+          <span>Passwords do not match.</span>
+        </div>
+      </div>
+    
+      <!-- Mobile Number -->
+      <div class="form-group">
+        <label for="mobileNumber">Mobile Number:</label>
+        <input type="text" id="mobileNumber" name="mobileNumber" [(ngModel)]="user.mobileNumber" required pattern="^[0-9]{10}$" #mobileNumber="ngModel" class="form-input">
+        <div *ngIf="mobileNumber.invalid && mobileNumber.touched" class="error-message">
+          <span *ngIf="mobileNumber.errors?.required">Mobile number is required.</span>
+          <span *ngIf="mobileNumber.errors?.pattern">Enter a valid 10-digit mobile number.</span>
+        </div>
+      </div>
+    
+      <!-- User Role -->
+      <div class="form-group">
+        <label for="userRole">User Role:</label>
+        <select id="userRole" name="userRole" [(ngModel)]="user.userRole" required #userRole="ngModel" class="form-input">
+          <option value="" disabled>Select Role</option>
+          <option value="Admin">Admin</option>
+          <option value="User">User</option>
+        </select>
+        <div *ngIf="userRole.invalid && userRole.touched" class="error-message">
+          <span *ngIf="userRole.errors?.required">User role is required.</span>
+        </div>
+      </div>
+    
+      <button type="submit" [disabled]="registerForm.invalid || confirmPassword !== user.password" class="submit-button">
+        Register
+      </button>
+    </form>
+  </div>
+</body>
+</html>

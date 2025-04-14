@@ -17,9 +17,75 @@
       <td>{{ service.serviceName }}</td>
       <td>{{ service.servicePrice }}</td>
       <td>{{ service.typeOfVehicle }}</td>
-      <td><input type="date" [(ngModel)]="appointmentDates[i]" (input)="onInputChange(i)"></td>
-      <td><input type="text" [(ngModel)]="locations[i]" placeholder="Enter location" (input)="onInputChange(i)"></td>
-      <td><button class="add-appointment" (click)="addAppointment(i)" [disabled]="!appointmentDates[i] || !locations[i]">Add Appointment</button></td>
+      <td>
+        <input
+          type="date"
+          [(ngModel)]="appointmentDates[i]"
+          (ngModelChange)="validateDate($event, i)"
+          #dateInput="ngModel"
+          [class.invalid]="dateInput.invalid && dateInput.touched"
+        />
+        <div *ngIf="dateInput.invalid && dateInput.touched" class="error">
+          Please select a valid future date.
+        </div>
+      </td>
+      <!-- <td><input type="text" [(ngModel)]="locations[i]" placeholder="Enter location" (input)="onInputChange(i)"></td> -->
+      <label for="location" [(ngModel)]="locations[i]" (input)="onInputChange(i)"></label>
+            <select id="location" name="location" required>
+                <option value="" disabled selected>Select your location</option>
+                <option value="Ghansoli">Ghansoli</option>
+                <option value="KoparKhairane">KoparKhairane</option>
+                <option value="Rabale">Rabale</option>
+            </select>
+      <td><button class="add-appointment" (click)="addAppointment(service.serviceId,i)" [disabled]="!appointmentDates[i] || !locations[i]">Add Appointment</button></td>
     </tr>
   </tbody>
 </table>
+<div *ngIf="showPopup" class="popup">
+  <p>{{ serviceId ? 'Service Updated Successfully' : 'Appointment Added Successfully' }}</p>
+  <button (click)="closePopup()">Ok</button>
+</div>
+ 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Service Centers Map</title>
+    <style>
+        #map-container {
+            height: 450px;
+            width: 100%;
+        }
+        #form-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Our Service Centers</h1>
+    <div id="map-container">
+        <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d482632.1525936999!2d72.54925214615662!3d19.082911489027246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1744567068548!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+        <iframe src="https://www.google.com/maps/d/embed?mid=1UC4xAYS_S815VGTPp748fauAsVvJAUs&ehbc=2E312F" width="640" height="480"></iframe>
+    </div>
+    <div id="form-container">
+        <h2>Book an Appointment</h2>
+        <form action="#" method="POST">
+            <label for="location">Select Location:</label>
+            <select id="location" name="location" required>
+                <option value="" disabled selected>Select your location</option>
+                <option value="Ghansoli">Ghansoli</option>
+                <option value="KoparKhairane">KoparKhairane</option>
+                <option value="Rabale">Rabale</option>
+            </select>
+            <br><br>
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" required>
+            <br><br>
+            <label for="time">Select Time:</label>
+            <input type="time" id="time" name="time" required>
+            <br><br>
+            <button type="submit">Book Appointment</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,35 +1,85 @@
-<h2>Login Page</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      height: 90vh;
+      display: flex;
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+      background-image: url('/assets/registration.jpeg');
+      background-size: cover;
+      background-position: center;
+    }
 
-<div class="login-container">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-    <label for="username">Username:</label>
-    <input
-      type="text"
-      id="username"
-      name="username"
-      ngModel
-      required
-      #username="ngModel"
-    />
-    <div *ngIf="username.invalid && username.touched" class="error">
-      Username is required.
-    </div>
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 15px; /* Reduced padding */
+      padding-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
 
-    <label for="password">Password:</label>
-    <input
-      type="password"
-      id="password"
-      name="password"
-      ngModel
-      required
-      #password="ngModel"
-    />
-    <div *ngIf="password.invalid && password.touched" class="error">
-      Password is required.
-    </div>
+    .form-container h4 {
+      text-align: center;
+      color: #333;
+    }
 
-    <button type="submit" [disabled]="loginForm.invalid">Login</button>
-  </form>
+    .form-container label {
+      color: #333;
+    }
 
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-</div>
+    .form-container input, .form-container button {
+      width: 100%;
+      padding: 8px; /* Reduced padding */
+      margin: 8px 0; /* Reduced margin */
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .form-container button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+
+    .form-container .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <h4>Login</h4>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" ngModel required #username="ngModel" class="form-input">
+        <div *ngIf="username.invalid && username.touched" class="error-message">
+          <span>Username is required.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" ngModel required #password="ngModel" class="form-input">
+        <div *ngIf="password.invalid && password.touched" class="error-message">
+          <span>Password is required.</span>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid" class="submit-button">Login</button>
+    </form>
+
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  </div>
+</body>
+</html>
