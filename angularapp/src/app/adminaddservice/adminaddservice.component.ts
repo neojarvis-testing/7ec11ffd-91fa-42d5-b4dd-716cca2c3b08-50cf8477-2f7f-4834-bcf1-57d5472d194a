@@ -3,7 +3,6 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 import { VehicleService } from '../services/vehicle.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { data } from 'jquery';
 
 @Component({
   selector: 'app-adminaddservice',
@@ -18,7 +17,7 @@ export class AdminaddserviceComponent implements OnInit {
     private router: Router
   ) { }
 
-  vehiclemaintenance: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "" };
+  vehiclemaintenance: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "", description: "" };
   showPopup: boolean = false;
   serviceId: number | null = null;
 

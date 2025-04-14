@@ -1,0 +1,34 @@
+.service-details-container {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.service-details-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.service-details-container p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.service-details-container p strong {
+    color: #000;
+}
+
+.service-details-container div {
+    margin-bottom: 10px;
+}
+
+.service-details-container .loading {
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+}

@@ -80,3 +80,36 @@ th {
     width: 100%;
     margin-bottom: 20px;
 }
+
+
+.qr-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px; /* Adds space between QR and details */
+  }
+  
+  .qr-box {
+    flex: 1; /* QR Code takes up space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .qr-box canvas {
+    width: 150px; /* Adjust as needed */
+    height: 150px;
+
+  }
+  
+  .details-box {
+    flex: 2; /* Details take more space */
+    padding: 15px;
+    border-left: 2px solid #ccc; /* Creates separation */
+  }
+  
+  .details-box p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  

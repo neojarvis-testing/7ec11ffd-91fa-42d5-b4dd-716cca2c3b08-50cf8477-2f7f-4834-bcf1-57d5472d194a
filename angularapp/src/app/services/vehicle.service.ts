@@ -7,7 +7,7 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
   providedIn: 'root'
 })
 export class VehicleService {
-  public apiUrl: string = "https://ide-aeccfaadacfebcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";
+  public apiUrl: string = "https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";
 
   constructor(private httpClient: HttpClient) { }
 

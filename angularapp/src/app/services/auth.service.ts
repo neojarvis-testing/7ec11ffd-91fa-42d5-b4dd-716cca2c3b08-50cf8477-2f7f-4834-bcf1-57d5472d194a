@@ -41,6 +41,11 @@ export class AuthService {
       });
   }
 
+  getUsername(): string | null {
+    return localStorage.getItem('username');
+  }
+
+
   // Check if the username already exists (for real-time validation)
   checkUsername(username: string): Observable<boolean> {
     return this.httpClient.get<boolean>(this.baseUrl + "/api/check-username?username=" + username);

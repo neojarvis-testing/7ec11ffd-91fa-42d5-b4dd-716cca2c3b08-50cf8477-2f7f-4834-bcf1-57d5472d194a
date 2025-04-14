@@ -3,75 +3,75 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
-
+ 
 h1 {
     text-align: center;
     color: #333;
 }
-
+ 
 label {
     font-weight: bold;
 }
-
+ 
 input[type="text"] {
     padding: 5px;
     margin-bottom: 10px;
     width: 200px;
 }
-
+ 
 .blue-line {
     height: 2px;
     background-color: #007bff;
     margin-bottom: 20px;
 }
-
+ 
 /* Table styles */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
-
+ 
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
-
+ 
 th {
     background-color: #f2f2f2;
     color: #333;
 }
-
+ 
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
-
+ 
 tr:hover {
     background-color: #f1f1f1;
 }
-
+ 
 /* Status select box styles */
 .status-select {
     width: 150px;
     padding: 5px;
 }
-
+ 
 .status-approved {
     background-color: green;
     color: white;
 }
-
+ 
 .status-pending {
     background-color: orange;
     color: white;
 }
-
+ 
 .status-rejected {
     background-color: red;
     color: white;
 }
-
+ 
 /* Button styles */
 .delete-btn {
     background-color: #d9534f;
@@ -81,11 +81,11 @@ tr:hover {
     cursor: pointer;
     border-radius: 4px;
 }
-
+ 
 .delete-btn:hover {
     background-color: #c9302c;
 }
-
+ 
 /* Popup styles */
 .delete-popup {
     position: fixed;
@@ -100,17 +100,17 @@ tr:hover {
     padding: 20px;
     border-radius: 8px;
 }
-
+ 
 .popup-content {
     text-align: center;
 }
-
+ 
 .popup-actions {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
-
+ 
 .confirm-btn, .cancel-btn {
     padding: 10px 20px;
     border: none;
@@ -118,17 +118,17 @@ tr:hover {
     cursor: pointer;
     font-size: 14px;
 }
-
+ 
 .confirm-btn {
     background-color: #d9534f;
     color: white;
 }
-
+ 
 .cancel-btn {
     background-color: #5bc0de;
     color: white;
 }
-
+ 
 /* Overlay styles */
 .overlay {
     position: fixed;
@@ -139,7 +139,7 @@ tr:hover {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
-
+ 
 /* No appointments message */
 .no-appointments {
     text-align: center;
@@ -147,3 +147,4 @@ tr:hover {
     font-weight: bold;
     margin-top: 20px;
 }
+ 

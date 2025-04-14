@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   }
  
   public isAdmin(): boolean {
-     return localStorage.getItem('userRole') === 'ADMIN';
+     return localStorage.getItem('userRole') === 'Admin';
     }
  
   public isUser(): boolean {

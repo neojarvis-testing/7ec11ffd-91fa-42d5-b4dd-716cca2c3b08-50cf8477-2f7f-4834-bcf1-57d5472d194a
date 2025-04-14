@@ -1,50 +1,118 @@
 <h1>My Appointments</h1>
 <div class="blue-line"></div>
- 
+
 <label for="status">Filter by Status:</label>
-<select id="status" [(ngModel)]="selectedStatus" (change)="getAppoinmentsByFilter()">
-    <option value="All">All</option>
-    <option value="Approved">Approved</option>
-    <option value="Rejected">Rejected</option>
-    <option value="Pending">Pending</option>
+
+<select id="status" [(ngModel)]="selectedStatus" (change)="getAppointmentsByFilter()">
+  <option value="All">All</option>
+  <option value="Approved">Approved</option>
+  <option value="Rejected">Rejected</option>
+  <option value="Pending">Pending</option>
 </select>
- 
+
 <label for="search">Search Bar:</label>
 <input type="text" name="search" id="search" [(ngModel)]="inp" (keyup)="searchData()">
- 
-<body>
-    <div class="container" *ngIf="appointments.length>0">
-        <div class="filter">
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>S.NO</th>
-                            <th>Service Name</th>
-                            <th>Price</th>
-                            <th>Type</th>
-                            <th>Location</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let appointment of appointments, index as i">
-                            <td>{{i+1}}</td>
-                            <td>{{appointment.service.serviceName}}</td>
-                            <td>{{appointment.service.servicePrice}}</td>
-                            <td>{{appointment.service.typeOfVehicle}}</td>
-                            <td>{{appointment.location}}</td>
-                            <td>{{appointment.appointmentDate | date :'shortDate'}}</td>
-                            <td>{{appointment.status}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+
+<div class="container" *ngIf="appointments.length > 0">
+  <div class="filter">
+    <table>
+      <thead>
+        <tr>
+          <th>S.NO</th>
+          <th>Service Name</th>
+          <th>Price</th>
+          <th>Type</th>
+          <th>Location</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments; index as i">
+          <td>{{ i + 1 }}</td>
+          <td>{{ appointment.service.serviceName }}</td>
+          <td>₹{{ appointment.service.servicePrice }}</td>
+          <td>{{ appointment.service.typeOfVehicle }}</td>
+          <td>{{ appointment.location }}</td>
+          <td>{{ appointment.appointmentDate | date: 'shortDate' }}</td>
+          <td>
+            <div class="d-flex align-items-center gap-3">
+              <span>{{ appointment.status }}</span>
+              <div *ngIf="appointment.status === 'Approved'">
+                <button class="btn btn-primary" (click)="payNow(i)">Pay Now</button>
+              </div>
             </div>
- 
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="appointments.length == 0" class="no-appointments">
+  No appointments available
+</div>
+
+<!-- Payment Popup -->
+<div *ngIf="showPaymentPopup" class="modal fade show d-block">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+            <h3 class="text-center">Payment Gateway</h3>
+          </div>
+
         </div>
+        <div class="modal-body">
+          <p>Your payment code: <strong>{{ paymentCode }}</strong></p>
+          <!-- <p>Your payment is successful for the following service:</p> -->
+  
+          <!-- Flex container to align QR Code and Details -->
+          <div class="qr-container">
+            <!-- QR Code on the left -->
+            <div class="qr-box">
+              <canvas #qrCanvas></canvas>
+            </div>
+  
+            <!-- Service Details on the right -->
+            <div class="details-box">
+              <div *ngIf="selectedIndex !== null" class="card shadow-sm p-3">
+                <p><strong class="text-dark">Service Name:</strong> {{ appointments[selectedIndex]?.service?.serviceName }}</p>
+                <p><strong class="text-dark">Type of Vehicle:</strong> {{ appointments[selectedIndex]?.service?.typeOfVehicle }}</p>
+                <p><strong class="text-dark">Location:</strong> {{ appointments[selectedIndex]?.location }}</p>
+                <p><strong class="text-dark">Service Price:</strong> ₹{{ appointments[selectedIndex]?.service?.servicePrice }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="modal-footer">
+            <button (click)="handlePaymentDone()" class="btn btn-success">Payment Done</button>
+          <button (click)="showPaymentPopup = false" class="btn btn-secondary ms-3">Close</button>
+        </div>
+      </div>
     </div>
-</body>
- 
+  </div>
+  
+
+  <!-- Payment Confirmation Dialog -->
+<div *ngIf="showConfirmationPopup" class="modal fade show d-block">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-success">Payment Successful!</h4>
+        </div>
+        <div class="modal-body text-center">
+          <p>Your payment is **successful** and your payment code is:</p>
+          <h2 class="text-primary"><strong>{{ paymentCode }}</strong></h2>
+          <p>Thank you for using our service!</p>
+        </div>
+        <div class="modal-footer">
+          <button (click)="closeConfirmation()" class="btn btn-danger">Cancel & Go Back</button>
+        </div>
+      </div>
+    </div>
+
 <div *ngIf="appointments.length==0" class="no-appointments">
     No appointments available</div>
+

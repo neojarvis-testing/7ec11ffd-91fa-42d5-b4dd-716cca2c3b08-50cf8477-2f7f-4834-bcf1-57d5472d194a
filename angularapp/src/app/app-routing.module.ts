@@ -18,6 +18,7 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
+import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
   {path:"adminaddservice/:serviceId",component:AdminaddserviceComponent},
   {path:"error",component:ErrorComponent},
+  {path: 'adminviewdescription/:serviceId', component: AdminviewdescriptionComponent}
   // {path:"**",component:HomeComponent},
 
 

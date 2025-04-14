@@ -16,6 +16,7 @@ export class AdminviewfeedbackComponent implements OnInit {
   constructor(private feedbackService:FeedbackService,private router:Router) { }
 
   ngOnInit(): void {
+    this.getAllFeedbacks();
   }
 
 
@@ -25,7 +26,7 @@ export class AdminviewfeedbackComponent implements OnInit {
     })
   }
 
-
+ 
   viewProfile(feedbackId: number){
     this.router.navigate(['/profile',feedbackId]);
   }

@@ -17,6 +17,7 @@ export class UseraddappointmentComponent implements OnInit {
   appointmentDates: string[] = [];
   locations: string[] = [];
   showPopup: boolean = false;
+  searchData:string="";
  
   constructor(private vehicleService: VehicleService, private appointmentService: AppointmentService,private authService : AuthService,private router: Router) { }
   userId : number | null = null;
@@ -30,7 +31,15 @@ export class UseraddappointmentComponent implements OnInit {
       this.services = data;
     });
   }
+  validateDate(selectedDate: string, index: number): void {
+    const today = new Date();
+    const selected = new Date(selectedDate);
  
+    if (selected < today) {
+      this.appointmentDates[index] = ''; // Reset the value if invalid
+      alert('Please select a date in the future.');
+    }
+  }
   addAppointment(id:number,index: number) {
     const newAppointment: Appointment = {
         service: { serviceId: id } as VehicleMaintenance,
@@ -56,5 +65,19 @@ closePopup() {
   onInputChange(index: number): void {
     console.log(`Input changed at index: ${index}`);
   }
-  
+ 
+  searchByService()
+  {
+    this.vehicleService.getAllServices().subscribe(data => {
+      this.services = data;
+      this.services = this.services.filter(service =>
+        service.serviceName.toLowerCase().includes(this.searchData.toLowerCase())
+      );
+    });
+  }
+ 
 }
+ 
+ 
+ 
+ 
