@@ -26,7 +26,7 @@
             <td>{{appointment.location}}</td>
             <td>{{appointment.user.username}}</td>
             <td>
-                <select name="selectedOption" [(ngModel)]="status" id="statusSelect" class="status-select" (change)="updateStatus(i+1)">
+                <select name="selectedOption" [(ngModel)]="appointment.status" id="statusSelect" class="status-select" (change)="updateStatus(appointment)">
                     <option value="Approved" class="status-approved">Approved</option>
                     <option value="Rejected" class="status-rejected">Rejected</option>
                     <option value="Pending" class="status-pending">Pending</option>
@@ -38,7 +38,7 @@
         </tr>
     </tbody>
 </table>
- 
+
 <div *ngIf="showDeletePopup" class="overlay"></div>
 <div *ngIf="showDeletePopup" class="delete-popup">
     <div class="popup-content">
@@ -52,14 +52,3 @@
 <div *ngIf="appointments.length == 0" class="no-appointments">
     Oops! No Appointment found.
 </div>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 

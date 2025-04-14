@@ -14,7 +14,8 @@ label {
 }
 
 input[type="text"] {
-    padding: 5px;
+    padding: 10px;
+    margin-top: 30px;
     margin-bottom: 10px;
     width: 200px;
 }
