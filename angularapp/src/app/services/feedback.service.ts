@@ -24,6 +24,20 @@ export class FeedbackService {
   public  deleteFeedback(feedbackId: number):Observable<any>{
     return this.httpClient.delete(this.apiUrl+"/api/feedback/"+feedbackId);
   }
+
+
+  public getFeedbackById(feedbackId:number):Observable<any>{
+    return this.httpClient.get(this.apiUrl+"/api/feedback/"+feedbackId);
+  }
+
+  public getFeedbacksByUserId(userId: number):Observable<any>{
+    return this.httpClient.get(this.apiUrl+"/api/feedback/user/"+userId);
+  }
+
+  public updateFeedbackById(feedbackId:number,feedback:Feedback):Observable<any>{
+    return this.httpClient.put(this.apiUrl+"/api/feedback/"+feedbackId,feedback);
+  }
+
   
 
 }

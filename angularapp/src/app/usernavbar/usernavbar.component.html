@@ -1,20 +1,43 @@
-<nav class="navbar">
-  <a routerLink="/home" class="text-decoration-none">Home</a>
-  
-  <select class="dropdown" onchange="location = this.value;">
-    <option value="" disabled selected>Appointments</option>
-    <option value="/useraddappointment">Book Appointment</option>
-    <option value="/userviewappointment">My Appointments</option>
-  </select>
-  
-  <select class="dropdown" onchange="location = this.value;">
-    <option value="" disabled selected>Feedback</option>
-    <option value="/useraddfeedback">Add Feedback</option>
-    <option value="/userviewappointment">My Feedbacks</option>
-  </select>
-  
-  <a routerLink="/profile" class="text-decoration-none">
-    <img src="profile-icon.png" alt="Profile" class="profile-icon">
-  </a>
-  <a routerLink="/home" type="button">Logout</a>
-</nav>
+
+<body>
+    <header>
+        <div class="navbar">
+            <h1>Vehicle Service</h1>
+            <div class="admin-section">
+                <nav>
+                    <ul>
+                        <li><a routerLink="/home">Home</a></li>
+                        <li class="hover-card">
+                            <a style="cursor: pointer">Appointments</a>
+                            <div class="card">
+                                <button style="cursor: pointer" onclick="location.href='/useraddappointment'">Book Appointments</button>
+                                <button style="cursor: pointer" onclick="location.href='/userviewappointment'">My Appointments</button>
+                            </div>
+                        </li>
+                        <li class="hover-card">
+                            <a style="cursor: pointer">Feedback</a>
+                            <div class="card">
+                                <button onclick="location.href='/useraddfeedback'">Add Feedback</button>
+                                <button onclick="location.href='/userviewfeedback'">My Feedbacks</button>
+                            </div>
+                        </li>
+                        <li class="profile-dropdown">
+                            <a href="#"><i class="bi bi-person-circle"></i></a>
+                            <div class="dropdown-menu">
+                                <a routerLink="/myprofile">My Profile</a>
+                                <a style="cursor: pointer" (click)="logout()">Logout</a>
+                            </div>
+                        </li>
+                        <!-- Updated bell icon to navigate to usernotification -->
+                        <li>
+                            <a style="cursor: pointer;" (click)="navigateToNotifications()"><i class="bi bi-bell"></i></a>
+                        </li>
+                    </ul>
+                </nav>  
+            </div>
+        </div>
+    </header>
+</body>
+
+<router-outlet></router-outlet>
+

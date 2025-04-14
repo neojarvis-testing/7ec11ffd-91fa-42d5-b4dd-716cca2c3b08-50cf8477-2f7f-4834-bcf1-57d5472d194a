@@ -24,6 +24,10 @@ import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.c
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { RouterModule } from '@angular/router';
+
+import { UserNotificationComponent } from './usernotification/usernotification.component';
+import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
+
 import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
 
  
@@ -48,7 +52,12 @@ import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewd
     UsernavbarComponent,
     UserviewappointmentComponent,
     UserviewfeedbackComponent,
+
+    UserNotificationComponent,
+    AdminNotificationComponent,
+
     AdminviewdescriptionComponent
+
   ],
   imports: [
     BrowserModule,

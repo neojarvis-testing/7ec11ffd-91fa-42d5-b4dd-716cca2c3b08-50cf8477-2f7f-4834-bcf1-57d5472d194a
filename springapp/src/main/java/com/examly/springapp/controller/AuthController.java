@@ -14,6 +14,7 @@ import com.examly.springapp.model.User;
 import com.examly.springapp.service.UserServiceImpl;
  
 import jakarta.persistence.EntityNotFoundException;
+import java.util.List;
  
 @RestController
 public class AuthController {
@@ -34,6 +35,17 @@ public class AuthController {
  
         }
     }
+
+    // Get All Users
+    // @GetMapping("/api/users")
+    // public ResponseEntity<?> getAllUsers() {
+    //     try {
+    //         List<User> users = userServiceImpl.findAllUsers();
+    //         return ResponseEntity.status(200).body(users); // OK
+    //     } catch (Exception e) {
+    //         return ResponseEntity.status(400).body(e.getMessage()); // Bad Request
+    //     }
+    // }
  
  
     @GetMapping("/api/user/{userId}")

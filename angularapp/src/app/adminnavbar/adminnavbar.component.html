@@ -1,16 +1,33 @@
-<nav class="navbar">
-  <a routerLink="/home" class="text-decoration-none">Home</a>
-  <div class="dropdown">
 
-    <select class="dropdown" onchange="location = this.value;">
-      <option disabled selected>Services</option>
-      <option value="/adminaddservice">Add Service</option>
-      <option value="/adminviewservice">View Services</option>
-    </select>
-
-  </div>
-  <a routerLink="/adminviewappointment" class="text-decoration-none">Appointments</a>
-  <a routerLink="/adminviewfeedback" class="text-decoration-none">Feedbacks</a>
-  <a routerLink="/adminviewuserdetails" class="text-decoration-none">Customer</a>
-  <a routerLink="/home" type="button">Logout</a>
+<nav>
+    <div class="navbar">
+        <h1>Vehicle Service/ Admin</h1>
+        <div class="admin-section">
+            <nav>
+                <ul>
+                    <li><a routerLink="/">Home</a></li>
+                    <li class="hover-card">
+                        <a href="#">Services</a>
+                        <div class="card">
+                            <button onclick="location.href='/adminaddservice'">Add Service</button>
+                            <button onclick="location.href='/adminviewservice'">View Services</button>
+                        </div>
+                    </li>
+                    <li><a routerLink="/adminviewappointment">Appointment</a></li>
+                    <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
+                    <li><a routerLink="/adminviewuserdetails">Customer</a></li>
+                    <li class="profile-dropdown">
+                        <a href="#"><i class="bi bi-person-circle"></i></a>
+                        <div class="dropdown-menu">
+                            <a routerLink="/myprofile">My Profile</a>
+                            <a style="cursor: pointer" (click)="logout()">Logout</a>
+                        </div>
+                    </li>
+                    <li><a routerLink="/adminnotification"><i class="bi bi-bell"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </nav>
+<router-outlet></router-outlet>
+

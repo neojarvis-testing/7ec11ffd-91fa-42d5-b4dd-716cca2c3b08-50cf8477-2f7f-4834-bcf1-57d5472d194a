@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Feedback } from '../models/feedback.model';
 import { FeedbackService } from '../services/feedback.service';
@@ -9,17 +10,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./useraddfeedback.component.css']
 })
 export class UseraddfeedbackComponent implements OnInit {
+  feedback: Feedback = { message: '', rating: null, user: { userId: null, email: '', password: '', username: '', mobileNumber: '', userRole: '' } };
 
-  feedback: Feedback = { message: "", rating: null, user: { userId: 1 } };
 
-  constructor(private feedbackService: FeedbackService, private router: Router) { }
+  constructor(
+    private feedbackService: FeedbackService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    const userId = this.authService.getUserId();
+    this.feedback.user.userId = userId ? parseInt(userId, 10) : null; // Handle invalid userId gracefully
   }
 
-  submitFeedback() {
-    this.feedbackService.createFeedback(this.feedback).subscribe(data => {
-      this.router.navigate(['/userviewfeedback']);
-    });
+  submitFeedback(form: NgForm): void {
+    if (form.valid) {
+      this.feedbackService.createFeedback(this.feedback).subscribe(() => {
+        this.router.navigate(['/userviewfeedback']);
+      }, error => {
+        console.error('Error creating feedback:', error); // Log error for debugging
+      });
+    }
+
   }
 }
