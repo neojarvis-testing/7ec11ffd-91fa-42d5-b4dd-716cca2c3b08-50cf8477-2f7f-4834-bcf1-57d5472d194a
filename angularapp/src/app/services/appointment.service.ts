@@ -37,4 +37,8 @@ export class AppointmentService {
     return this.httpClient.delete(this.apiUrl+"/api/appointment/"+appointmentId);
   }
 
+  addPayment(paymentDetails: any): Observable<any> {
+    return this.httpClient.post<any>("/api/payments", paymentDetails);
+  }
+
 }

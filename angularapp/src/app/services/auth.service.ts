@@ -90,6 +90,10 @@ export class AuthService {
     }
   }
 
+  getUsername(): string | null {
+    return localStorage.getItem('username');
+  }
+
 }
 
 
