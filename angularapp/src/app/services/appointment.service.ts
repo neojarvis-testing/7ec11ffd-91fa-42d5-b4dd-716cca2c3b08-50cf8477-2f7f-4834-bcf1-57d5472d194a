@@ -29,6 +29,7 @@ export class AppointmentService {
  
   // Add a new appointment
   addAppointment(appointment: Appointment): Observable<any> {
+    console.log("service:", JSON.stringify(appointment));
     return this.httpClient.post(this.apiUrl + "/api/appointment", appointment);
   }
  
@@ -49,6 +50,18 @@ export class AppointmentService {
 
   addPayment(paymentDetails: any): Observable<any> {
     return this.httpClient.post<any>("/api/payments", paymentDetails);
+  }
+  getUnreadAppointmentsCount(): Observable<{ unreadCount: number }> {
+    return this.httpClient.get<{ unreadCount: number }>(this.apiUrl+"/unread-count");
+  }
+ 
+  markAllAsRead(): Observable<void> {
+    return this.httpClient.post<void>(this.apiUrl + "/mark-read", null); // Pass null as the body
+  }
+ 
+  // Fetch user details by user ID
+  getUserDetails(userId: number): Observable<any> {
+    return this.httpClient.get(this.apiUrl+"/api/users/"+userId);
   }
 
 }

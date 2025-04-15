@@ -27,6 +27,8 @@ import { RouterModule } from '@angular/router';
 import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
 import { UserNotificationComponent } from './usernotification/usernotification.component';
 import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
+import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.component';
+import { ChartsModule } from 'ng2-charts';
 
  
 @NgModule({
@@ -52,14 +54,17 @@ import { AdminNotificationComponent } from './adminnotification/adminnotificatio
     UserviewfeedbackComponent,
     AdminviewdescriptionComponent,
     UserNotificationComponent,
-    AdminNotificationComponent
+    AdminNotificationComponent,
+    AdminviewreportsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ChartsModule
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

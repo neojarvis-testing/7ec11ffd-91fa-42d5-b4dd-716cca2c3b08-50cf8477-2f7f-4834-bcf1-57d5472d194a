@@ -1,5 +1,6 @@
 package com.examly.springapp.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -29,6 +30,7 @@ public class AppointmentController {
 
     @PostMapping("/api/appointment")
     public ResponseEntity<?> addAppointment(@RequestBody Appointment appointment){
+        System.out.println(appointment);
         Appointment newAppointment = appointmentService.addAppointment(appointment);
         return ResponseEntity.status(201).body(newAppointment);
 
@@ -65,7 +67,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/api/appointment/user/{userId}")
-    public ResponseEntity<?> getAppointmentByUserId(int userId){
+    public ResponseEntity<?> getAppointmentByUserId(@PathVariable int userId){
         List<Appointment> appointmentList = appointmentService.getAppointmentByUserId(userId);
         return ResponseEntity.status(200).body(appointmentList);
     }
@@ -95,6 +97,21 @@ public class AppointmentController {
         return ResponseEntity.status(500).body(Map.of("error", "Error requesting payment: " + e.getMessage()));
     }
 }
+// Get the count of unread appointments
+    @GetMapping("/unread-count")
+    public ResponseEntity<Map<String, Integer>> getUnreadCount() {
+        int unreadCount = appointmentService.countUnreadAppointments();
+        Map<String, Integer> response = new HashMap<>();
+        response.put("unreadCount", unreadCount);
+        return ResponseEntity.ok(response);
+    }
+ 
+    // Mark all appointments as read
+    @PostMapping("/mark-read")
+    public ResponseEntity<Void> markAllAsRead() {
+        appointmentService.markAllAsRead();
+        return ResponseEntity.ok().build();
+    }
 
     
 }

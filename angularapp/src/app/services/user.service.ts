@@ -36,4 +36,6 @@ export class UserService {
   public getUserByName(name: string): Observable<User> {
     return this.httpClient.get<User>(this.apiUrl + '/api/user/name/' + name);
   }
+
+  
 }

@@ -13,7 +13,12 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface AppointmentRepo extends JpaRepository<Appointment,Long>{
     
-    @Query("SELECT a FROM Appointment a WHERE a.user.id = :userId")
-    public List<Appointment> findByUserId(int userId);
+    // @Query("SELECT a FROM Appointment a WHERE a.user.id = :userId")
+    public List<Appointment> findByUserUserId(int userId);
+    // Count appointments by their status
+    public int countByStatus(String status);
+ 
+    // Find appointments by their status
+    public List<Appointment> findByStatus(String status);
     
 }

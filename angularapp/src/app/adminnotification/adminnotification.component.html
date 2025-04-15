@@ -1,21 +1,47 @@
 <div class="notification-container">
-    <h2>New Appointments</h2>
-    <table class="notification-table">
-      <thead>
-        <tr>
-          <th>S. No</th>
-          <th>Notification</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let appointment of appointments; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ appointment.user?.username }} has booked an appointment.</td>
-          <td>
-            <button class="request-payment-btn" (click)="requestPayment(appointment)">Request Payment</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <h2>New Appointments</h2>
+  <table class="notification-table">
+    <thead>
+      <tr>
+        <th>S. No</th>
+        <th>Notification</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of appointments; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ appointment.user?.username }} has booked an appointment.</td>
+        <td>
+          <button class="request-payment-btn" (click)="requestPayment(appointment)">Request Payment</button>
+          <button class="show-profile-btn" (click)="showUserProfile(appointment.user.userId)">Show Profile</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+ 
+  <!-- Display User Details Popup -->
+  <div class="overlay" *ngIf="selectedUserDetails">
+    <div class="user-details-popup">
+      <div class="user-details-header">
+        <h3>User Details</h3>
+        <button class="close-popup-btn" (click)="closeUserDetails()">X</button>
+      </div>
+      <div class="user-details-content">
+        <p><strong>Username:</strong> {{ selectedUserDetails.username }}</p>
+        <p><strong>User ID:</strong> {{ selectedUserDetails.userId }}</p>
+        <p><strong>Email:</strong> {{ selectedUserDetails.email }}</p>
+        <p><strong>Mobile Number:</strong> {{ selectedUserDetails.mobileNumber }}</p>
+        <p><strong>User Role:</strong> {{ selectedUserDetails.userRole }}</p>
+      </div>
+    </div>
   </div>
+ 
+  <!-- Payment Popup -->
+  <div class="payment-popup" *ngIf="showPaymentPopup">
+    <div class="popup-content">
+      <i class="bi bi-check check-icon"></i>
+      <p>Payment Request Sent Successfully</p>
+    </div>
+  </div>
+</div>

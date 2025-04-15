@@ -1,31 +1,50 @@
 <nav>
   <div class="navbar">
-      <h1>Vehicle Service/ Admin</h1>
-      <div class="admin-section">
-          <nav>
-              <ul>
-                  <li><a routerLink="/">Home</a></li>
-                  <li class="hover-card">
-                      <a href="#">Services</a>
-                      <div class="card">
-                          <button onclick="location.href='/adminaddservice'">Add Service</button>
-                          <button onclick="location.href='/adminviewservice'">View Services</button>
-                      </div>
-                  </li>
-                  <li><a routerLink="/adminviewappointment">Appointment</a></li>
-                  <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
-                  <li><a routerLink="/adminviewuserdetails">Customer</a></li>
-                  <li class="profile-dropdown">
-                      <a href="#"><i class="bi bi-person-circle"></i></a>
-                      <div class="dropdown-menu">
-                          <a routerLink="/myprofile">My Profile</a>
-                          <a style="cursor: pointer" (click)="logout()">Logout</a>
-                      </div>
-                  </li>
-                  <li><a routerLink="/adminnotification"><i class="bi bi-bell"></i></a></li>
-              </ul>
-          </nav>
+    <h1>Vehicle Service/ Admin</h1>
+    <div class="admin-section">
+      <nav>
+        <ul>
+          <li><a routerLink="/">Home</a></li>
+          <li class="hover-card">
+            <a href="#">Services</a>
+            <div class="card">
+              <button onclick="location.href='/adminaddservice'" >Add Service</button>
+              <button onclick="location.href='/adminviewservices'">View Services</button>
+            </div>
+          </li>
+          <li><a routerLink="/adminviewappointment">Appointment</a></li>
+          <li><a routerLink="/adminviewfeedback">Feedbacks</a></li>
+          <li><a routerLink="/adminviewuserdetails">Customer</a></li>
+          <li><a routerLink="/adminviewreports">Reports</a></li>
+          <li class="profile-dropdown">
+            <a href="#"><i class="bi bi-person-circle"></i></a>
+            <div class="dropdown-menu">
+              <button (click)="fetchUserDetails()">My Profile</button>
+              <button (click)="logout()">Logout</button>
+            </div>
+          </li>
+          <li>
+            <a style="position: relative; cursor: pointer" (click)="viewNotifications()">
+              <i class="bi bi-bell"></i>
+              <span class="notification-badge" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+ 
+  <!-- Profile Modal Popup -->
+  <div class="popup-overlay" *ngIf="showProfilePopup">
+    <div class="popup-content">
+      <h2>User Profile</h2>
+      <div class="profile-info">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Mobile Number:</strong> {{ user.mobileNumber }}</p>
       </div>
+      <button (click)="closeProfilePopup()">Close</button>
+    </div>
   </div>
 </nav>
 <router-outlet></router-outlet>

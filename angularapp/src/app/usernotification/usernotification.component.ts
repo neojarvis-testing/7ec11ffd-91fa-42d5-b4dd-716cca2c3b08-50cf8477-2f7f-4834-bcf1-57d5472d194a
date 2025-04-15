@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../services/notification.service';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usernotification',
@@ -14,7 +15,8 @@ export class UserNotificationComponent implements OnInit {
 
   constructor(
     private notificationService: NotificationService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router : Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,7 @@ export class UserNotificationComponent implements OnInit {
   handlePayment(notification: any): void {
     console.log(`Processing payment for notification: ${notification.message}`);
     alert('Redirecting to payment page...');
+    this.router.navigate(['/userviewappointment']);
   }
 
   removeNotification(index: number): void {

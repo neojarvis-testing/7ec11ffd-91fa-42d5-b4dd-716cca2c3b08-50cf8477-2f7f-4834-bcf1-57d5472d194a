@@ -53,46 +53,59 @@
   No appointments available
 </div>
 
-<!-- Payment Popup -->
-<div *ngIf="showPaymentPopup" class="modal fade show d-block">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="modal-title">
-            <h3 class="text-center">Payment Gateway</h3>
-          </div>
+<div *ngIf="showPaymentPopup">
+  <h3>Payment Gateway</h3>
+  <p>Your payment code: <strong>{{ paymentCode }}</strong></p>
+</div>
+<div>
+  <!-- <h2>Scan to Pay via UPI</h2> -->
+  <img *ngIf="upiUrl" [src]="upiUrl" alt="UPI QR Code">
+  <canvas #qrCanvas></canvas>
+</div>
 
+
+
+<!-- Payment Popup -->
+<!-- Basic Payment Popup Without CSS -->
+<div *ngIf="showPaymentPopup">
+  <div>
+    <!-- <div>
+      <h3>Payment Gateway</h3>
+    </div>
+
+    <div>
+      <p>Your payment code: <strong>{{ paymentCode }}</strong></p> -->
+
+      <!-- QR Code & Details -->
+      <div>
+        <div>
+          <!-- <h2>Scan to Pay via UPI</h2> -->
+          <!-- <img *ngIf="upiUrl" [src]="upiUrl" alt="UPI QR Code"> -->
+          <canvas #qrCanvas></canvas>
         </div>
-        <div class="modal-body">
-          <p>Your payment code: <strong>{{ paymentCode }}</strong></p>
-          <!-- <p>Your payment is successful for the following service:</p> -->
-  
-          <!-- Flex container to align QR Code and Details -->
-          <div class="qr-container">
-            <!-- QR Code on the left -->
-            <div class="qr-box">
-              <canvas #qrCanvas></canvas>
-            </div>
-  
-            <!-- Service Details on the right -->
-            <div class="details-box">
-              <div *ngIf="selectedIndex !== null" class="card shadow-sm p-3">
-                <p><strong class="text-dark">Service Name:</strong> {{ appointments[selectedIndex]?.service?.serviceName }}</p>
-                <p><strong class="text-dark">Type of Vehicle:</strong> {{ appointments[selectedIndex]?.service?.typeOfVehicle }}</p>
-                <p><strong class="text-dark">Location:</strong> {{ appointments[selectedIndex]?.location }}</p>
-                <p><strong class="text-dark">Service Price:</strong> ₹{{ appointments[selectedIndex]?.service?.servicePrice }}</p>
-              </div>
-            </div>
+
+        <div>
+          <div *ngIf="selectedIndex !== null">
+            <p><strong>Service Name:</strong> {{ appointments[selectedIndex]?.service?.serviceName }}</p>
+            <p><strong>Type of Vehicle:</strong> {{ appointments[selectedIndex]?.service?.typeOfVehicle }}</p>
+            <p><strong>Location:</strong> {{ appointments[selectedIndex]?.location }}</p>
+            <p><strong>Service Price:</strong> ₹{{ appointments[selectedIndex]?.service?.servicePrice }}</p>
           </div>
-        </div>
-  
-        <div class="modal-footer">
-            <button (click)="handlePaymentDone()" class="btn btn-success">Payment Done</button>
-          <button (click)="showPaymentPopup = false" class="btn btn-secondary ms-3">Close</button>
         </div>
       </div>
+    <!-- </div> -->
+
+    <div>
+      <button (click)="handlePaymentDone()">Payment Done</button>
+      <button (click)="showPaymentPopup = false">Close</button>
     </div>
   </div>
+</div>
+  
+        <!-- <div class="modal-footer">
+            <button (click)="handlePaymentDone()" class="btn btn-success">Payment Done</button>
+          <button (click)="showPaymentPopup = false" class="btn btn-secondary ms-3">Close</button>
+        </div> -->
   
 
   <!-- Payment Confirmation Dialog -->
@@ -113,6 +126,5 @@
       </div>
     </div>
 
-<div *ngIf="appointments.length==0" class="no-appointments">
-    No appointments available</div>
+
 

@@ -1,124 +1,125 @@
+/* General container styling for the notifications */
 .notification-container {
-    max-width: 700px; /* Increased width for better readability */
-    margin: 30px auto; /* Added vertical margin for spacing */
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 12px; /* Slightly rounded corners */
-    background-color: #f8faff; /* Subtle blue background for professionalism */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added a soft shadow for depth */
+  max-width: 700px; /* Increased width for better readability */
+  margin: 30px auto; /* Added vertical margin for spacing */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px; /* Slightly rounded corners */
+  background-color: #f8faff; /* Subtle blue background for professionalism */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added a soft shadow for depth */
+}
+ 
+/* Individual notification item styling */
+.notification-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-bottom: 15px;
+  border: 1px solid #e3e6f0; /* Subtle border for separation */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #ffffff; /* Clean white background */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Small shadow for depth */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover animation */
+}
+ 
+/* Hover effect for notification items */
+.notification-item:hover {
+  transform: translateY(-2px); /* Slight lift on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+ 
+/* Header section for the close icon (X) */
+.notification-header {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+ 
+/* Styling for the close (X) icon */
+.close-icon {
+  font-size: 20px;
+  color: #ff4d4f; /* Soft red for the close icon */
+  cursor: pointer;
+  transition: color 0.3s, transform 0.2s; /* Smooth color and scale transitions */
+}
+ 
+.close-icon:hover {
+  color: #d9363e; /* Darker red on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+ 
+/* Styling for the notification message */
+.notification-message {
+  font-size: 18px; /* Larger, more readable text */
+  font-weight: 600; /* Slightly bold for emphasis */
+  color: #333333; /* Dark gray for professional look */
+  margin-bottom: 12px; /* Added spacing below the message */
+  line-height: 1.6; /* Better line spacing for readability */
+}
+ 
+/* Action buttons container */
+.notification-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px; /* Spacing between buttons */
+}
+ 
+/* Styling for the payment button */
+.payment-button {
+  background-color: #4caf50; /* Green for action buttons */
+  color: #ffffff; /* White text for contrast */
+  border: none;
+  padding: 10px 16px; /* Increased padding for better clickability */
+  border-radius: 6px; /* Slightly rounded */
+  cursor: pointer;
+  font-size: 16px; /* Slightly larger font size */
+  font-weight: 500; /* Medium weight for better readability */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
+}
+ 
+.payment-button:hover {
+  background-color: #388e3c; /* Darker green on hover */
+  transform: translateY(-1px); /* Slight lift on hover */
+}
+ 
+/* Styling for additional buttons (if needed) */
+.cancel-button {
+  background-color: #f44336; /* Red for cancel buttons */
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.2s;
+}
+ 
+.cancel-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+  transform: translateY(-1px);
+}
+ 
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .notification-container {
+    max-width: 90%; /* Adjust container width on smaller screens */
+    padding: 15px;
   }
-  
-  /* Individual notification item styling */
+ 
   .notification-item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    margin-bottom: 15px;
-    border: 1px solid #e3e6f0; /* Subtle border for separation */
-    border-radius: 10px; /* Rounded corners */
-    background-color: #ffffff; /* Clean white background */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Small shadow for depth */
-    transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover animation */
+    padding: 15px;
   }
-  
-  /* Hover effect for notification items */
-  .notification-item:hover {
-    transform: translateY(-2px); /* Slight lift on hover */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
-  }
-  
-  /* Header section for the close icon (X) */
-  .notification-header {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-  
-  /* Styling for the close (X) icon */
-  .close-icon {
-    font-size: 20px;
-    color: #ff4d4f; /* Soft red for the close icon */
-    cursor: pointer;
-    transition: color 0.3s, transform 0.2s; /* Smooth color and scale transitions */
-  }
-  
-  .close-icon:hover {
-    color: #d9363e; /* Darker red on hover */
-    transform: scale(1.1); /* Slightly enlarge on hover */
-  }
-  
-  /* Styling for the notification message */
+ 
   .notification-message {
-    font-size: 18px; /* Larger, more readable text */
-    font-weight: 600; /* Slightly bold for emphasis */
-    color: #333333; /* Dark gray for professional look */
-    margin-bottom: 12px; /* Added spacing below the message */
-    line-height: 1.6; /* Better line spacing for readability */
+    font-size: 16px; /* Slightly smaller font size for smaller screens */
   }
-  
-  /* Action buttons container */
-  .notification-actions {
-    display: flex;
-    justify-content: flex-start;
-    gap: 10px; /* Spacing between buttons */
-  }
-  
-  /* Styling for the payment button */
-  .payment-button {
-    background-color: #4caf50; /* Green for action buttons */
-    color: #ffffff; /* White text for contrast */
-    border: none;
-    padding: 10px 16px; /* Increased padding for better clickability */
-    border-radius: 6px; /* Slightly rounded */
-    cursor: pointer;
-    font-size: 16px; /* Slightly larger font size */
-    font-weight: 500; /* Medium weight for better readability */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth hover effects */
-  }
-  
-  .payment-button:hover {
-    background-color: #388e3c; /* Darker green on hover */
-    transform: translateY(-1px); /* Slight lift on hover */
-  }
-  
-  /* Styling for additional buttons (if needed) */
+ 
+  .payment-button,
   .cancel-button {
-    background-color: #f44336; /* Red for cancel buttons */
-    color: #ffffff;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px; /* Adjust button font size */
+    padding: 8px 12px;
   }
-  
-  .cancel-button:hover {
-    background-color: #d32f2f; /* Darker red on hover */
-    transform: translateY(-1px);
-  }
-  
-  /* Media query for responsiveness */
-  @media (max-width: 768px) {
-    .notification-container {
-      max-width: 90%; /* Adjust container width on smaller screens */
-      padding: 15px;
-    }
-  
-    .notification-item {
-      padding: 15px;
-    }
-  
-    .notification-message {
-      font-size: 16px; /* Slightly smaller font size for smaller screens */
-    }
-  
-    .payment-button,
-    .cancel-button {
-      font-size: 14px; /* Adjust button font size */
-      padding: 8px 12px;
-    }
-  }
-  
+}
+ 

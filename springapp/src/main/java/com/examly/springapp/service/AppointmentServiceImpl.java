@@ -37,8 +37,9 @@ public class AppointmentServiceImpl implements AppointmentService{
     @Override
     public Appointment addAppointment(Appointment appointment) {
         User user = userRepo.findById(appointment.getUser().getUserId()).get();
- 
+        System.out.println(user);
         VehicleMaintenance vehicle = vehicleServiceRepo.findById(appointment.getService().getServiceId()).get();
+        System.out.println(vehicle);
         appointment.setUser(user);
         appointment.setService(vehicle);
         return appointmentRepo.save(appointment);
@@ -70,7 +71,7 @@ public class AppointmentServiceImpl implements AppointmentService{
  
     @Override
     public List<Appointment> getAppointmentByUserId(int userId) {
-        List<Appointment> appointmentList = appointmentRepo.findByUserId(userId);
+        List<Appointment> appointmentList = appointmentRepo.findByUserUserId(userId);
         return appointmentList;
     }
  
@@ -104,6 +105,20 @@ public class AppointmentServiceImpl implements AppointmentService{
     notification.setMessage("Payment requested for your appointment. Please proceed to payment.");
     notification.setRead(false); // Mark as unread
     notificationRepo.save(notification); // Save the notification
+    }
+
+    @Override
+    public int countUnreadAppointments() {
+        return appointmentRepo.countByStatus("Pending");
+}
+ 
+    @Override
+    public void markAllAsRead() {
+        List<Appointment> unreadAppointments = appointmentRepo.findByStatus("Pending");
+        for (Appointment appointment : unreadAppointments) {
+            appointment.setStatus("Read");
+            appointmentRepo.save(appointment);
+        }
     }
    
 }

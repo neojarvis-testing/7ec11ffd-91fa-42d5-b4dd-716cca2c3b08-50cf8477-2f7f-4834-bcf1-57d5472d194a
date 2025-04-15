@@ -19,6 +19,9 @@ import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
 import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
+import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.component';
+import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
+import { UserNotificationComponent } from './usernotification/usernotification.component';
 
 
 const routes: Routes = [
@@ -32,6 +35,7 @@ const routes: Routes = [
   {path:"adminviewservice",component:AdminviewserviceComponent},
   {path:"adminviewuserdetails",component:AdminviewuserdetailsComponent},
   {path:"login",component:LoginComponent},
+  {path:"adminnotification",component:AdminNotificationComponent},
   
   {path:"profile",component:ProfileComponent},
   {path:"registration",component:RegistrationComponent},
@@ -42,8 +46,10 @@ const routes: Routes = [
   {path:"userviewfeedback",component:UserviewfeedbackComponent},
   {path:"adminaddservice/:serviceId",component:AdminaddserviceComponent},
   {path:"error",component:ErrorComponent},
-  {path: 'adminviewdescription/:serviceId', component: AdminviewdescriptionComponent}
-  // {path:"**",component:HomeComponent},
+  {path: 'adminviewdescription/:serviceId', component: AdminviewdescriptionComponent},
+  {path:"adminviewreports",component:AdminviewreportsComponent},
+  {path:"usernotification",component:UserNotificationComponent},
+  {path:"**",component:HomeComponent}
 
 
 ];

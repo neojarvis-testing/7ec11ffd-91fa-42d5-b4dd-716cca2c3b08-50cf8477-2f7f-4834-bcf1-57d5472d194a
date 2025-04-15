@@ -4,6 +4,7 @@ package com.examly.springapp.controller;
 import java.util.List;
  
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,6 +60,24 @@ public class UserController {
             return ResponseEntity.status(404).body(e.getMessage()); // Not Found
         } catch (Exception e) {
             return ResponseEntity.status(400).body(e.getMessage()); // Bad Request
+        }
+    }
+    @GetMapping("/api/users/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable int userId) {
+        User user = userService.getByUserId(userId);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/api/user/name/{name}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable("name") String username) {
+        try {
+            User user = userService.loadUserByUsername(username);
+            return ResponseEntity.ok(user);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(404).body(null);
         }
     }
 }

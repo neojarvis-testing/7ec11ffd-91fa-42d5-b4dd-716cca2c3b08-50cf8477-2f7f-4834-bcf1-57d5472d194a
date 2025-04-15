@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.NoArgsConstructor;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -34,7 +35,7 @@ public class Appointment {
    
     @ManyToOne 
     @JoinColumn(name="userId")
-    @JsonIgnore
+    // @JsonIgnore
     private User user;
        
 }

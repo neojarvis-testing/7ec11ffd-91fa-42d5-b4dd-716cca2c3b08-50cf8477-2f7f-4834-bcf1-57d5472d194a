@@ -1,3 +1,4 @@
+/* General Styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -6,7 +7,7 @@ body {
 }
  
 .navbar {
-  background-color: #333;
+  background: linear-gradient(135deg, #333, #444);
   color: #fff;
   padding: 15px 20px;
   display: flex;
@@ -14,6 +15,7 @@ body {
   align-items: center;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
  
 .navbar h1 {
@@ -21,18 +23,12 @@ body {
   font-size: 24px;
 }
  
-.admin-section {
-  flex-grow: 1;
-}
- 
 .admin-section nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 15px;
-  align-items: center;
-  justify-content: flex-end;
+  gap: 20px;
 }
  
 .admin-section nav ul li {
@@ -44,13 +40,14 @@ body {
   text-decoration: none;
   padding: 10px 15px;
   display: block;
-  transition: background-color 0.3s, box-shadow 0.3s, border-radius 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, border-radius 0.3s, transform 0.2s;
 }
  
 .admin-section nav ul li a:hover {
   background-color: #575757;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
+  transform: scale(1.05);
 }
  
 .admin-section nav ul li a i {
@@ -58,66 +55,113 @@ body {
   vertical-align: middle;
 }
  
-.profile-dropdown .dropdown-menu,
-.hover-card .card {
+/* Dropdown and Hover Card */
+.hover-card .card,
+.profile-dropdown .dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #333;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  min-width: 150px;
-}
- 
-.profile-dropdown:hover .dropdown-menu,
-.hover-card:hover .card {
-  display: block;
-}
- 
-.profile-dropdown .dropdown-menu a,
-.hover-card .card button {
-  color: #fff;
-  padding: 10px 15px;
-  display: block;
-  text-decoration: none;
-  background-color: #333;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s, border-radius 0.3s;
-}
- 
-.profile-dropdown .dropdown-menu a:hover,
-.hover-card .card button:hover {
-  background-color: #575757;
+  background: white;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
+  z-index: 1;
+  padding: 10px;
+  animation: fadeIn 0.3s ease;
 }
  
-.logout {
-  background-color: #ff4d4d;
+.hover-card:hover .card,
+.profile-dropdown:hover .dropdown-menu {
+  display: block;
+}
+ 
+.card button,
+.dropdown-menu button {
+  background-color: transparent;
+  color: black;
   border: none;
+  font-size: 14px;
+  padding: 10px 15px;
+  text-align: left;
+  width: 100%;
   cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 5px;
+  margin: 5px 0;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
  
-.logout:hover {
-  background-color: #ff1a1a;
+.card button:hover,
+.dropdown-menu button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05);
 }
  
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+/* Profile Modal Popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
  
-  .admin-section nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
  
-  .admin-section nav ul li a {
-    padding: 10px;
+.popup-content h2 {
+  margin-top: 0;
+}
+ 
+.popup-content p {
+  margin: 10px 0;
+}
+ 
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+ 
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+ 
+button:last-of-type {
+  background-color: #dc3545;
+}
+ 
+button:last-of-type:hover {
+  background-color: #c82333;
+}
+ 
+/* Animation for popup */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AppointmentService } from '../services/appointment.service';
 import { Appointment } from '../models/appointment.model';
-
 import { AuthService } from '../services/auth.service';
+
+import * as QRCode from 'qrcode';
 
 
 @Component({
@@ -10,23 +11,21 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './userviewappointment.component.html',
   styleUrls: ['./userviewappointment.component.css']
 })
-
 export class UserviewappointmentComponent implements OnInit, AfterViewInit {
-
   appointments: Appointment[] = [];
   selectedStatus: string = "All";
   inp: string = "";
   userId: number | null;
   selectedIndex: number | null = null;
+  upiUrl : string ="";
 
-  // Payment variables
   showPaymentPopup = false;
   paymentCode: string = '';
   showConfirmationPopup = false;
 
-  @ViewChild('qrCanvas', { static: false }) qrCanvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('qrCanvas', { static: true }) qrCanvas!: ElementRef<HTMLCanvasElement>;
 
-  constructor(private appointmentService: AppointmentService, private authService: AuthService) { }
+  constructor(private appointmentService: AppointmentService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.userId = parseInt(this.authService.getUserId());
@@ -69,35 +68,27 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit {
     this.selectedIndex = index;
     this.showPaymentPopup = true;
 
-    setTimeout(() => this.createDummyQRCode(300), 0);
+    setTimeout(() => this.generateQrCode(), 0); // Replace dummy generator with new QR logic
   }
 
-  createDummyQRCode(size: number) {
-    if (!this.qrCanvas) {
-      console.error('Canvas not initialized');
-      return;
-    }
-
-    const canvas = this.qrCanvas.nativeElement;
-    const ctx = canvas.getContext('2d');
-
-    if (!ctx) {
-      console.error('Canvas context not available!');
-      return;
-    }
-
-    canvas.width = size;
-    canvas.height = size;
-    const gridSize = 30;
-    const cellSize = size / gridSize;
-
-    for (let x = 0; x < gridSize; x++) {
-      for (let y = 0; y < gridSize; y++) {
-        ctx.fillStyle = Math.random() > 0.5 ? '#000' : '#FFF';
-        ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+  generateQrCode(): void {
+    const upiId = 'aditya.jay.gupta23@okaxis';
+    const money = 1;
+  
+    const randomTid = Math.floor(100000000 + Math.random() * 900000000).toString();
+    const upiUrl = `upi://pay?pa=${upiId}&pn=AdityaGupta&mc=0000&tid=${randomTid}&tr=987654321&tn=Payment&am=${money}&cu=INR`;
+  
+    console.log('Generated UPI URL:', upiUrl); // Debugging log
+  
+    QRCode.toCanvas(this.qrCanvas.nativeElement, upiUrl, error => {
+      if (error) {
+        console.error('Error generating QR code:', error);
+      } else {
+        console.log('QR code generated successfully');
       }
-    }
+    });
   }
+  
 
   handlePaymentDone(): void {
     if (this.selectedIndex !== null) {
@@ -116,8 +107,6 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit {
 
       this.appointmentService.addPayment(paymentDetails).subscribe(paymentResponse => {
         console.log('Payment processed successfully:', paymentResponse);
-        
-        // After successful payment, send an email confirmation
 
         this.showPaymentPopup = false;
         this.showConfirmationPopup = true;
@@ -126,7 +115,6 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit {
       });
     }
   }
-
 
   closeConfirmation(): void {
     this.showConfirmationPopup = false;

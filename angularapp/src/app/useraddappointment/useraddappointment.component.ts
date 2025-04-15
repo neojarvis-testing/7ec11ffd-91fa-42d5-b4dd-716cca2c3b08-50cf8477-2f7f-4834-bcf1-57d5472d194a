@@ -20,9 +20,10 @@ export class UseraddappointmentComponent implements OnInit {
   searchData:string="";
  
   constructor(private vehicleService: VehicleService, private appointmentService: AppointmentService,private authService : AuthService,private router: Router) { }
-  userId : number | null = null;
+  userId : number;
   ngOnInit(): void {
     this.userId = parseInt(this.authService.getUserId());
+    console.log(this.userId);
     this.getAllServices();
   }
  
