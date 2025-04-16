@@ -15,25 +15,25 @@ export class AppComponent implements OnInit {
  
   ngOnInit(): void {
     
-    this.role = this.localStorage.getItem("userRole")
-    console.log('User Role:',this.role);
-    if(this.role == null){
-      this.role = 'guest'
-    }
+    // this.role = this.localStorage.getItem("userRole")
+    // console.log('User Role:',this.role);
+    // if(this.role == null){
+    //   this.role = 'guest'
+    // }
 
   }
  
-  public isAdmin(): boolean {
-     return localStorage.getItem('userRole') === 'Admin';
-    }
+  // public isAdmin(): boolean {
+  //    return localStorage.getItem('userRole') === 'Admin';
+  //   }
  
-  public isUser(): boolean {
-    return localStorage.getItem('userRole') === 'USER';
-  }
+  // public isUser(): boolean {
+  //   return localStorage.getItem('userRole') === 'USER';
+  // }
  
   // public isLoggedIn() : boolean{
   //   return this.authService.isLoggedIn();
   // }
-  title = 'angularapp';
+  title = 'VroomDoc';
   
 }

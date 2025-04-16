@@ -45,26 +45,26 @@ export class ProfileComponent implements OnInit {
     }
   }
  
-  handleUserData(data: User): void {
+  public handleUserData(data: User): void {
     this.user = data;
   }
  
-  handleError(error: any): void {
+  public handleError(error: any): void {
     console.error('Error fetching user details', error);
     // Handle error, e.g., navigate to an error page or show a message
   }
  
-  showEditForm(): void {
+  public showEditForm(): void {
     this.isEditMode = true;
     this.isProfileUpdated = false;
   }
  
-  cancelEdit(): void {
+  public cancelEdit(): void {
     this.isEditMode = false;
     this.router.navigate(['/feedbacks']); // Navigate to the list of feedbacks page
   }
  
-  onSubmit(form: NgForm): void {
+  public onSubmit(form: NgForm): void {
     if (form.valid) {
       const userId = this.user.userId;
       if (userId) {
@@ -79,13 +79,13 @@ export class ProfileComponent implements OnInit {
     }
   }
  
-  handleUpdateSuccess(data: User): void {
+  public handleUpdateSuccess(data: User): void {
     this.user = data;
     this.isEditMode = false;
     this.isProfileUpdated = true;
   }
  
-  navigateToFeedbacks(): void {
+  public navigateToFeedbacks(): void {
     this.router.navigate(['/adminviewfeedback']); // Navigate to the list of feedbacks page
   }
 }

@@ -35,3 +35,5 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.currentImage = this.images[nextIndex];
   }
 }
+
+

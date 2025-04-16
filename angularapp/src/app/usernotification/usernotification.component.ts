@@ -24,11 +24,11 @@ export class UserNotificationComponent implements OnInit {
     this.fetchNotifications();
   }
 
-  fetchUsername(): void {
+  public fetchUsername(): void {
     this.username = this.authService.getUsername(); // Replace with actual method to retrieve username
   }
 
-  fetchNotifications(): void {
+  public fetchNotifications(): void {
     const userId = Number(this.authService.getUserId());
     if (userId) {
       this.notificationService.getUserNotifications(userId).subscribe(
@@ -44,13 +44,13 @@ export class UserNotificationComponent implements OnInit {
     }
   }
 
-  handlePayment(notification: any): void {
+  public handlePayment(notification: any): void {
     console.log(`Processing payment for notification: ${notification.message}`);
     alert('Redirecting to payment page...');
     this.router.navigate(['/userviewappointment']);
   }
 
-  removeNotification(index: number): void {
+  public removeNotification(index: number): void {
     this.notifications.splice(index, 1); // Simply remove the notification from the array
   }
 }

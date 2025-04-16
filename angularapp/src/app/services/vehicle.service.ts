@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
+import { Global } from '../models/global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
-  public apiUrl: string = "https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";
-
+  public apiUrl: string = Global.baseUrl;
+  
   constructor(private httpClient: HttpClient) { }
 
   public getAllServices(): Observable<any> {

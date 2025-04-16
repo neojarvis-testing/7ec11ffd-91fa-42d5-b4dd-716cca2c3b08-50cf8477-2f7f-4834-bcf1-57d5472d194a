@@ -1,5 +1,6 @@
 package com.examly.springapp.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -25,7 +26,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Payment {
+public class Payment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;

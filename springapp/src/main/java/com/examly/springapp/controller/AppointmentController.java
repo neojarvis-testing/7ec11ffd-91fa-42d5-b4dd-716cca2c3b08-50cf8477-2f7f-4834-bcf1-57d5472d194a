@@ -25,12 +25,17 @@ import jakarta.persistence.EntityNotFoundException;
 @RestController
 public class AppointmentController {
 
-    @Autowired 
-    private AppointmentService appointmentService;
+
+    private final AppointmentService appointmentService;
+
+    public AppointmentController(AppointmentService appointmentService) {
+        this.appointmentService = appointmentService;
+    }
+
+    
 
     @PostMapping("/api/appointment")
     public ResponseEntity<?> addAppointment(@RequestBody Appointment appointment){
-        System.out.println(appointment);
         Appointment newAppointment = appointmentService.addAppointment(appointment);
         return ResponseEntity.status(201).body(newAppointment);
 

@@ -38,7 +38,7 @@ import { UserStoreService } from '../helpers/user-store.service';
    
    
    
-      loadUserFromLocalStorage(): void {
+    public loadUserFromLocalStorage(): void {
        const storedUser = localStorage.getItem('authUser');
        if (storedUser) {
        const user: AuthUser = JSON.parse(storedUser);
@@ -47,22 +47,19 @@ import { UserStoreService } from '../helpers/user-store.service';
        }
    
      
-    public logout(){
-      this.authService.logout();
-      this.isLoggedIn=false;
-      this.userName = '';
-      this.userRole = '';
-      // this.cdRef.detectChanges();
-      this.router.navigate(['/login']);
-    }
+    // public logout(){
+    //   this.authService.logout();
+    //   this.isLoggedIn=false;
+    //   this.userName = '';
+    //   this.userRole = '';
+    //   this.router.navigate(['/login']);
+    // }
    
-    updateUserState(){
+    public updateUserState(){
       this.isLoggedIn = this.userStore.isLoggedIn();
       this.userName = this.userStore.authUser?.username;
       this.userRole = this.userStore.authUser?.userRole;
     }
 
-    
-   
   }
    

@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import { Global } from '../models/global';
  
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
  
-  public apiUrl = "https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080"; // Base API URL
+  public apiUrl = Global.baseUrl;
  
   constructor(private httpClient: HttpClient) { }
  

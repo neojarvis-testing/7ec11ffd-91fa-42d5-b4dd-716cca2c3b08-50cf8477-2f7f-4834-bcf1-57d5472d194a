@@ -21,13 +21,13 @@ export class AdminviewdescriptionComponent implements OnInit {
     });
   }
 
-  getServiceDetails(): void {
+  public getServiceDetails(): void {
     this.vehicleService.getServiceById(this.serviceId).subscribe(data => {
       this.serviceDetails = data;
     });
   }
 
-  goBack(){
+  public goBack(){
     this.router.navigate(['/adminviewservice']);
   }
 }

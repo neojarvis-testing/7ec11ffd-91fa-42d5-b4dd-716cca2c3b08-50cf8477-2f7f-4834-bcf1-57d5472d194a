@@ -154,6 +154,28 @@ button:last-of-type:hover {
   background-color: #c82333;
 }
  
+/* Logout Confirmation Modal */
+.popup-content.logout {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  max-width: 80%;
+  text-align: center;
+}
+
+.popup-content.logout h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.popup-content.logout button {
+  width: 120px;
+  margin: 5px;
+  padding: 10px;
+}
+
 /* Animation for popup */
 @keyframes fadeIn {
   from {

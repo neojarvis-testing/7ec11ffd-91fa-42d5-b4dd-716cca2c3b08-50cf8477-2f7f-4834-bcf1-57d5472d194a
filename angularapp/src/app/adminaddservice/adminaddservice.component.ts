@@ -11,15 +11,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AdminaddserviceComponent implements OnInit {
 
+  vehiclemaintenance: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "", description: "" };
+  showPopup: boolean = false;
+  serviceId: number | null = null;
+  
   constructor(
     private vehicleService: VehicleService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
-
-  vehiclemaintenance: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "", description: "" };
-  showPopup: boolean = false;
-  serviceId: number | null = null;
 
   ngOnInit(): void {
     this.serviceId = parseInt(this.route.snapshot.paramMap.get('serviceId'));
@@ -45,7 +45,7 @@ export class AdminaddserviceComponent implements OnInit {
     }
   }
 
-  closePopup() {
+  public closePopup() {
     this.showPopup = false;
     this.router.navigate(['/adminviewservice']);
   }

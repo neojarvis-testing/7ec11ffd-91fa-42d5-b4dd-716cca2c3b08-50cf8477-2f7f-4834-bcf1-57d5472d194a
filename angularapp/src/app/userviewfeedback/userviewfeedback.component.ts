@@ -24,18 +24,18 @@ export class UserviewfeedbackComponent implements OnInit {
     this.getAllFeedbacks();
   }
  
-  getAllFeedbacks(): void {
+  public getAllFeedbacks(): void {
     this.feedbackService.getFeedbacksByUserId(this.feedbackId).subscribe(data => {
       this.feedbacks = data;
     });
   }
  
-  showDeletePopup(feedbackId: number): void {
+  public showDeletePopup(feedbackId: number): void {
     this.feedbackIdToDelete = feedbackId;
     this.showPopup = true;
   }
  
-  confirmDelete(): void {
+  public confirmDelete(): void {
     if (this.feedbackIdToDelete !== null) {
       this.feedbackService.deleteFeedback(this.feedbackIdToDelete).subscribe(() => {
         this.getAllFeedbacks();
@@ -45,7 +45,7 @@ export class UserviewfeedbackComponent implements OnInit {
     }
   }
  
-  cancelDelete(): void {
+  public cancelDelete(): void {
     this.showPopup = false;
     this.feedbackIdToDelete = null;
   }

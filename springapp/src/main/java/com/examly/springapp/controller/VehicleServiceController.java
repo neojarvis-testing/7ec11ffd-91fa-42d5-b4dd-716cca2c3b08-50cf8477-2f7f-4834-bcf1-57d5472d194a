@@ -20,10 +20,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 public class VehicleServiceController {
-
-    @Autowired
-    private VehicleService vehicleService;
     
+    private final VehicleService vehicleService;
+
+    public VehicleServiceController(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
+    }
+
     @PreAuthorize("permitAll()")
     @PostMapping("/api/services")
     

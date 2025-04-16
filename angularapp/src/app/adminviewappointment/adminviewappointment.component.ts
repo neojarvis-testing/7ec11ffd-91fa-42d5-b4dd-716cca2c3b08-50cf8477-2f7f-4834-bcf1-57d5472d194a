@@ -41,13 +41,13 @@ export class AdminviewappointmentComponent implements OnInit {
     this.loadAppointments();
   }
 
-  loadAppointments() {
+  public loadAppointments() {
     this.appointmentService.getAppointments().subscribe(data => {
       this.appointments = data;
     });
   }
 
-  deleteAppointment(appointmentId: number) {
+  public deleteAppointment(appointmentId: number) {
     this.appointmentService.deleteAppointment(appointmentId).subscribe(data1 => {
       this.showDeletePopup = false;
       this.appointmentId = null;
@@ -55,24 +55,24 @@ export class AdminviewappointmentComponent implements OnInit {
     });
   }
 
-  showPopup(id: number) {
+  public showPopup(id: number) {
     this.appointmentId = id;
     this.showDeletePopup = true;
   }
 
-  hidePopup() {
+  public hidePopup() {
     this.showDeletePopup = false;
     this.appointmentId = null;
   }
 
-  searchData() {
+  public searchData() {
     this.appointmentService.getAppointments().subscribe(data => {
       this.appointments = data;
       this.appointments = this.appointments.filter(b => JSON.stringify(b).toLowerCase().includes(this.inp.toLowerCase()));
     });
   }
 
-  updateStatus(appointment: Appointment) {
+  public updateStatus(appointment: Appointment) {
     this.appointmentService.updateAppointment(appointment.appointmentId, appointment).subscribe(data => {
       this.loadAppointments();
     });

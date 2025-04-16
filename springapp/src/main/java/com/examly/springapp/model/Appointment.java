@@ -1,8 +1,7 @@
 package com.examly.springapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Setter
 @ToString
 @Entity
-public class Appointment {
+public class Appointment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentId;

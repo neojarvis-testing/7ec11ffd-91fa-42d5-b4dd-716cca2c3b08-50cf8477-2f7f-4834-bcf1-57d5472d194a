@@ -24,18 +24,22 @@ import com.examly.springapp.config.JwtUtils;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     
     // Inject the JavaMailSender for sending emails via SMTP.
-    @Autowired
-    private JavaMailSender mailSender;
+    private final JavaMailSender mailSender;
+
+    public UserServiceImpl(UserRepo userRepo, AuthenticationManager authenticationManager,
+            PasswordEncoder passwordEncoder, JavaMailSender mailSender) {
+        this.userRepo = userRepo;
+        this.authenticationManager = authenticationManager;
+        this.passwordEncoder = passwordEncoder;
+        this.mailSender = mailSender;
+    }
 
     @Override
     public User registerUser(User user) {

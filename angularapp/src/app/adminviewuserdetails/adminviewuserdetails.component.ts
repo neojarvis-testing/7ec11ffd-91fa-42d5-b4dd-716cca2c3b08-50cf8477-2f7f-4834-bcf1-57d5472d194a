@@ -26,20 +26,20 @@ export class AdminviewuserdetailsComponent implements OnInit {
     this.loadUsers();
   }
 
-  loadUsers() {
+  public loadUsers() {
     this.userService.getAllUsers().subscribe(data => {
       this.users = data;
       this.users=this.users.filter(u => u.userRole == 'User');
     });
   }
 
-  deleteUser(id: string) {
+  public deleteUser(id: string) {
     this.userService.deleteUser(id).subscribe(data1 => {
       this.loadUsers();
     });
   }
 
-  searchData() {
+  public searchData() {
     if (this.username == "") {
       this.loadUsers();
     } else {
@@ -56,7 +56,7 @@ export class AdminviewuserdetailsComponent implements OnInit {
     }
   }
 
-  closePopup() {
+  public closePopup() {
     this.showPopup = false;
     this.username = "";
     this.user={userId: null,

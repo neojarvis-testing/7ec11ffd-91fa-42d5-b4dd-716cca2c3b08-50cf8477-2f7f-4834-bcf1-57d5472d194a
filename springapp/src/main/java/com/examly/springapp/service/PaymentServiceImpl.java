@@ -11,8 +11,12 @@ import com.examly.springapp.repository.PaymentRepo;
 
 @Service
 public class PaymentServiceImpl {
-    @Autowired
-    private PaymentRepo paymentRepository;
+    
+    private final PaymentRepo paymentRepository;
+
+    public PaymentServiceImpl(PaymentRepo paymentRepository) {
+        this.paymentRepository = paymentRepository;
+    }
 
     public List<Payment> getPaymentsByUsername(String username) {
         return paymentRepository.findByUsername(username);

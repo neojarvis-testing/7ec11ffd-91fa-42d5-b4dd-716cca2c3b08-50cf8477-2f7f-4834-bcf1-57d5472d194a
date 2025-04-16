@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void { }
 
   // Check if the username exists when the input loses focus.
-  onUsernameBlur(): void {
+  public onUsernameBlur(): void {
     if (this.user.username) {
       this.authService.checkUsername(this.user.username).subscribe((exists: boolean) => {
         this.usernameExists = exists;
@@ -42,7 +42,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   // Check if the email is already registered when the input loses focus.
-  onEmailBlur(): void {
+  public onEmailBlur(): void {
     if (this.user.email) {
       this.authService.checkEmail(this.user.email).subscribe((exists: boolean) => {
         this.emailExists = exists;
@@ -51,7 +51,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   // Check if the mobile number exists when the input loses focus.
-  onMobileBlur(): void {
+  public onMobileBlur(): void {
     if (this.user.mobileNumber) {
       this.authService.checkMobile(this.user.mobileNumber).subscribe((exists: boolean) => {
         this.mobileExists = exists;
@@ -61,7 +61,7 @@ export class RegistrationComponent implements OnInit {
 
   // Called when the registration form is submitted.
   // Validates the form and calls the service to send an OTP.
-  onSubmit(registerForm: NgForm): void {
+  public onSubmit(registerForm: NgForm): void {
     console.log("from onSubmit");
     
     this.authService.sendOtp(this.user.email).subscribe(
@@ -85,7 +85,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   // Starts the OTP countdown timer (30 seconds).
-  startOtpTimer(): void {
+  public startOtpTimer(): void {
     console.log("Response from startOtpTimer");
     
     this.otpTime = 30; // Reset timer to 30 seconds
@@ -101,7 +101,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   // Updates the OTP timer display in mm:ss format.
-  updateOtpTimeDisplay(): void {
+  public updateOtpTimeDisplay(): void {
     const minutes = Math.floor(this.otpTime / 60);
     const seconds = this.otpTime % 60;
     this.otpTimeDisplay = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -109,7 +109,7 @@ export class RegistrationComponent implements OnInit {
 
   // Called when the user clicks on "Verify OTP".
   // Validates the OTP and submits it for verification along with the user data.
-  verifyOtp(): void {
+  public verifyOtp(): void {
     this.otpSubmitted = true;
     if (!this.otp) { return; }
     this.authService.verifyOtpAndRegister(this.user, this.otp).subscribe(
@@ -125,7 +125,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   // Allows the user to request a new OTP.
-  resendOtp(): void {
+  public resendOtp(): void {
     this.authService.sendOtp(this.user.email).subscribe(
       res => {
         this.otpTime = 30; // Reset the timer to 30 seconds
@@ -138,7 +138,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   // Returns a masked version of the user’s email for display in the OTP popup.
-  getMaskedEmail(): string {
+  public getMaskedEmail(): string {
     if (!this.user.email) { return ''; }
     const [local, domain] = this.user.email.split('@');
     // Display only the last 4 characters of the local part
@@ -147,7 +147,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   // Optionally closes the OTP popup and returns to the registration form.
-  closeOtpPopup(): void {
+  public closeOtpPopup(): void {
     this.otpSent = false;
     if (this.timerInterval) { clearInterval(this.timerInterval); }
   }

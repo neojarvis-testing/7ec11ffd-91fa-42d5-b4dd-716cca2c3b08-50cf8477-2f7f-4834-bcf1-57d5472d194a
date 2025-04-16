@@ -27,12 +27,12 @@ export class UseraddappointmentComponent implements OnInit {
     this.getAllServices();
   }
  
-  getAllServices() {
+  public getAllServices() {
     this.vehicleService.getAllServices().subscribe(data => {
       this.services = data;
     });
   }
-  validateDate(selectedDate: string, index: number): void {
+  public validateDate(selectedDate: string, index: number): void {
     const today = new Date();
     const selected = new Date(selectedDate);
  
@@ -41,7 +41,7 @@ export class UseraddappointmentComponent implements OnInit {
       alert('Please select a date in the future.');
     }
   }
-  addAppointment(id:number,index: number) {
+  public addAppointment(id:number,index: number) {
     const newAppointment: Appointment = {
         service: { serviceId: id } as VehicleMaintenance,
         appointmentDate: this.appointmentDates[index],
@@ -58,16 +58,16 @@ export class UseraddappointmentComponent implements OnInit {
     });
 }
  
-closePopup() {
+public closePopup() {
   this.showPopup = false;
   this.router.navigate(['/useraddappointment']);
 }
   // Add the onInputChange method
-  onInputChange(index: number): void {
+  public onInputChange(index: number): void {
     console.log(`Input changed at index: ${index}`);
   }
  
-  searchByService()
+  public searchByService()
   {
     this.vehicleService.getAllServices().subscribe(data => {
       this.services = data;

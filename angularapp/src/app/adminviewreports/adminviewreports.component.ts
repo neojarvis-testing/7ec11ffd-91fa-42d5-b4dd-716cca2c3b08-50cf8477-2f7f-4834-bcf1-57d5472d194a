@@ -10,13 +10,15 @@ import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
 })
 export class AdminviewreportsComponent implements OnInit {
 
+  appointments: Appointment[] = [];
+  selectedChart: string | null = null;
+
   constructor(private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
     this.loadAppointments();
   }
-  appointments: Appointment[] = [];
-  selectedChart: string | null = null;
+  
 
   // Bar Chart
   barChartOptions: ChartOptions = {
@@ -65,14 +67,14 @@ export class AdminviewreportsComponent implements OnInit {
   userRoleChartType: ChartType = 'pie';
   userRoleChartColors: any[] = [{ backgroundColor: [] }];
 
-  loadAppointments() {
+  public loadAppointments() {
     this.appointmentService.getAppointments().subscribe(data => {
       this.appointments = data;
       this.updateCharts();
     });
   }
 
-  updateCharts() {
+  public updateCharts() {
     const serviceNames = this.appointments.map(a => a.service.serviceName);
     const servicePrices = this.appointments.map(a => a.service.servicePrice);
     const statusCounts = this.getStatusCounts();
@@ -103,7 +105,7 @@ export class AdminviewreportsComponent implements OnInit {
     
   }
 
-  getStatusCounts() {
+  public getStatusCounts() {
     const statusCounts: { [key: string]: number } = {};
     this.appointments.forEach(appointment => {
       if (statusCounts[appointment.status]) {
@@ -115,7 +117,7 @@ export class AdminviewreportsComponent implements OnInit {
     return statusCounts;
   }
 
-  getVehicleTypeCounts() {
+  public getVehicleTypeCounts() {
     const vehicleTypeCounts: { [key: string]: number } = {};
     this.appointments.forEach(appointment => {
       if (vehicleTypeCounts[appointment.service.typeOfVehicle]) {
@@ -127,7 +129,7 @@ export class AdminviewreportsComponent implements OnInit {
     return vehicleTypeCounts;
   }
 
-  getLocationCounts() {
+  public getLocationCounts() {
     const locationCounts: { [key: string]: number } = {};
     this.appointments.forEach(appointment => {
       if (locationCounts[appointment.location]) {
@@ -140,7 +142,7 @@ export class AdminviewreportsComponent implements OnInit {
   }
 
 
-  generateColors(count: number): string[] {
+  public generateColors(count: number): string[] {
     const colors: string[] = [];
     for (let i = 0; i < count; i++) {
       colors.push(`hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`);
@@ -148,11 +150,11 @@ export class AdminviewreportsComponent implements OnInit {
     return colors;
   }
 
-  selectChart(chart: string) {
+  public selectChart(chart: string) {
     this.selectedChart = chart;
   }
 
-  clearSelection() {
+  public clearSelection() {
     this.selectedChart = null;
   }
 }

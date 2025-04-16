@@ -22,10 +22,15 @@ import jakarta.persistence.EntityNotFoundException;
 @RestController
  
 public class UserController {
+
+    
+    private final UserServiceImpl userService;
  
-    @Autowired
-    private UserServiceImpl userService;
  
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
+
     //Get All Users
     @GetMapping("/api/users")
     public ResponseEntity<?> getAllUsers() {

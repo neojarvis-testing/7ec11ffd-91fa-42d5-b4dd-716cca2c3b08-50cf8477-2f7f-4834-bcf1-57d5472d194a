@@ -20,14 +20,14 @@ export class AdminviewfeedbackComponent implements OnInit {
   }
 
 
-  getAllFeedbacks() {
+  public getAllFeedbacks() {
     this.feedbackService.getAllFeedback().subscribe(data=>{
       this.feedbacks=data;
     })
   }
 
  
-  viewProfile(feedbackId: number){
+  public viewProfile(feedbackId: number){
     this.router.navigate(['/profile',feedbackId]);
   }
 

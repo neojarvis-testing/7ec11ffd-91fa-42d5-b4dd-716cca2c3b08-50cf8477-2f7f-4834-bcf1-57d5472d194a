@@ -16,30 +16,35 @@ import com.examly.springapp.service.NotificationService;
  
 @RestController
 public class NotificationController {
+
+    
+    private final NotificationService notificationService;
  
-    @Autowired
-    private NotificationService notificationService;
- 
-@PostMapping("/api/notifications")
-public ResponseEntity<?> createNotification(@RequestBody Notification notification) {
-    notificationService.saveNotification(notification);
-    return ResponseEntity.ok("Notification created successfully.");
-}
- 
-@GetMapping("/api/notifications/{userId}")
-public ResponseEntity<List<Notification>> getUserNotifications(@PathVariable int userId) {
-    List<Notification> notifications = notificationService.getNotificationsForUser(userId);
-    return ResponseEntity.ok(notifications);
-}
- 
-@DeleteMapping("/{notificationId}")
-public ResponseEntity<?> deleteNotification(@PathVariable Long notificationId) {
-    try {
-        notificationService.deleteNotification(notificationId);
-        return ResponseEntity.ok("Notification deleted successfully.");
-    } catch (Exception e) {
-        return ResponseEntity.status(500).body("Error deleting notification: " + e.getMessage());
+    public NotificationController(NotificationService notificationService) {
+        this.notificationService = notificationService;
     }
-}
+
+    
+    @PostMapping("/api/notifications")
+    public ResponseEntity<?> createNotification(@RequestBody Notification notification) {
+        notificationService.saveNotification(notification);
+        return ResponseEntity.ok("Notification created successfully.");
+    }
+    
+    @GetMapping("/api/notifications/{userId}")
+    public ResponseEntity<List<Notification>> getUserNotifications(@PathVariable int userId) {
+        List<Notification> notifications = notificationService.getNotificationsForUser(userId);
+        return ResponseEntity.ok(notifications);
+    }
+    
+    @DeleteMapping("/{notificationId}")
+    public ResponseEntity<?> deleteNotification(@PathVariable Long notificationId) {
+        try {
+            notificationService.deleteNotification(notificationId);
+            return ResponseEntity.ok("Notification deleted successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error deleting notification: " + e.getMessage());
+        }
+    }
  
 }

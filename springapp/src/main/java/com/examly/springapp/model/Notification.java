@@ -1,5 +1,6 @@
 package com.examly.springapp.model;
  
+import java.io.Serializable;
 import java.time.LocalDateTime;
  
 import jakarta.persistence.Entity;
@@ -20,7 +21,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Notification {
+public class Notification implements Serializable{
  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

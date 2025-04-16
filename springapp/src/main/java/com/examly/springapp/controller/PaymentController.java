@@ -18,9 +18,12 @@ import com.examly.springapp.service.PaymentServiceImpl;
 @RestController
 @RequestMapping("/api/payments")
 public class PaymentController {
+
+    private final PaymentServiceImpl paymentService;
     
-    @Autowired
-    private PaymentServiceImpl paymentService;
+    public PaymentController(PaymentServiceImpl paymentService) {
+        this.paymentService = paymentService;
+    }
 
     @PostMapping()
     public ResponseEntity<Payment> addPayment(@RequestBody Payment payment) {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
  
 import { Feedback } from '../models/feedback.model';
 import { Observable } from 'rxjs';
+import { Global } from '../models/global';
  
  
 @Injectable({
@@ -11,7 +12,7 @@ import { Observable } from 'rxjs';
 export class FeedbackService {
  
  
-  public apiUrl="https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080"
+  public apiUrl=Global.baseUrl;
  
   constructor(private httpClient:HttpClient) { }
  

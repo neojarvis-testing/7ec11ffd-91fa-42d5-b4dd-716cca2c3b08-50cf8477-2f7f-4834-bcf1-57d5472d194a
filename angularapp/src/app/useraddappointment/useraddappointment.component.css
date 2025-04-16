@@ -1,120 +1,63 @@
-/* General Styles */
 body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+  font-family: 'Arial', sans-serif;
 }
- 
-h1 {
+.header {
   text-align: center;
-  color: #333;
+  margin-top: 20px;
+  color: #007bff;
 }
- 
-/* Search Container */
+.section-container {
+  padding: 20px;
+}
+.available-services {
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
 .search-container {
   margin-bottom: 20px;
-  text-align: left;
 }
- 
-.search-container label {
-  font-weight: bold;
-}
- 
 .search-container input {
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 200px;
-  display: block;
-}
- 
-.search-container button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  display: block;
-}
- 
-.search-container button:hover {
-  background-color: #0056b3;
-}
- 
-/* Table Styles */
-#servicesTable {
   width: 100%;
-  border-collapse: collapse;
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+#servicesTable {
   margin-top: 20px;
 }
- 
-#servicesTable th, #servicesTable td {
-  border: 1px solid #ddd;
-  padding: 8px;
+#servicesTable thead th {
   text-align: center;
 }
- 
-#servicesTable th {
-  background-color: #f2f2f2;
-  color: #333;
+#servicesTable tbody td {
+  text-align: center;
 }
- 
-#servicesTable tr:nth-child(even) {
-  background-color: #f9f9f9;
+.map-container {
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
- 
-#servicesTable tr:hover {
-  background-color: #ddd;
+.map-container iframe {
+  border-radius: 8px;
 }
- 
-/* Input Styles */
-input[type="date"], input[type="text"] {
-  padding: 5px;
-  width: 90%;
-  box-sizing: border-box;
-}
- 
-/* Button Styles */
-.add-appointment {
-  padding: 5px 10px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
- 
-.add-appointment:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
- 
-.add-appointment:hover:not(:disabled) {
-  background-color: #218838;
-}
- 
-/* Popup Styles */
 .popup {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: #fff;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
   text-align: center;
 }
- 
-.popup p {
-  margin-bottom: 20px;
+.error {
+  color: red;
+  font-size: 12px;
 }
- 
-.popup button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
+.carousel-inner img {
+  height: 450px;
+  object-fit: cover;
 }
- 
-.popup button:hover {
-  background-color: #0056b3;
-}
- 

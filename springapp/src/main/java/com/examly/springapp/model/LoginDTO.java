@@ -1,5 +1,7 @@
 package com.examly.springapp.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +18,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LoginDTO {
+public class LoginDTO implements Serializable{
 
 
     @Id

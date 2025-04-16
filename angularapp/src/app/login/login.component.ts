@@ -20,10 +20,10 @@ export class LoginComponent implements OnInit {
     
   }
  
-  onSubmit(form: NgForm): void {
+  public onSubmit(form: NgForm): void {
     if (form.valid) {
       this.authService.login(form.value);
-      this.router.navigate(['/adminnavbar']);
+      this.router.navigate(['/home']);
     } else {
       this.errorMessage = 'Please enter valid credentials.';
     }

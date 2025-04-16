@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
   styleUrls: ['./adminnotification.component.css']
 })
 export class AdminNotificationComponent implements OnInit {
+  
   appointments: Appointment[] = [];
   previousAppointmentCount: number = 0;
   selectedUserDetails: User | null = null; // To display details of the selected user
@@ -21,7 +22,7 @@ export class AdminNotificationComponent implements OnInit {
     setInterval(() => this.fetchAppointments(), 5000); // Poll every 5 seconds
   }
  
-  fetchAppointments(): void {
+  public fetchAppointments(): void {
     this.appointmentService.getAppointments().subscribe(data => {
       if (data.length > this.previousAppointmentCount) {
         this.appointments = data.slice(this.previousAppointmentCount);
@@ -30,7 +31,7 @@ export class AdminNotificationComponent implements OnInit {
     });
   }
  
-  requestPayment(appointment: Appointment): void {
+  public requestPayment(appointment: Appointment): void {
     this.appointmentService.requestPayment(appointment.appointmentId, { responseType: 'text' as 'json' }).subscribe(
       (response: any) => {
         console.log(response); // Logs the plain text response
@@ -46,7 +47,7 @@ export class AdminNotificationComponent implements OnInit {
   }
  
   // Fetch user details for the selected appointment
-  showUserProfile(userId: number): void {
+  public showUserProfile(userId: number): void {
     this.appointmentService.getUserDetails(userId).subscribe(
       (response: User) => {
         this.selectedUserDetails = response;
@@ -59,7 +60,7 @@ export class AdminNotificationComponent implements OnInit {
   }
  
   // Close the user details popup
-  closeUserDetails(): void {
+  public closeUserDetails(): void {
     this.selectedUserDetails = null;
   }
 }

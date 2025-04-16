@@ -15,9 +15,11 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class VehicleServiceImpl implements VehicleService{
 
-    @Autowired
-    private VehicleServiceRepo vehicleServiceRepo;
-    
+    private final VehicleServiceRepo vehicleServiceRepo;
+
+    public VehicleServiceImpl(VehicleServiceRepo vehicleServiceRepo) {
+        this.vehicleServiceRepo = vehicleServiceRepo;
+    }
 
     @Override
     public VehicleMaintenance addService(VehicleMaintenance service) {

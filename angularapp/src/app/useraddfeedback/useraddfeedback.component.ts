@@ -24,7 +24,7 @@ export class UseraddfeedbackComponent implements OnInit {
     this.feedback.user.userId = userId ? parseInt(userId, 10) : null; // Handle invalid userId gracefully
   }
  
-  submitFeedback(form: NgForm): void {
+  public submitFeedback(form: NgForm): void {
     if (form.valid) {
       this.feedbackService.createFeedback(this.feedback).subscribe(() => {
         this.router.navigate(['/userviewfeedback']);

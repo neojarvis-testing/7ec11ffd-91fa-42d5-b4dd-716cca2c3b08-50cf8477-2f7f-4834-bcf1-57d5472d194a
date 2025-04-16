@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
 import { AuthUser } from '../models/auth-user.model';
+import { Global } from '../models/global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   // Base URL for your backend proxy (adjust if needed)
-  private baseUrl = "https://ide-aaecabeadbafefcebdffabdaaaacfffbcfdda.premiumproject.examly.io/proxy/8080";  
+  private baseUrl =Global.baseUrl;
 
    // Default HTTP options with JSON header
    private httpOptions = {
@@ -27,7 +28,7 @@ export class AuthService {
 
   // Login function.
   // On success, it stores user details and token in localStorage and navigates to home.
-  login(loginData: Login): void {
+  public login(loginData: Login): void {
     this.httpClient.post<AuthUser>(this.baseUrl + "/api/login", loginData)
       .subscribe(response => {
           localStorage.setItem('token', response.token);
@@ -35,44 +36,44 @@ export class AuthService {
           localStorage.setItem('username', response.username);
           localStorage.setItem('userId', response.userId);
           console.log('Local storage after login:', localStorage);
-          this.router.navigate(["/home"]);
+          // this.router.navigate(["/home"]);
       }, error => {
         console.error('Login failed:', error);
       });
   }
 
-  getUsername(): string | null {
+  public getUsername(): string | null {
     return localStorage.getItem('username');
   }
 
 
   // Check if the username already exists (for real-time validation)
-  checkUsername(username: string): Observable<boolean> {
+  public checkUsername(username: string): Observable<boolean> {
     return this.httpClient.get<boolean>(this.baseUrl + "/api/check-username?username=" + username);
   }
 
   // Check if the email already exists (for real-time validation)
-  checkEmail(email: string): Observable<boolean> {
+  public checkEmail(email: string): Observable<boolean> {
     return this.httpClient.get<boolean>(this.baseUrl + "/api/check-email?email=" + email);
   }
 
   // Check if the mobile number already exists (for real-time validation)
-  checkMobile(mobileNumber: string): Observable<boolean> {
+  public checkMobile(mobileNumber: string): Observable<boolean> {
     return this.httpClient.get<boolean>(this.baseUrl + "/api/check-mobile?mobileNumber=" + mobileNumber);
   }
 
   // Retrieve stored token
-  getToken(): string | null {
+  public getToken(): string | null {
     return localStorage.getItem('token');
   }
 
   // Retrieve stored user ID
-  getUserId(): string | null {
+  public getUserId(): string | null {
     return localStorage.getItem('userId');
   }
 
   // Indicates whether the user is authenticated based on token
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
@@ -89,7 +90,7 @@ export class AuthService {
   }
 
   // Logout function: Clears localStorage and navigates to login view.
-  logout(): void {
+  public logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('userRole');
     localStorage.removeItem('username');
@@ -103,7 +104,7 @@ export class AuthService {
    * Sends an OTP to the provided email.
    * The backend generates an OTP and emails it to the user.
    */
-  sendOtp(email: string): Observable<any> {
+  public sendOtp(email: string): Observable<any> {
     return this.httpClient.post(this.baseUrl + "/api/send-otp", email);
   }
 
@@ -112,7 +113,7 @@ export class AuthService {
    * This method sends the email, OTP, and registration details to the backend.
    * The backend checks if the OTP is correct and still valid.
    */
-  verifyOtpAndRegister(user: User, otp: string): Observable<any> {
+  public verifyOtpAndRegister(user: User, otp: string): Observable<any> {
     let payload = {
       email: user.email,
       otp: otp,

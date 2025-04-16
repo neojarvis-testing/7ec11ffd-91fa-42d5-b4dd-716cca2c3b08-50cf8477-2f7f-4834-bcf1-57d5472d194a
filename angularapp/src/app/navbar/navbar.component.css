@@ -1,8 +1,13 @@
 .navbar {
     background-color: #333;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding: 10px 20px;
+    width: 100%; /* Make the navbar span the entire width of the page */
+    position: fixed; /* Fix the navbar at the top */
+    top: 0; /* Position it at the top */
+    left: 0; /* Align it to the left */
 }
+ 
 
 .navbar-title {
     color: #fff;

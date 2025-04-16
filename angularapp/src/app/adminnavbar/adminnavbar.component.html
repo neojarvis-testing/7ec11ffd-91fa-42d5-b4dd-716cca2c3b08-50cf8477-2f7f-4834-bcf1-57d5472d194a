@@ -8,8 +8,8 @@
           <li class="hover-card">
             <a href="#">Services</a>
             <div class="card">
-              <button onclick="location.href='/adminaddservice'" >Add Service</button>
-              <button onclick="location.href='/adminviewservices'">View Services</button>
+              <button onclick="location.href='/adminaddservice'">Add Service</button>
+              <button onclick="location.href='/adminviewservice'">View Services</button>
             </div>
           </li>
           <li><a routerLink="/adminviewappointment">Appointment</a></li>
@@ -33,7 +33,7 @@
       </nav>
     </div>
   </div>
- 
+
   <!-- Profile Modal Popup -->
   <div class="popup-overlay" *ngIf="showProfilePopup">
     <div class="popup-content">
@@ -44,6 +44,16 @@
         <p><strong>Mobile Number:</strong> {{ user.mobileNumber }}</p>
       </div>
       <button (click)="closeProfilePopup()">Close</button>
+    </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div class="popup-overlay" *ngIf="showLogoutPopup">
+    <div class="popup-content">
+      <h2>Confirm Logout</h2>
+      <p>Are you sure you want to logout?</p>
+      <button (click)="confirmLogout()">Yes</button>
+      <button (click)="closeLogoutPopup()">No</button>
     </div>
   </div>
 </nav>

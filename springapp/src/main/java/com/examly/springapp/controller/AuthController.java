@@ -26,21 +26,23 @@ import jakarta.persistence.EntityNotFoundException;
  
 @RestController
 public class AuthController {
+
+    private final UserServiceImpl userServiceImpl;
+
+    private final JwtUtils jwtUtils;
+
+    private final AuthenticationManager authenticationManager;
    
-    @Autowired
-    private UserServiceImpl userServiceImpl;
-
-    @Autowired
-    private JwtUtils jwtUtils;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
- 
+    public AuthController(UserServiceImpl userServiceImpl, JwtUtils jwtUtils,
+            AuthenticationManager authenticationManager) {
+        this.userServiceImpl = userServiceImpl;
+        this.jwtUtils = jwtUtils;
+        this.authenticationManager = authenticationManager;
+    }
  
     @PostMapping("/api/register")
     @PreAuthorize("permitAll()")
     public ResponseEntity<?> registerUser(@RequestBody User user){
-        System.out.println("User object:" + user);
         User newUser = userServiceImpl.registerUser(user);
         return ResponseEntity.status(201).body(newUser);  // 201 Created
     }

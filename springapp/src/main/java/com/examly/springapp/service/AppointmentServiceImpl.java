@@ -3,7 +3,6 @@ package com.examly.springapp.service;
 import java.util.List;
 import java.util.Optional;
  
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
  
 import com.examly.springapp.model.Appointment;
@@ -21,25 +20,27 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
  
-    @Autowired
-    private AppointmentRepo appointmentRepo;
+    private final AppointmentRepo appointmentRepo;
  
-    @Autowired
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
  
-    @Autowired
-    private NotificationRepo notificationRepo;
+    private final NotificationRepo notificationRepo;
+
+    private final VehicleServiceRepo vehicleServiceRepo;
  
- 
-    @Autowired
-    private VehicleServiceRepo vehicleServiceRepo;
- 
+    public AppointmentServiceImpl(AppointmentRepo appointmentRepo, UserRepo userRepo, NotificationRepo notificationRepo,
+            VehicleServiceRepo vehicleServiceRepo) {
+        this.appointmentRepo = appointmentRepo;
+        this.userRepo = userRepo;
+        this.notificationRepo = notificationRepo;
+        this.vehicleServiceRepo = vehicleServiceRepo;
+    }
+
+    
     @Override
     public Appointment addAppointment(Appointment appointment) {
         User user = userRepo.findById(appointment.getUser().getUserId()).get();
-        System.out.println(user);
         VehicleMaintenance vehicle = vehicleServiceRepo.findById(appointment.getService().getServiceId()).get();
-        System.out.println(vehicle);
         appointment.setUser(user);
         appointment.setService(vehicle);
         return appointmentRepo.save(appointment);

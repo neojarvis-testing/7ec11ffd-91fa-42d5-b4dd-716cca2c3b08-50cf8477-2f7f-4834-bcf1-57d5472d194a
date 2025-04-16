@@ -32,17 +32,17 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit {
     this.getAppointments();
   }
 
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     console.log("View initialized");
   }
 
-  getAppointments() {
+  public getAppointments() {
     this.appointmentService.getAppointmentsByUser(this.userId).subscribe(data => {
       this.appointments = data;
     });
   }
 
-  getAppointmentsByFilter() {
+  public getAppointmentsByFilter() {
     if (this.selectedStatus === 'All') {
       this.getAppointments();
     } else {
@@ -52,18 +52,18 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit {
     }
   }
 
-  searchData() {
+  public searchData() {
     this.appointmentService.getAppointmentsByUser(this.userId).subscribe(data => {
       this.appointments = data.filter(b => JSON.stringify(b).toLowerCase().includes(this.inp.toLowerCase()));
     });
   }
 
-  generatePaymentCode(): string {
+  public generatePaymentCode(): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     return Array.from({ length: 6 }, () => characters.charAt(Math.floor(Math.random() * characters.length))).join('');
   }
 
-  payNow(index: number): void {
+  public payNow(index: number): void {
     this.paymentCode = this.generatePaymentCode();
     this.selectedIndex = index;
     this.showPaymentPopup = true;
@@ -71,7 +71,7 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit {
     setTimeout(() => this.generateQrCode(), 0); // Replace dummy generator with new QR logic
   }
 
-  generateQrCode(): void {
+  public generateQrCode(): void {
     const upiId = 'aditya.jay.gupta23@okaxis';
     const money = 1;
   
@@ -90,7 +90,7 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit {
   }
   
 
-  handlePaymentDone(): void {
+  public handlePaymentDone(): void {
     if (this.selectedIndex !== null) {
       const selectedAppointment = this.appointments[this.selectedIndex];
       const paymentDate = new Date().toISOString();
@@ -116,7 +116,7 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit {
     }
   }
 
-  closeConfirmation(): void {
+  public closeConfirmation(): void {
     this.showConfirmationPopup = false;
   }
 }

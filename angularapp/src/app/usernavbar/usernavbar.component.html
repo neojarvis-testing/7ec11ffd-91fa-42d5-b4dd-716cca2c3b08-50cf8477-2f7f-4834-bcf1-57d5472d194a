@@ -23,8 +23,8 @@
                         <li class="profile-dropdown">
                             <a href="#"><i class="bi bi-person-circle"></i></a>
                             <div class="dropdown-menu">
-                                <a routerLink="/myprofile">My Profile</a>
-                                <a style="cursor: pointer" (click)="logout()">Logout</a>
+                                <button (click)="fetchUserDetails()">My Profile</button>
+                                <button (click)="logout()">Logout</button>
                             </div>
                         </li>
                         <!-- Updated bell icon to navigate to usernotification -->
@@ -36,6 +36,21 @@
             </div>
         </div>
     </header>
+
+    <!-- Profile Modal Popup -->
+    <div class="popup-overlay" *ngIf="showProfilePopup">
+        <div class="popup-content">
+            <h2>User Profile</h2>
+            <div class="profile-info">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Mobile Number:</strong> {{ user.mobileNumber }}</p>
+            </div>
+            <button (click)="closeProfilePopup()">Close</button>
+        </div>
+    </div>
 </body>
- 
+
 <router-outlet></router-outlet>
+
+
