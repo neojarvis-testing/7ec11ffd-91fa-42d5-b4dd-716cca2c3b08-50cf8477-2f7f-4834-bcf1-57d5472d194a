@@ -1,30 +1,104 @@
-<div class="background" [ngStyle]="{'background-image': 'url(' + currentImage + ')'}">
-  <div class="content">
-  <h1>VEHICLE SERVICE</h1>
-  <p>Regular vehicle servicing is important for road safety, fuel efficiency, and maintaining the car's value.It can help prevent costly repairs by identifying and addressing potential issues with the brakes, tires, and suspension systems early on. Servicing can also improve fuel efficiency, which can lead to savings on fuel costs over time. Servicing your car regularly can also help maintain its value for resale. By performing routine checks on critical components such as the engine, transmission, and exhaust system, you can avoid major repairs that might leave you stranded on the road. This proactive approach provides peace of mind, knowing that your vehicle is in good condition and less likely to experience unexpected breakdowns.</p>
+<div class="container" fxLayout="column" fxFill>
+  <div *ngIf="authService.isAdmin()">
+      
   </div>
+  <div *ngIf="authService.isUser()">
+    <div class="card-slider-section">
+      <div id="cardCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#cardCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+     
+        <!-- Card Items -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card">
+              <img src="./assets/banner_1.png" class="card-image" alt="Card 1">
+              <div class="card-content">
+                <h3>Welcome to Vehicle Services</h3>
+                <p>Top-notch services for your vehicle!</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <img src="./assets/banner_2.png" class="card-image" alt="Card 2">
+              <div class="card-content">
+                <h3>Expert Car Repair</h3>
+                <p>Professional and reliable car repair services.</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <img src="./assets/banner_3.png" class="card-image" alt="Card 3">
+              <div class="card-content">
+                <h3>Trusted Vehicle Inspections</h3>
+                <p>Ensure your car is in perfect condition.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#cardCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#cardCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="brands-section">
+      <h2>Brands We Serve</h2>
+      <div class="brands-slider">
+        <div class="brands-track">
+          
+          <img src="/assets/car_logo_3.png" alt="Brand 3">
+          <img src="/assets/car_logo_4.png" alt="Brand 4">
+          <img src="/assets/car_logo_5.png" alt="Brand 5">
+          <img src="/assets/car_logo_6.png" alt="Brand 6">
+          <img src="/assets/car_logo_1.png" alt="Brand 1">
+          <img src="/assets/car_logo_2.png" alt="Brand 2">
+          <img src="/assets/car_logo_7.png" alt="Brand 7">
+          <img src="/assets/car_logo_9.png" alt="Brand 9">
+          <img src="/assets/car_logo_10.png" alt="Brand 10">
+          <img src="/assets/car_logo_8.png" alt="Brand 8">
+      
+          <!-- Duplicate images for seamless scrolling -->
+          
+          <img src="/assets/car_logo_3.png" alt="Brand 3">
+          <img src="/assets/car_logo_4.png" alt="Brand 4">
+          <img src="/assets/car_logo_5.png" alt="Brand 5">
+          <img src="/assets/car_logo_6.png" alt="Brand 6">
+          <img src="/assets/car_logo_1.png" alt="Brand 1">
+          <img src="/assets/car_logo_2.png" alt="Brand 2">
+          <img src="/assets/car_logo_7.png" alt="Brand 7">
+          <img src="/assets/car_logo_9.png" alt="Brand 9">
+          <img src="/assets/car_logo_10.png" alt="Brand 10">
+          <img src="/assets/car_logo_8.png" alt="Brand 8">
+        </div>
+      </div>
   </div>
-   
-  <footer>
-  <div class="footer-container">
-  <div class="footer-section">
-  <h3>About Us</h3>
-  <p>We provide top-notch vehicle servicing to ensure your car is always in the best condition.</p>
+      
+</div>
   </div>
-  <div class="footer-section">
-  <h3>Contact Us</h3>
-  <p>Email: vroomdoc14gmail.com</p>
-  <p>Phone: 7204383189</p>
+  <div *ngIf="authService.isGuest()">
+      <div class="background">
+          <div class="content">
+              <h1>VEHICLE SERVICE</h1>
+              <p>Regular vehicle servicing is important for road safety, fuel efficiency, and maintaining the car's value. It can help prevent costly repairs by identifying and addressing potential issues with the brakes, tires, and suspension systems early on. Servicing can also improve fuel efficiency, which can lead to savings on fuel costs over time. Servicing your car regularly can also help maintain its value for resale. By performing routine checks on critical components such as the engine, transmission, and exhaust system, you can avoid major repairs that might leave you stranded on the road. This proactive approach provides peace of mind, knowing that your vehicle is in good condition and less likely to experience unexpected breakdowns.</p>
+          </div>
+      </div>
+    
   </div>
-  <div class="footer-section">
-  <h3>Follow Us</h3>
-  <p>
-  <a href="https://www.facebook.com/">Facebook</a> | 
-  <a href="https://x.com/?lang=en">Twitter</a> | 
-  <a href="https://www.instagram.com/">Instagram</a>
-  </p>
-  </div>
-  </div>
-  </footer>
+
+
+  <app-footer></app-footer>
 
   

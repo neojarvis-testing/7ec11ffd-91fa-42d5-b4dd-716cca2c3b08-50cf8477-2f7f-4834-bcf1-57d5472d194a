@@ -22,6 +22,7 @@ import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewd
 import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.component';
 import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
 import { UserNotificationComponent } from './usernotification/usernotification.component';
+import { MapComponent } from './map/map.component';
 
 
 const routes: Routes = [
@@ -49,6 +50,7 @@ const routes: Routes = [
   {path: 'adminviewdescription/:serviceId', component: AdminviewdescriptionComponent},
   {path:"adminviewreports",component:AdminviewreportsComponent},
   {path:"usernotification",component:UserNotificationComponent},
+  {path:"map",component:MapComponent},
   {path:"**",component:HomeComponent}
 
 

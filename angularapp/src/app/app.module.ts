@@ -29,6 +29,8 @@ import { UserNotificationComponent } from './usernotification/usernotification.c
 import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
 import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.component';
 import { ChartsModule } from 'ng2-charts';
+import { MapComponent } from './map/map.component';
+import { FooterComponent } from './footer/footer.component';
 
  
 @NgModule({
@@ -55,7 +57,9 @@ import { ChartsModule } from 'ng2-charts';
     AdminviewdescriptionComponent,
     UserNotificationComponent,
     AdminNotificationComponent,
-    AdminviewreportsComponent
+    AdminviewreportsComponent,
+    MapComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
