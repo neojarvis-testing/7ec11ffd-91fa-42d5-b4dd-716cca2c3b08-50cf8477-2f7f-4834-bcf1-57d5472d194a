@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserStoreService } from '../helpers/user-store.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-usernavbar',
   templateUrl: './usernavbar.component.html',
   styleUrls: ['./usernavbar.component.css']
 })
-export class UsernavbarComponent implements OnInit {
+export class UsernavbarComponent implements OnInit, OnDestroy {
   userName: any;
   userRole: any;
   showProfilePopup: boolean = false; // Control the visibility of the profile popup
   user: User = { email: "", password: "", username: "", mobileNumber: "", userRole: "" }; // Store user details
+
+  private subscriptions: Subscription = new Subscription(); // Manage multiple subscriptions
 
   constructor(
     private userStore: UserStoreService,
@@ -25,12 +28,19 @@ export class UsernavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserFromLocalStorage();
-    this.userStore.user$.subscribe((user) => {
+    
+    const userStoreSubscription = this.userStore.user$.subscribe((user) => {
       if (user) {
         this.userName = user.username;
         this.userRole = user.userRole;
       }
     });
+    this.subscriptions.add(userStoreSubscription);
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all active subscriptions to prevent memory leaks
+    this.subscriptions.unsubscribe();
   }
 
   loadUserFromLocalStorage(): void {
@@ -44,7 +54,7 @@ export class UsernavbarComponent implements OnInit {
   fetchUserDetails(): void {
     const userId = this.authService.getUserId(); // Get logged-in user's ID from AuthService
     if (userId) {
-      this.userService.getUserById(userId).subscribe(
+      const userDetailsSubscription = this.userService.getUserById(userId).subscribe(
         (response: User) => {
           this.user = response; // Populate user details
           this.showProfilePopup = true; // Show the profile popup
@@ -53,6 +63,7 @@ export class UsernavbarComponent implements OnInit {
           console.error('Error fetching user details:', error);
         }
       );
+      this.subscriptions.add(userDetailsSubscription);
     }
   }
 

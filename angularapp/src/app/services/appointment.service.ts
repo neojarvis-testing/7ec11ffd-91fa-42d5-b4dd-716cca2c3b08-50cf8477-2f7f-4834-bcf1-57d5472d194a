@@ -50,7 +50,7 @@ export class AppointmentService {
   }
 
   public addPayment(paymentDetails: any): Observable<any> {
-    return this.httpClient.post<any>("/api/payments", paymentDetails);
+    return this.httpClient.post<any>(this.apiUrl+"/api/payments", paymentDetails);
   }
   public getUnreadAppointmentsCount(): Observable<{ unreadCount: number }> {
     return this.httpClient.get<{ unreadCount: number }>(this.apiUrl+"/unread-count");

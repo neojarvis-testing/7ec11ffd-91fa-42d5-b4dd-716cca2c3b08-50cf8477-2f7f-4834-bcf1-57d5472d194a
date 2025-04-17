@@ -3,6 +3,7 @@ import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 import { VehicleService } from '../services/vehicle.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-adminaddservice',
@@ -14,6 +15,7 @@ export class AdminaddserviceComponent implements OnInit {
   vehiclemaintenance: VehicleMaintenance = { serviceName: "", servicePrice: 0, typeOfVehicle: "", description: "" };
   showPopup: boolean = false;
   serviceId: number | null = null;
+  private subscription: Subscription | null = null;
   
   constructor(
     private vehicleService: VehicleService,
@@ -24,7 +26,7 @@ export class AdminaddserviceComponent implements OnInit {
   ngOnInit(): void {
     this.serviceId = parseInt(this.route.snapshot.paramMap.get('serviceId'));
     if (this.serviceId) {
-      this.vehicleService.getServiceById(this.serviceId).subscribe(data => {
+      this.subscription = this.vehicleService.getServiceById(this.serviceId).subscribe(data => {
         this.vehiclemaintenance = data;
       });
     }
@@ -48,5 +50,11 @@ export class AdminaddserviceComponent implements OnInit {
   public closePopup() {
     this.showPopup = false;
     this.router.navigate(['/adminviewservice']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

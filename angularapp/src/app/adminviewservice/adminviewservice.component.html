@@ -1,11 +1,16 @@
 <div class="container">
+  <div class="card-heading">
+    <h1>Services We Provide</h1>
+  </div>
   <div class="search-container">
-    <label for="searchInput">Search Service Name:</label><br>
-    <input type="text" id="searchInput" [(ngModel)]="searchData" placeholder="Enter service name"
-      class="form-control" />
+    <label for="searchInput" class="search-label">Search Service Name:</label>
+    <div class="search-box">
+      <i class="bi bi-search search-icon"></i>
+      <input type="text" id="searchInput" [(ngModel)]="searchData" placeholder="Enter service name" />
+    </div>
     <button (click)="searchByServiceName()" class="btn btn-primary">Search</button>
   </div>
-
+ 
   <table class="table table-bordered mt-3">
     <thead>
       <tr>
@@ -22,14 +27,14 @@
         <td>{{ service.serviceName }}</td>
         <td>{{ service.servicePrice }}</td>
         <td>{{ service.typeOfVehicle }}</td>
-        <td>
+        <td class="button-container">
           <button class="btn btn-success spacing" (click)="editService(service.serviceId)">
             Edit
           </button>&nbsp;&nbsp;
           <button class="btn btn-danger spacing" (click)="deleteService(service.serviceId)">
             Delete
           </button>&nbsp;&nbsp;
-          <button class="btn btn-success spacing" (click)="viewServiceDescription(service.serviceId)">
+          <button class="btn btn-primary spacing" (click)="viewServiceDescription(service.serviceId)">
             View
           </button>
         </td>
@@ -37,3 +42,4 @@
     </tbody>
   </table>
 </div>
+ 

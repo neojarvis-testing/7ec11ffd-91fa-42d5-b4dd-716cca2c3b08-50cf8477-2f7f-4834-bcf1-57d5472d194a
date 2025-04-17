@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { VehicleMaintenance } from '../models/vehicle-maintenance.model';
 import { VehicleService } from '../services/vehicle.service';
 import { AppointmentService } from '../services/appointment.service';
@@ -6,13 +6,14 @@ import { Appointment } from '../models/appointment.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-useraddappointment',
   templateUrl: './useraddappointment.component.html',
   styleUrls: ['./useraddappointment.component.css']
 })
-export class UseraddappointmentComponent implements OnInit {
+export class UseraddappointmentComponent implements OnInit, OnDestroy {
   // List of available services
   services: VehicleMaintenance[] = [];
   // Search term for filtering services
@@ -31,33 +32,42 @@ export class UseraddappointmentComponent implements OnInit {
   // Optional appointment-success confirmation popup
   showPopup: boolean = false;
 
+  private subscriptions: Subscription = new Subscription(); // Manage multiple subscriptions
+
   constructor(
     private vehicleService: VehicleService,
     private appointmentService: AppointmentService,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.userId = parseInt(this.authService.getUserId());
+    this.userId = parseInt(this.authService.getUserId(), 10);
     console.log("User ID:", this.userId);
     this.getAllServices();
   }
 
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to prevent memory leaks
+    this.subscriptions.unsubscribe();
+  }
+
   // Fetch all available services from the back end
   public getAllServices(): void {
-    this.vehicleService.getAllServices().subscribe(data => {
+    const serviceSubscription = this.vehicleService.getAllServices().subscribe(data => {
       this.services = data;
     });
+    this.subscriptions.add(serviceSubscription);
   }
 
   // Filter services based on the search term
   public searchByService(): void {
-    this.vehicleService.getAllServices().subscribe(data => {
+    const searchSubscription = this.vehicleService.getAllServices().subscribe(data => {
       this.services = data.filter(service =>
         service.serviceName.toLowerCase().includes(this.searchData.toLowerCase())
       );
     });
+    this.subscriptions.add(searchSubscription);
   }
 
   // Open the appointment popup and set the selected service
@@ -99,7 +109,7 @@ export class UseraddappointmentComponent implements OnInit {
     };
 
     console.log('Adding Appointment:', newAppointment);
-    this.appointmentService.addAppointment(newAppointment).subscribe(response => {
+    const addAppointmentSubscription = this.appointmentService.addAppointment(newAppointment).subscribe(response => {
       console.log('Appointment added successfully', response);
       // Optionally display a confirmation popup
       this.showPopup = true;
@@ -108,6 +118,7 @@ export class UseraddappointmentComponent implements OnInit {
     }, error => {
       console.error('Error adding appointment', error);
     });
+    this.subscriptions.add(addAppointmentSubscription);
   }
 
   // Close any open popup (the appointment form or the confirmation)

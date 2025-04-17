@@ -1,26 +1,43 @@
-<h2>Feedback Details</h2>
-
-<table border="1">
-    <thead>
+<div class="page-wrapper">
+    <h2 class="card-heading">Feedback Details</h2>
+  
+    <table>
+      <thead>
         <tr>
-            <th>S.No</th>
-            <th>User Name</th>
-            <th>Feedback</th>
-            <th>Ratings</th>
-            <th>Action</th>
+          <th>S.No</th>
+          <th>User Name</th>
+          <th>Feedback</th>
+          <th>Ratings</th>
+          <th>Action</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr *ngIf="feedbacks.length === 0">
-            <td colspan="5">No data found !</td>
+          <td colspan="5" class="no-data">No data found!</td>
         </tr>
         <tr *ngFor="let feedback of feedbacks; index as i">
-            <td>{{ i + 1 }}</td>
-            <td>{{ feedback.user.username }}</td>
-            <td>{{ feedback.message }}</td>
-            <td>{{ feedback.rating }}</td>
-            <td><button type="button" (click)="viewProfile(feedback.feedbackId)">Show Profile</button></td>
+          <td>{{ i + 1 }}</td>
+          <td>{{ feedback.user.username }}</td>
+          <td>{{ feedback.message }}</td>
+          <td>{{ feedback.rating }}</td>
+          <td>
+            <button type="button" class="delete-btn" (click)="confirmDelete(feedback)">
+              Delete
+            </button>
+          </td>
         </tr>
-    </tbody>
-</table>
-
+      </tbody>
+    </table>
+  
+    <!-- Delete Confirmation Popup -->
+    <div class="popup-card" *ngIf="deletePopupVisible">
+      <div class="popup-content">
+        <h3>Confirm Deletion</h3>
+        <p>Are you sure you want to delete the feedback from <strong>{{ feedbackToDelete?.user.username }}</strong>?</p>
+        <div class="popup-actions">
+          <button type="button" class="btn-confirm" (click)="deleteFeedback()">Yes, Delete</button>
+          <button type="button" class="btn-cancel" (click)="cancelDelete()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>

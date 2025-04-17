@@ -1,60 +1,10 @@
 <body>
-    <div class="container">
-      <h2>Admin View Reports</h2>
-      <button *ngIf="selectedChart" (click)="clearSelection()">Back to Dashboard</button>
-      <div class="dashboard-grid" *ngIf="!selectedChart">
-        <!-- Bar Chart -->
-        <div class="chart-container" (click)="selectChart('bar')">
-          <h3>Service Prices</h3>
-          <canvas baseChart
-                  [datasets]="barChartData"
-                  [labels]="barChartLabels"
-                  [options]="barChartOptions"
-                  [chartType]="barChartType">
-          </canvas>
-        </div>
-    
-        <!-- Pie Chart -->
-        <div class="chart-container" (click)="selectChart('pie')">
-          <h3>Appointment Status Distribution</h3>
-          <canvas baseChart
-                  [data]="pieChartData"
-                  [labels]="pieChartLabels"
-                  [options]="pieChartOptions"
-                  [chartType]="pieChartType"
-                  [colors]="pieChartColors">
-          </canvas>
-        </div>
-    
-        <!-- Vehicle Type Chart -->
-        <div class="chart-container" (click)="selectChart('vehicleType')">
-          <h3>Vehicle Type Distribution</h3>
-          <canvas baseChart
-                  [data]="vehicleTypeChartData"
-                  [labels]="vehicleTypeChartLabels"
-                  [options]="pieChartOptions"
-                  [chartType]="vehicleTypeChartType"
-                  [colors]="vehicleTypeChartColors">
-          </canvas>
-        </div>
-    
-        <!-- Location Chart -->
-        <div class="chart-container" (click)="selectChart('location')">
-          <h3>Appointment Locations</h3>
-          <canvas baseChart
-                  [data]="locationChartData"
-                  [labels]="locationChartLabels"
-                  [options]="pieChartOptions"
-                  [chartType]="locationChartType"
-                  [colors]="locationChartColors">
-          </canvas>
-        </div>
-    
-      
-      </div>
-    
-      <!-- Selected Chart View -->
-      <div *ngIf="selectedChart === 'bar'" class="chart-container">
+  <div class="container">
+    <h2>Admin View Reports</h2>
+    <button *ngIf="selectedChart" (click)="clearSelection()">Back to Dashboard</button>
+    <div class="dashboard-grid" *ngIf="!selectedChart">
+      <!-- Bar Chart -->
+      <div class="chart-container" (click)="selectChart('bar')">
         <h3>Service Prices</h3>
         <canvas baseChart
                 [datasets]="barChartData"
@@ -63,8 +13,9 @@
                 [chartType]="barChartType">
         </canvas>
       </div>
-    
-      <div *ngIf="selectedChart === 'pie'" class="chart-container">
+ 
+      <!-- Pie Chart -->
+      <div class="chart-container" (click)="selectChart('pie')">
         <h3>Appointment Status Distribution</h3>
         <canvas baseChart
                 [data]="pieChartData"
@@ -74,8 +25,9 @@
                 [colors]="pieChartColors">
         </canvas>
       </div>
-    
-      <div *ngIf="selectedChart === 'vehicleType'" class="chart-container">
+ 
+      <!-- Vehicle Type Chart -->
+      <div class="chart-container" (click)="selectChart('vehicleType')">
         <h3>Vehicle Type Distribution</h3>
         <canvas baseChart
                 [data]="vehicleTypeChartData"
@@ -85,8 +37,9 @@
                 [colors]="vehicleTypeChartColors">
         </canvas>
       </div>
-    
-      <div *ngIf="selectedChart === 'location'" class="chart-container">
+ 
+      <!-- Location Chart -->
+      <div class="chart-container" (click)="selectChart('location')">
         <h3>Appointment Locations</h3>
         <canvas baseChart
                 [data]="locationChartData"
@@ -96,8 +49,53 @@
                 [colors]="locationChartColors">
         </canvas>
       </div>
-    
+ 
+   
     </div>
-    </body>
-
-    
+ 
+    <!-- Selected Chart View -->
+    <div *ngIf="selectedChart === 'bar'" class="chart-container">
+      <h3>Service Prices</h3>
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+ 
+    <div *ngIf="selectedChart === 'pie'" class="chart-container">
+      <h3>Appointment Status Distribution</h3>
+      <canvas baseChart
+              [data]="pieChartData"
+              [labels]="pieChartLabels"
+              [options]="pieChartOptions"
+              [chartType]="pieChartType"
+              [colors]="pieChartColors">
+      </canvas>
+    </div>
+ 
+    <div *ngIf="selectedChart === 'vehicleType'" class="chart-container">
+      <h3>Vehicle Type Distribution</h3>
+      <canvas baseChart
+              [data]="vehicleTypeChartData"
+              [labels]="vehicleTypeChartLabels"
+              [options]="pieChartOptions"
+              [chartType]="vehicleTypeChartType"
+              [colors]="vehicleTypeChartColors">
+      </canvas>
+    </div>
+ 
+    <div *ngIf="selectedChart === 'location'" class="chart-container">
+      <h3>Appointment Locations</h3>
+      <canvas baseChart
+              [data]="locationChartData"
+              [labels]="locationChartLabels"
+              [options]="pieChartOptions"
+              [chartType]="locationChartType"
+              [colors]="locationChartColors">
+      </canvas>
+    </div>
+ 
+  </div>
+  </body>

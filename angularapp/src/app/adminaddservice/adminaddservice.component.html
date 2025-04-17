@@ -1,3 +1,4 @@
+ 
 <div class="container">
   <h2>{{ serviceId ? 'Edit Service' : 'Add Service' }}</h2>
   <form #serviceForm="ngForm" (ngSubmit)="addService(serviceForm)">
@@ -9,7 +10,7 @@
         Service Name is required.
       </div>
     </div>
-
+ 
     <div>
       <label for="servicePrice">Service Price:</label>
       <input type="number" id="servicePrice" name="servicePrice" [(ngModel)]="vehiclemaintenance.servicePrice" ngModel
@@ -18,36 +19,40 @@
         Service Price is required and must be a positive number.
       </div>
     </div>
-
+ 
     <div>
       <label for="vehicleType">Type of Vehicle:</label>
       <select id="vehicleType" name="vehicleType" [(ngModel)]="vehiclemaintenance.typeOfVehicle" ngModel required
         #vehicleType="ngModel">
         <option value="" disabled selected>Select Vehicle Type</option>
-        <option value="bike">Bike</option>
-        <option value="car">Car</option>
-        <option value="truck">Truck</option>
+        <option value="Bike">Bike</option>
+        <option value="Car">Car</option>
+        <option value="Truck">Truck</option>
+        <option value="Auto">Auto</option>
+        <option value="Bus">Bus</option>
       </select>
       <div *ngIf="vehicleType.invalid && vehicleType.touched">
         Please select a vehicle type.
       </div>
     </div>
-
+ 
     <div>
       <label for="description">Description:</label>
       <textarea id="description" name="description" [(ngModel)]="vehiclemaintenance.description" ngModel
-        required #description="ngModel" rows="4" cols="60" placeholder="Describe Vehicle Problem"></textarea>
+        required #description="ngModel" rows="4" cols="60" placeholder="Service Description"></textarea>
       <div *ngIf="description.invalid && description.touched">
         Description is required.
       </div>
     </div>
-    
-    
+   
+   
     <button type="submit" [disabled]="serviceForm.invalid">{{ serviceId ? 'Update Service' : 'Add Service' }}</button>
   </form>
 </div>
-
+ 
 <div *ngIf="showPopup" class="popup">
   <p>{{ serviceId ? 'Service Updated Successfully' : 'Service Added Successfully' }}</p>
   <button (click)="closePopup()">Ok</button>
 </div>
+ 
+ 

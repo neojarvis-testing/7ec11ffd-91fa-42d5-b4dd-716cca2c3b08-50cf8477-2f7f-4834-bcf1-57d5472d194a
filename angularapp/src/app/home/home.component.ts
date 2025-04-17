@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
- 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,48 +8,48 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  localStorage : any = localStorage;
-  role : string = "";
   private intervalId: any;
   private images: string[] = [
     'assets/background.webp',
     'assets/loginpage.png'
   ];
   public currentImage: string;
- 
-  constructor(public authService : AuthService) {
+  public role: string = 'guest';
+
+  constructor(public authService: AuthService) {
     this.currentImage = this.images[0];
   }
- 
+
   ngOnInit(): void {
+    // Start the image change interval
     this.intervalId = setInterval(() => {
       this.changeBackgroundImage();
     }, 5000); // Change image every 5 seconds
 
-    this.role = this.localStorage.getItem("userRole")
-    console.log('User Role:',this.role);
-    if(this.role == null){
-      this.role = 'guest'
-    }
+    // Retrieve user role from localStorage
+    const storedRole = localStorage.getItem('userRole');
+    this.role = storedRole ? storedRole : 'guest';
+    console.log('User Role:', this.role);
   }
- 
+
   ngOnDestroy(): void {
+    // Clear the interval to prevent memory leaks
     if (this.intervalId) {
       clearInterval(this.intervalId);
     }
   }
- 
+
   private changeBackgroundImage(): void {
     const currentIndex = this.images.indexOf(this.currentImage);
     const nextIndex = (currentIndex + 1) % this.images.length;
     this.currentImage = this.images[nextIndex];
   }
+
   public isAdmin(): boolean {
-    return localStorage.getItem('userRole') === 'ADMIN';
-   }
+    return localStorage.getItem('userRole') === 'Admin';
+  }
 
- public isUser(): boolean {
-   return localStorage.getItem('userRole') === 'USER';
- }
+  public isUser(): boolean {
+    return localStorage.getItem('userRole') === 'User';
+  }
 }
-

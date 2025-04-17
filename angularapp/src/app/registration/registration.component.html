@@ -1,10 +1,10 @@
 <!-- registration.component.html -->
-
+ 
 <!-- Registration Form (visible only when OTP has not been sent) -->
 <div *ngIf="!otpSent">
   <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
     <h4 class="text-center mb-4">Register</h4>
-
+ 
     <!-- Username Field -->
     <div class="form-group mb-3">
       <label for="username">Username</label>
@@ -33,7 +33,7 @@
         <small class="text-danger">Username already exists.</small>
       </div>
     </div>
-
+ 
     <!-- Email Field -->
     <div class="form-group mb-3">
       <label for="email">Email</label>
@@ -50,7 +50,7 @@
         #email="ngModel"
         placeholder="Enter your email"
       />
-
+ 
         <span *ngIf="!emailExists && user.email && email.touched && email.valid"
               class="feedback-tick text-success position-absolute"
               style="left: 12px; top: 50%; transform: translateY(-50%);">
@@ -67,7 +67,7 @@
         <small class="text-danger">Email is already registered.</small>
       </div>
     </div>
-
+ 
         <!-- Password Field -->
     <div class="form-group mb-3">
       <label for="password">Password</label>
@@ -93,8 +93,8 @@
         </small>
       </div>
     </div>
-
-
+ 
+ 
     <!-- Confirm Password Field -->
     <div class="form-group mb-3">
       <label for="confirmPassword">Confirm Password</label>
@@ -111,7 +111,7 @@
         <small class="text-danger">Passwords do not match.</small>
       </div>
     </div>
-
+ 
     <!-- Mobile Number Field -->
     <div class="form-group mb-3">
       <label for="mobileNumber">Mobile Number</label>
@@ -144,7 +144,7 @@
         <small class="text-danger">Mobile number already exists.</small>
       </div>
     </div>
-
+ 
     <!-- User Role Field -->
     <div class="form-group mb-3">
       <label for="userRole">User Role</label>
@@ -166,7 +166,7 @@
         </small>
       </div>
     </div>
-
+ 
     <!-- "Send OTP & Register" Button -->
     <div class="text-center">
       <button type="submit" class="btn btn-primary"
@@ -176,7 +176,7 @@
     </div>
   </form>
 </div>
-
+ 
 <!-- OTP Verification Popup -->
 <div *ngIf="otpSent" class="modal">
   <div class="modal-overlay"></div>

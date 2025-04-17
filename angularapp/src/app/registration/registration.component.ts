@@ -1,15 +1,16 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
 
   // Registration form model
   user: User = { username: '', email: '', mobileNumber: '', password: '', userRole: '' };
@@ -28,49 +29,59 @@ export class RegistrationComponent implements OnInit {
   emailExists: boolean = false;
   mobileExists: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router,private cdr:ChangeDetectorRef) {}
+  private subscriptions: Subscription = new Subscription(); // Manage multiple subscriptions
 
-  ngOnInit(): void { }
+  constructor(private authService: AuthService, private router: Router, private cdr: ChangeDetectorRef) {}
 
-  // Check if the username exists when the input loses focus.
+  ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    // Clear the timer interval to prevent memory leaks
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+    }
+
+    // Unsubscribe from all active subscriptions
+    this.subscriptions.unsubscribe();
+  }
+
   public onUsernameBlur(): void {
     if (this.user.username) {
-      this.authService.checkUsername(this.user.username).subscribe((exists: boolean) => {
+      const usernameSubscription = this.authService.checkUsername(this.user.username).subscribe((exists: boolean) => {
         this.usernameExists = exists;
       });
+      this.subscriptions.add(usernameSubscription);
     }
   }
 
-  // Check if the email is already registered when the input loses focus.
   public onEmailBlur(): void {
     if (this.user.email) {
-      this.authService.checkEmail(this.user.email).subscribe((exists: boolean) => {
+      const emailSubscription = this.authService.checkEmail(this.user.email).subscribe((exists: boolean) => {
         this.emailExists = exists;
       });
+      this.subscriptions.add(emailSubscription);
     }
   }
 
-  // Check if the mobile number exists when the input loses focus.
   public onMobileBlur(): void {
     if (this.user.mobileNumber) {
-      this.authService.checkMobile(this.user.mobileNumber).subscribe((exists: boolean) => {
+      const mobileSubscription = this.authService.checkMobile(this.user.mobileNumber).subscribe((exists: boolean) => {
         this.mobileExists = exists;
       });
+      this.subscriptions.add(mobileSubscription);
     }
   }
 
-  // Called when the registration form is submitted.
-  // Validates the form and calls the service to send an OTP.
   public onSubmit(registerForm: NgForm): void {
     console.log("from onSubmit");
-    
-    this.authService.sendOtp(this.user.email).subscribe(
+
+    const otpSubscription = this.authService.sendOtp(this.user.email).subscribe(
       response => {
         console.log('Success Response:', response);
-        if (response.status === 'success') { 
-          this.otpSent = true; 
+        if (response.status === 'success') {
+          this.otpSent = true;
           this.cdr.detectChanges(); // Notify Angular to update the view
-          this.startOtpTimer(); 
+          this.startOtpTimer();
         } else {
           alert('Unexpected response from server. Please try again.');
         }
@@ -81,16 +92,15 @@ export class RegistrationComponent implements OnInit {
         alert('Error sending OTP. Please try again.');
       }
     );
-        
+    this.subscriptions.add(otpSubscription);
   }
 
-  // Starts the OTP countdown timer (30 seconds).
   public startOtpTimer(): void {
-    console.log("Response from startOtpTimer");
-    
     this.otpTime = 30; // Reset timer to 30 seconds
     this.updateOtpTimeDisplay();
-    if (this.timerInterval) { clearInterval(this.timerInterval); }
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+    }
     this.timerInterval = setInterval(() => {
       this.otpTime--;
       this.updateOtpTimeDisplay();
@@ -100,33 +110,34 @@ export class RegistrationComponent implements OnInit {
     }, 1000);
   }
 
-  // Updates the OTP timer display in mm:ss format.
   public updateOtpTimeDisplay(): void {
     const minutes = Math.floor(this.otpTime / 60);
     const seconds = this.otpTime % 60;
     this.otpTimeDisplay = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
 
-  // Called when the user clicks on "Verify OTP".
-  // Validates the OTP and submits it for verification along with the user data.
   public verifyOtp(): void {
     this.otpSubmitted = true;
-    if (!this.otp) { return; }
-    this.authService.verifyOtpAndRegister(this.user, this.otp).subscribe(
+    if (!this.otp) {
+      return;
+    }
+    const verifySubscription = this.authService.verifyOtpAndRegister(this.user, this.otp).subscribe(
       res => {
         alert('Registration successful!');
-        if (this.timerInterval) { clearInterval(this.timerInterval); }
+        if (this.timerInterval) {
+          clearInterval(this.timerInterval);
+        }
         this.router.navigate(['/login']);
       },
       err => {
         alert('Invalid or expired OTP. Please try again.');
       }
     );
+    this.subscriptions.add(verifySubscription);
   }
 
-  // Allows the user to request a new OTP.
   public resendOtp(): void {
-    this.authService.sendOtp(this.user.email).subscribe(
+    const resendSubscription = this.authService.sendOtp(this.user.email).subscribe(
       res => {
         this.otpTime = 30; // Reset the timer to 30 seconds
         this.startOtpTimer();
@@ -135,20 +146,22 @@ export class RegistrationComponent implements OnInit {
         alert('Error resending OTP. Please try again.');
       }
     );
+    this.subscriptions.add(resendSubscription);
   }
 
-  // Returns a masked version of the user’s email for display in the OTP popup.
   public getMaskedEmail(): string {
-    if (!this.user.email) { return ''; }
+    if (!this.user.email) {
+      return '';
+    }
     const [local, domain] = this.user.email.split('@');
-    // Display only the last 4 characters of the local part
     const visibleChars = local.length > 4 ? local.slice(-4) : local;
     return '****' + visibleChars + '@' + domain;
   }
 
-  // Optionally closes the OTP popup and returns to the registration form.
   public closeOtpPopup(): void {
     this.otpSent = false;
-    if (this.timerInterval) { clearInterval(this.timerInterval); }
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+    }
   }
 }

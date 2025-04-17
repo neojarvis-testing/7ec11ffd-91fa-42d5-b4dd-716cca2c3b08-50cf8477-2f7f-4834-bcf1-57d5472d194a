@@ -1,8 +1,32 @@
+/* --- General Reset --- */
 body {
   background-color: #f4f7f9;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   padding: 0;
+  line-height: 1.6;
+  position: relative; /* Needed for the z-index to take effect */
+  z-index: -1; /* Moves the container behind other elements */
+}
+
+/* --- Navbar Styling --- */
+.navbar {
+  position: fixed; /* Keeps the navbar fixed at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensures navbar is above other content */
+  background-color: #007bff; /* Change as per your design */
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Container Styling --- */
+.container {
+    margin-top: 70px; /* Ensures content starts below the navbar */
+  padding: 20px; /* Adds internal spacing */
+ 
 }
 
 /* --- Form Container --- */
@@ -10,21 +34,22 @@ form {
   max-width: 600px;
   margin: 50px auto;
   padding: 30px 40px;
-  border: none;
   border-radius: 10px;
   background: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 form:hover {
   transform: translateY(-4px);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 form h4 {
   text-align: center;
   margin-bottom: 25px;
   color: #333;
+  font-weight: 600;
 }
 
 .form-group {
@@ -36,7 +61,7 @@ label {
   margin-bottom: 8px;
   font-size: 14px;
   color: #333;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 input[type="text"],
@@ -44,12 +69,12 @@ input[type="email"],
 input[type="password"],
 select {
   width: 100%;
-  padding: 12px 10px;
+  padding: 12px 15px;
   border: 1px solid #ccd0d5;
   border-radius: 5px;
   font-size: 14px;
   background-color: #fff;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 input[type="text"]:focus,
@@ -58,7 +83,7 @@ input[type="password"]:focus,
 select:focus {
   border-color: #007bff;
   outline: none;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
 .input-with-feedback {
@@ -66,12 +91,12 @@ select:focus {
 }
 
 .input-with-feedback input {
-  padding-left: 35px;
+  padding-left: 40px;
 }
 
 .feedback-tick {
   position: absolute;
-  left: 10px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   color: #28a745;
@@ -84,22 +109,26 @@ select:focus {
   margin-top: 4px;
 }
 
-button[type="submit"] {
+button[type="submit"],
+button {
   width: 100%;
-  padding: 12px;
+  padding: 12px 15px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
   margin-top: 10px;
 }
 
-button[type="submit"]:hover {
+button[type="submit"]:hover,
+button:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 button[type="submit"]:disabled {
@@ -119,20 +148,122 @@ select {
   }
 }
 
-.card {
-  margin-top: 20px;
-}
-
+/* --- OTP Verification Modal --- */
 .modal {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  z-index: 1000; 
-  background-color: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
+.modal-content {
+  position: relative;
+  max-width: 400px;
+  width: 90%;
+  padding: 20px 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-content h4 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.modal-content p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.modal-content input[type="text"] {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 14px;
+  border: 1px solid #ccd0d5;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.modal-content input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-buttons .btn {
+  flex: 1;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.modal-buttons .btn-success {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+}
+
+.modal-buttons .btn-success:hover {
+  background-color: #218838;
+}
+
+.modal-buttons .btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+}
+
+.modal-buttons .btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.modal-buttons .btn-link {
+  background: none;
+  color: #007bff;
+  text-decoration: underline;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.modal-buttons .btn-link:hover {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 90%;
+    padding: 15px 20px;
+  }
+
+  .modal-content h4 {
+    font-size: 16px;
+  }
+
+  .modal-content p {
+    font-size: 13px;
+  }
+}
