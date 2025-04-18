@@ -1,26 +1,45 @@
 <div class="card">
-  <h2>Feedback</h2>
-
-  <form #feedbackForm="ngForm" (ngSubmit)="submitFeedback(feedbackForm)">
+  <h2>Submit Feedback</h2>
+ 
+  <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+    <!-- Feedback Message -->
     <div class="form-group">
       <label for="message">Feedback Message:</label>
-      <textarea id="message" name="message" rows="4" class="form-control" [(ngModel)]="feedback.message" required minlength="10" #message="ngModel"></textarea>
-      <div *ngIf="message.invalid && (message.dirty || message.touched)" class="alert alert-danger">
-        <div *ngIf="message.errors?.required">Feedback message is required.</div>
-        <div *ngIf="message.errors?.minlength">Feedback message must be at least 10 characters long.</div>
+      <textarea
+        id="message"
+        formControlName="message"
+        rows="4"
+        class="form-control"
+        placeholder="Write your feedback here">
+      </textarea>
+      <div *ngIf="feedbackForm.controls['message'].invalid && feedbackForm.controls['message'].touched" class="alert alert-danger">
+        <div *ngIf="feedbackForm.controls['message'].errors?.required">Feedback message is required.</div>
+        <div *ngIf="feedbackForm.controls['message'].errors?.minlength">Feedback message must be at least 10 characters long.</div>
       </div>
     </div>
-
+ 
+    <!-- Rating (1-5) -->
     <div class="form-group">
-      <label for="rating">Rating (1-5):</label>
-      <input type="number" id="rating" name="rating" class="form-control" min="1" max="5" [(ngModel)]="feedback.rating" required #rating="ngModel">
-      <div *ngIf="rating.invalid && (rating.dirty || rating.touched)" class="alert alert-danger">
-        <div *ngIf="rating.errors?.required">Rating is required.</div>
-        <div *ngIf="rating.errors?.min">Rating must be at least 1.</div>
-        <div *ngIf="rating.errors?.max">Rating cannot be more than 5.</div>
+      <label for="rating">Rating:</label>
+      <div class="stars">
+        <i
+          *ngFor="let star of [].constructor(maxRating); let i = index"
+          class="bi"
+          [ngClass]="i < rating ? 'bi-star-fill' : 'bi-star'"
+          (click)="setRating(i)">
+        </i>
+      </div>
+      <div *ngIf="feedbackForm.controls['rating'].invalid && feedbackForm.controls['rating'].touched" class="alert alert-danger">
+        <div *ngIf="feedbackForm.controls['rating'].errors?.required">Rating is required.</div>
+        <div *ngIf="feedbackForm.controls['rating'].errors?.min">Rating must be at least 1.</div>
+        <div *ngIf="feedbackForm.controls['rating'].errors?.max">Rating cannot be more than 5.</div>
       </div>
     </div>
-
+ 
+    <!-- Submit Button -->
     <button type="submit" class="btn btn-primary" [disabled]="feedbackForm.invalid">Submit Feedback</button>
   </form>
 </div>
+
+<app-footer></app-footer>
+ 

@@ -12,21 +12,25 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService:AuthService,private router:Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  public intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const authToken = localStorage.getItem('token');
     const url = request.url;
 
-  // Skip adding token for specific endpoints like /register
-  if (url.includes('/register')) {
-    return next.handle(request);
-  }
-
-  if (url.includes('/login')) {
-    return next.handle(request);
-  }
-
+    // Skip adding the token for these endpoints
+    if (
+      url.includes('/register') ||
+      url.includes('/login') ||
+      url.includes('/check-username') ||
+      url.includes('/check-email') ||
+      url.includes('/check-mobile') ||
+      url.includes('/send-otp') ||
+      url.includes('/verify-otp')
+    ) {
+      return next.handle(request);
+    }
+    
     // Clone the request and attach the token if available
     let authReq = request;
     if (authToken) {
@@ -41,7 +45,3 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(authReq);
   }
 }
-
-
-
-

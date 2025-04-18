@@ -1,4 +1,3 @@
-
 <body>
     <header>
         <div class="navbar">
@@ -6,29 +5,69 @@
             <div class="admin-section">
                 <nav>
                     <ul>
-                        <!-- <li>{{userName}}/{{userRole}}</li> -->
-                        <li><a href="#">Home</a></li>
+                        <li><a routerLink="/home">Home</a></li>
                         <li class="hover-card">
-                            <a>Appointments</a>
+                            <a style="cursor: pointer">Appointments</a>
                             <div class="card">
-                                <button onclick="location.href='/useraddappointment'">Book Appointments</button>
-                                <button onclick="location.href='/userviewappointment'">My Appointments</button>
+                                <button style="cursor: pointer" onclick="location.href='/useraddappointment'">Book Appointments</button>
+                                <button style="cursor: pointer" onclick="location.href='/userviewappointment'">My Appointments</button>
                             </div>
                         </li>
                         <li class="hover-card">
-                            <a>Feedback</a>
+                            <a style="cursor: pointer">Feedback</a>
                             <div class="card">
                                 <button onclick="location.href='/useraddfeedback'">Add Feedback</button>
                                 <button onclick="location.href='/userviewfeedback'">My Feedbacks</button>
                             </div>
                         </li>
-                        <li><a class="logout" (click)="logout()" type="button">Logout</a></li>
+                        <li>
+                            <a style="cursor: pointer" routerLink="/map">Find Us</a>
+                        </li>
+                        <li class="profile-dropdown">
+                            <a href="#"><i class="bi bi-person-circle"></i></a>
+                            <div class="dropdown-menu">
+                                <button (click)="fetchUserDetails()">My Profile</button>
+                                <button (click)="showLogoutPopup = true">Logout</button>
+                            </div>
+                        </li>
+                        <!-- Updated bell icon to navigate to usernotification -->
+                        <li>
+                            <a style="cursor: pointer;" (click)="navigateToNotifications()">
+                                <i class="bi bi-bell"></i>
+                               
+                            </a>
+                        </li>
                     </ul>
                 </nav>  
             </div>
         </div>
     </header>
-    
+ 
+    <!-- Profile Modal Popup -->
+    <div class="popup-overlay" *ngIf="showProfilePopup">
+        <div class="popup-content">
+            <h2>User Profile</h2>
+            <div class="profile-info">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Mobile Number:</strong> {{ user.mobileNumber }}</p>
+            </div>
+            <button (click)="closeProfilePopup()">Close</button>
+        </div>
+    </div>
+ 
+    <!-- Logout Confirmation Modal -->
+    <div class="popup-overlay" *ngIf="showLogoutPopup">
+        <div class="popup-content">
+            <h2>Confirm Logout</h2>
+            <p>Are you sure you want to logout?</p>
+            <div class="button-group">
+                <button (click)="confirmLogout()">Yes</button>
+                <button (click)="closeLogoutPopup()">No</button>
+            </div>
+        </div>
+    </div>
 </body>
-
+ 
 <router-outlet></router-outlet>
+ 

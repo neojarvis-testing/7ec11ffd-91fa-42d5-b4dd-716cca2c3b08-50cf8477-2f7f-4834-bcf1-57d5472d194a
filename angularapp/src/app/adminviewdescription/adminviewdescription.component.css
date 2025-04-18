@@ -1,0 +1,56 @@
+.service-details-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+ 
+  .service-details-container h2 {
+    text-align: center;
+    color: #333;
+  }
+ 
+  .service-details-container p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+  }
+ 
+  .service-details-container p strong {
+    color: #000;
+  }
+ 
+  .service-details-container .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #575757;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+ 
+  .service-details-container .btn:hover {
+    background-color: #000;
+  }
+ 
+  @media (max-width: 600px) {
+    .service-details-container {
+      padding: 15px;
+    }
+ 
+    .service-details-container p {
+      font-size: 14px;
+    }
+ 
+    .service-details-container .btn {
+      padding: 8px 16px;
+    }
+  }
+ 
+ 

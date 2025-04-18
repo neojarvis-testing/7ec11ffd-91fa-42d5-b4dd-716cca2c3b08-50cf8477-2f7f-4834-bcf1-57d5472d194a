@@ -3,7 +3,6 @@ package com.examly.springapp.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +17,12 @@ import com.examly.springapp.service.PaymentServiceImpl;
 @RestController
 @RequestMapping("/api/payments")
 public class PaymentController {
+
+    private final PaymentServiceImpl paymentService;
     
-    @Autowired
-    private PaymentServiceImpl paymentService;
+    public PaymentController(PaymentServiceImpl paymentService) {
+        this.paymentService = paymentService;
+    }
 
     @PostMapping()
     public ResponseEntity<Payment> addPayment(@RequestBody Payment payment) {

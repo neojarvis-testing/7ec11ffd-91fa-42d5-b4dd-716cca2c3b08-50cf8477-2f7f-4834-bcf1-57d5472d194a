@@ -1,65 +1,64 @@
-<h1>Requested Appointments</h1>
-<label for="search">Search Bar:</label>
-<input type="text" name="search" id="search" [(ngModel)]="inp" (keyup)="searchData()">
-<div class="blue-line"></div>
-<table>
-    <thead>
+<div class="full-container">
+    <div class="card-heading">
+      <h1>Requested Appointments</h1>
+    </div>
+    <label for="search">Search Bar:</label>
+    <div class="search-container">
+      <i class="bi bi-search search-icon"></i>
+      <input type="text" name="search" id="search" [(ngModel)]="inp" (keyup)="searchData()" placeholder="Search...">
+    </div>
+    <div class="blue-line"></div>
+    <table>
+      <thead>
         <tr>
-            <th>S.No</th>
-            <th>ServiceName</th>
-            <th>Price</th>
-            <th>Vehicle</th>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Username</th>
-            <th>Status</th>
-            <th>Actions</th>
+          <th>S.No</th>
+          <th>ServiceName</th>
+          <th>Price</th>
+          <th>Vehicle</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Username</th>
+          <th>Status</th>
+          <th>Actions</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr *ngFor="let appointment of appointments; index as i">
-            <td>{{i + 1}}</td>
-            <td>{{appointment.service.serviceName}}</td>
-            <td>{{appointment.service.servicePrice}}</td>
-            <td>{{appointment.service.typeOfVehicle}}</td>
-            <td>{{appointment.appointmentDate | date:'dd/MM/yyyy'}}</td>
-            <td>{{appointment.location}}</td>
-            <td>{{appointment.user.username}}</td>
-            <td>
-                <select name="selectedOption" [(ngModel)]="status" id="statusSelect" class="status-select" (change)="updateStatus(i+1)">
-                    <option value="Approved" class="status-approved">Approved</option>
-                    <option value="Rejected" class="status-rejected">Rejected</option>
-                    <option value="Pending" class="status-pending">Pending</option>
-                </select>
-            </td>
-            <td>
-                <button (click)="showPopup(appointment.appointmentId)" class="delete-btn">Delete</button>
-            </td>
+          <td>{{i + 1}}</td>
+          <td>{{appointment.service.serviceName}}</td>
+          <td>{{appointment.service.servicePrice}}</td>
+          <td>{{appointment.service.typeOfVehicle}}</td>
+          <td>{{appointment.appointmentDate | date:'dd/MM/yyyy'}}</td>
+          <td>{{appointment.location}}</td>
+          <td>{{appointment.user.username}}</td>
+          <td>
+            <select name="selectedOption" [(ngModel)]="appointment.status" id="statusSelect" class="status-select" (change)="updateStatus(appointment)">
+              <option value="Pending" class="status-pending">Pending</option>
+              <option value="Approved" class="status-approved">Approved</option>
+              <option value="Rejected" class="status-rejected">Rejected</option>
+              <option value="Read" class="status-read">Read</option>
+              <option value="Payment Requested" class="status-payment-requested">Payment Requested</option>
+            </select>
+          </td>
+          <td>
+            <button (click)="showPopup(appointment.appointmentId)" class="delete-btn">Delete</button>
+          </td>
         </tr>
-    </tbody>
-</table>
+      </tbody>
+    </table>
  
-<div *ngIf="showDeletePopup" class="overlay"></div>
-<div *ngIf="showDeletePopup" class="delete-popup">
-    <div class="popup-content">
+    <div *ngIf="showDeletePopup" class="overlay"></div>
+    <div *ngIf="showDeletePopup" class="delete-popup">
+      <div class="popup-content">
         <p>Are you sure you want to delete this appointment?</p>
         <div class="popup-actions">
-            <button (click)="deleteAppointment(appointmentId)" class="confirm-btn">Yes</button>
-            <button (click)="hidePopup()" class="cancel-btn">No</button>
+          <button (click)="deleteAppointment(appointmentId)" class="confirm-btn">Yes</button>
+          <button (click)="hidePopup()" class="cancel-btn">No</button>
         </div>
+      </div>
     </div>
-</div>
-<div *ngIf="appointments.length == 0" class="no-appointments">
-    Oops! No Appointment found.
-</div>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+    <div *ngIf="appointments.length == 0" class="no-appointments">
+      Oops! No Appointment found.
+    </div>
+  </div>
  

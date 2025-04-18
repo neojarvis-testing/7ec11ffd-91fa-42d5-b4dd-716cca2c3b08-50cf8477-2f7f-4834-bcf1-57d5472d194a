@@ -2,22 +2,20 @@ package com.examly.springapp.service;
 
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.examly.springapp.model.VehicleMaintenance;
 import com.examly.springapp.repository.VehicleServiceRepo;
-
 import jakarta.persistence.EntityNotFoundException;
 
 
 @Service
 public class VehicleServiceImpl implements VehicleService{
 
-    @Autowired
-    private VehicleServiceRepo vehicleServiceRepo;
-    
+    private final VehicleServiceRepo vehicleServiceRepo;
+
+    public VehicleServiceImpl(VehicleServiceRepo vehicleServiceRepo) {
+        this.vehicleServiceRepo = vehicleServiceRepo;
+    }
 
     @Override
     public VehicleMaintenance addService(VehicleMaintenance service) {

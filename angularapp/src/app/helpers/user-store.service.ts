@@ -17,7 +17,7 @@ export class UserStoreService {
     }
   }
  
-  setUser(user: AuthUser | null): void {
+  public setUser(user: AuthUser | null): void {
     if (user) {
       localStorage.setItem('authUser', JSON.stringify(user));
     } else {
@@ -27,11 +27,11 @@ export class UserStoreService {
     this.userSubject.next(user);
   }
  
-  get authUser(): AuthUser | null {
+  public get authUser(): AuthUser | null {
     return this.userSubject.getValue();
   }
  
-  isLoggedIn(): boolean {
+  public isLoggedIn(): boolean {
     return !!this.authUser;
   }
 }

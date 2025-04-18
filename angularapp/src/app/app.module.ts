@@ -21,9 +21,17 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { RouterModule } from '@angular/router';
+import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
+import { UserNotificationComponent } from './usernotification/usernotification.component';
+import { AdminNotificationComponent } from './adminnotification/adminnotification.component';
+import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.component';
+import { ChartsModule } from 'ng2-charts';
+import { MapComponent } from './map/map.component';
+import { FooterComponent } from './footer/footer.component';
+
  
 @NgModule({
   declarations: [
@@ -46,14 +54,22 @@ import { RouterModule } from '@angular/router';
     UsernavbarComponent,
     UserviewappointmentComponent,
     UserviewfeedbackComponent,
-  
+    AdminviewdescriptionComponent,
+    UserNotificationComponent,
+    AdminNotificationComponent,
+    AdminviewreportsComponent,
+    MapComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ChartsModule,
+    ReactiveFormsModule
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

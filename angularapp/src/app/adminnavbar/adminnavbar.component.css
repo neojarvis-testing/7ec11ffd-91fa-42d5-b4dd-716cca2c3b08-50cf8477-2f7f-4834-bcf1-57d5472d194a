@@ -1,104 +1,195 @@
+/* General Styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
 }
-
+ 
 .navbar {
-  background-color: #333;
+  background: linear-gradient(135deg, #333, #444);
   color: #fff;
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
+ 
 .navbar h1 {
   margin: 0;
   font-size: 24px;
 }
-
+ 
 .admin-section nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 15px;
+  gap: 20px;
 }
-
+ 
 .admin-section nav ul li {
   position: relative;
 }
-
+ 
 .admin-section nav ul li a {
   color: #fff;
   text-decoration: none;
   padding: 10px 15px;
   display: block;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s, border-radius 0.3s, transform 0.2s;
 }
-
+ 
 .admin-section nav ul li a:hover {
   background-color: #575757;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  transform: scale(1.05);
 }
-
-.dropdown-menu {
+ 
+.admin-section nav ul li a i {
+  font-size: 20px;
+  vertical-align: middle;
+}
+ 
+/* Dropdown and Hover Card */
+.hover-card .card,
+.profile-dropdown .dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
-  background-color: #333;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  padding: 10px;
+  animation: fadeIn 0.3s ease;
 }
-
-.dropdown:hover .dropdown-menu {
+ 
+.hover-card:hover .card,
+.profile-dropdown:hover .dropdown-menu {
   display: block;
 }
-
-.dropdown-menu li a {
+ 
+.card button,
+.dropdown-menu button {
+  background-color: transparent;
+  color: black;
+  border: none;
+  font-size: 14px;
   padding: 10px 15px;
-  white-space: nowrap;
-}
-
-.logout {
-  background-color: #ff4d4d;
-  border: none;
+  text-align: left;
+  width: 100%;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.logout:hover {
-  background-color: #ff1a1a;
-}
-
-.hover-card .card {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  z-index: 1;
-}
-
-.hover-card:hover .card {
-  display: block;
-}
-
-.card button {
-  display: block;
+  border-radius: 5px;
   margin: 5px 0;
-  padding: 10px;
-  background-color: #333;
-  color: #fff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+ 
+.card button:hover,
+.dropdown-menu button:hover {
+  background-color: #007bff;
+  color: white;
+  transform: scale(1.05);
+}
+ 
+/* Profile Modal Popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+ 
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+ 
+.popup-content h2 {
+  margin-top: 0;
+}
+ 
+.popup-content p {
+  margin: 10px 0;
+}
+ 
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
-.card button:hover {
-  background-color: #575757;
+ 
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
 }
+ 
+button:last-of-type {
+  background-color: #dc3545;
+}
+ 
+button:last-of-type:hover {
+  background-color: #c82333;
+}
+ 
+/* Logout Confirmation Modal */
+.popup-content.logout {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  max-width: 80%;
+  text-align: center;
+}
+ 
+.popup-content.logout h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+ 
+.popup-content.logout .button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Added gap to ensure space between buttons */
+}
+ 
+.popup-content.logout button {
+  width: 120px;
+  padding: 10px;
+}
+ 
+/* Animation for popup */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+ 

@@ -1,1 +1,48 @@
-<p>adminviewuserdetails works!</p>
+<div class="container">
+    <div class="card-heading">
+        <h1>Customer List</h1>
+    </div>
+    <div class="search-container">
+        <input type="text" name="username" [(ngModel)]="username" placeholder="Enter username">
+        <button class="btn btn-primary" (click)="searchData()">Search</button>
+    </div>
+    <div class="blue-line"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>S.NO</th>
+                <th>Customer Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Mobile Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; index as i">
+                <td>{{i + 1}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.userRole}}</td>
+                <td>{{user.mobileNumber}}</td>
+                <td><button (click)="deleteUser(user.userId)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Popup Modal -->
+    <div *ngIf="showPopup" class="popup">
+        <div class="popup-content" *ngIf="popupMessage == 'Found Customer'">
+            <p><b style="color: darkblue;">{{popupMessage}}</b></p>
+            <p>Customer Name: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>User Role: {{user.userRole}}</p>
+            <p>Mobile Number: {{user.mobileNumber}}</p>
+            <button (click)="closePopup()">Close</button>
+        </div>
+        <div class="popup-content" *ngIf="popupMessage == 'Customer not found.'">
+            <p>{{popupMessage}}</p>
+            <button (click)="closePopup()">Close</button>
+        </div>
+    </div>
+</div>

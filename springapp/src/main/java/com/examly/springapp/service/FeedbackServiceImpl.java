@@ -2,27 +2,22 @@ package com.examly.springapp.service;
 
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.examly.springapp.model.Feedback;
-import com.examly.springapp.model.User;
 import com.examly.springapp.repository.FeedbackRepo;
-import com.examly.springapp.repository.UserRepo;
-
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
-    @Autowired FeedbackRepo feedbackRepo;
-    @Autowired UserRepo userRepo;
+    private final FeedbackRepo feedbackRepo;
+
+    public FeedbackServiceImpl(FeedbackRepo feedbackRepo) {
+        this.feedbackRepo = feedbackRepo;
+    }
 
     @Override
     public Feedback createFeedback(Feedback feedback) {
-        User user = userRepo.findById(feedback.getUser().getUserId()).get();
-        feedback.setUser(user);
         Feedback savedFeedback=feedbackRepo.save(feedback);
         return savedFeedback;
     }
@@ -58,7 +53,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<Feedback> getFeedbackByUserId(int userId) {
-        List<Feedback> feedbackList=feedbackRepo.findByUserUserId(userId);
+        List<Feedback> feedbackList=feedbackRepo.findByUserId(userId);
         return feedbackList;
     }
     

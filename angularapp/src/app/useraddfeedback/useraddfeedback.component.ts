@@ -1,29 +1,52 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Feedback } from '../models/feedback.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FeedbackService } from '../services/feedback.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-
+ 
 @Component({
   selector: 'app-useraddfeedback',
   templateUrl: './useraddfeedback.component.html',
   styleUrls: ['./useraddfeedback.component.css']
 })
 export class UseraddfeedbackComponent implements OnInit {
-
-  feedback: Feedback = { message: "", rating: null, user: { userId: null, email: "", password: "", username: "", mobileNumber: "", userRole: "" } };
-
-  constructor(private feedbackService: FeedbackService, private router: Router,private authService : AuthService) { }
-
-  ngOnInit(): void {
-    this.feedback.user.userId = parseInt(this.authService.getUserId());
+  feedbackForm: FormGroup;
+  rating: number = 0; // Current selected rating
+  maxRating: number = 5; // Maximum stars for rating
+ 
+  constructor(
+    private fb: FormBuilder,
+    private feedbackService: FeedbackService,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    // Initialize the form with Reactive Forms
+    this.feedbackForm = this.fb.group({
+      message: ['', [Validators.required, Validators.minLength(10)]],
+      rating: [null, [Validators.required, Validators.min(1), Validators.max(5)]]
+    });
   }
-
-  submitFeedback(form: NgForm) {
-    if (form.valid) {
-      this.feedbackService.createFeedback(this.feedback).subscribe(data => {
+ 
+  ngOnInit(): void {
+    const userId = this.authService.getUserId();
+    if (userId) {
+      this.feedbackForm.addControl('user', this.fb.group({ userId: [parseInt(userId, 10)] }));
+    }
+  }
+ 
+  // Set the rating when a star is clicked
+  setRating(index: number): void {
+    this.rating = index + 1; // Set the rating (1-based index)
+    this.feedbackForm.controls['rating'].setValue(this.rating); // Update the form value
+  }
+ 
+  // Submit feedback
+  public submitFeedback(): void {
+    if (this.feedbackForm.valid) {
+      this.feedbackService.createFeedback(this.feedbackForm.value).subscribe(() => {
         this.router.navigate(['/userviewfeedback']);
+      }, error => {
+        console.error('Error creating feedback:', error); // Log error for debugging
       });
     }
   }
