@@ -3,7 +3,10 @@ package com.examly.springapp.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+
+import com.examly.springapp.model.Appointment;
 import com.examly.springapp.model.Feedback;
+import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.FeedbackRepo;
 import jakarta.persistence.EntityNotFoundException;
 
@@ -11,13 +14,17 @@ import jakarta.persistence.EntityNotFoundException;
 public class FeedbackServiceImpl implements FeedbackService {
 
     private final FeedbackRepo feedbackRepo;
+    private final AppointmentRepo appointmentRepo;
 
-    public FeedbackServiceImpl(FeedbackRepo feedbackRepo) {
+    public FeedbackServiceImpl(FeedbackRepo feedbackRepo,AppointmentRepo appointmentRepo ) {
         this.feedbackRepo = feedbackRepo;
+        this.appointmentRepo = appointmentRepo;
     }
-
+  
     @Override
-    public Feedback createFeedback(Feedback feedback) {
+    public Feedback createFeedback(Feedback feedback,long appointmentId) {
+        Appointment app = appointmentRepo.findById(appointmentId).orElse(null);
+        app.setStatus("Completed");
         Feedback savedFeedback=feedbackRepo.save(feedback);
         return savedFeedback;
     }

@@ -57,6 +57,12 @@
               <div *ngIf="appointment.status === 'Payment Requested'">
                 <button class="btn btn-success btn-sm" (click)="payNow(i)">Pay Now</button>
               </div>
+              <div *ngIf="appointment.status === 'Approved'">
+                <button class="btn btn-success btn-sm" (click)="feedback(appointment.appointmentId)">Give Feedback</button>
+              </div>
+              <div *ngIf="appointment.status === 'Completed'">
+                <button class="btn btn-success btn-sm">Thank you</button>
+              </div>
             </div>
           </td>
         </tr>
@@ -118,5 +124,5 @@
     </div>
   </div>
 </div>
-
+ 
 <app-footer></app-footer>

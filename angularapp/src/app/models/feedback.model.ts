@@ -6,4 +6,5 @@ export interface Feedback {
     user:User;
     message:string;
     rating:number;
+    appointmentId?:number
 }

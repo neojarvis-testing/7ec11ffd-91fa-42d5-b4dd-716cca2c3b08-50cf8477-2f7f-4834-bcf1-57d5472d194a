@@ -13,7 +13,7 @@ export class UserAuthGuard implements CanActivate {
   const isAuthenticated = !!localStorage.getItem('token') && role === 'User';
  
   if (!isAuthenticated) {
-  this.router.navigate(['/login']); // Redirect if not authenticated as admin
+  this.router.navigate(['/unauthorized']); // Redirect if not authenticated as admin
       return false;
     }
     return true;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FeedbackService } from '../services/feedback.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
  
 @Component({
@@ -13,12 +13,13 @@ export class UseraddfeedbackComponent implements OnInit {
   feedbackForm: FormGroup;
   rating: number = 0; // Current selected rating
   maxRating: number = 5; // Maximum stars for rating
- 
+  appointmentId: number; 
   constructor(
     private fb: FormBuilder,
     private feedbackService: FeedbackService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute 
   ) {
     // Initialize the form with Reactive Forms
     this.feedbackForm = this.fb.group({
@@ -28,6 +29,10 @@ export class UseraddfeedbackComponent implements OnInit {
   }
  
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.appointmentId = Number(params.get('id')); // Extract the id from the route
+      console.log('Received appointment ID:', this.appointmentId); // For debugging purposes
+    });
     const userId = this.authService.getUserId();
     if (userId) {
       this.feedbackForm.addControl('user', this.fb.group({ userId: [parseInt(userId, 10)] }));
@@ -43,7 +48,7 @@ export class UseraddfeedbackComponent implements OnInit {
   // Submit feedback
   public submitFeedback(): void {
     if (this.feedbackForm.valid) {
-      this.feedbackService.createFeedback(this.feedbackForm.value).subscribe(() => {
+      this.feedbackService.createFeedback(this.feedbackForm.value,this.appointmentId).subscribe(() => {
         this.router.navigate(['/userviewfeedback']);
       }, error => {
         console.error('Error creating feedback:', error); // Log error for debugging

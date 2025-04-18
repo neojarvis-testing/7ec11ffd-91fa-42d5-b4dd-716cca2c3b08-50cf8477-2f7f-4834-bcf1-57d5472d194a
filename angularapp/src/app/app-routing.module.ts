@@ -24,6 +24,8 @@ import { UserNotificationComponent } from './usernotification/usernotification.c
 import { MapComponent } from './map/map.component';
 import { AdminAuthGuard } from './adminauthguard.guard';
 import { UserAuthGuard } from './userauthguard.guard';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+
 
 
 const routes: Routes = [
@@ -42,7 +44,7 @@ const routes: Routes = [
   {path:"profile",component:ProfileComponent},
   {path:"registration",component:RegistrationComponent},
   {path:"useraddappointment",component:UseraddappointmentComponent, canActivate: [UserAuthGuard]},
-  {path:"useraddfeedback",component:UseraddfeedbackComponent, canActivate: [UserAuthGuard]},
+  {path:"useraddfeedback/:id",component:UseraddfeedbackComponent, canActivate: [UserAuthGuard]},
   {path:"usernavbar",component:UsernavbarComponent, canActivate: [UserAuthGuard]},
   {path:"userviewappointment",component:UserviewappointmentComponent, canActivate: [UserAuthGuard]},
   {path:"userviewfeedback",component:UserviewfeedbackComponent, canActivate: [UserAuthGuard]},
@@ -52,8 +54,8 @@ const routes: Routes = [
   {path:"adminviewreports",component:AdminviewreportsComponent, canActivate: [AdminAuthGuard]},
   {path:"usernotification",component:UserNotificationComponent, canActivate: [UserAuthGuard]},
   {path:"map",component:MapComponent, canActivate: [UserAuthGuard]},
-  {path:"**",component:HomeComponent}
-
+  {path:"unauthorized",component:UnauthorizedComponent},
+  {path:"**",component:HomeComponent},
 
 ];
 

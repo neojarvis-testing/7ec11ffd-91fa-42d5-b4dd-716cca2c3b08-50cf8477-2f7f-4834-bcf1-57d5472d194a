@@ -16,9 +16,9 @@ export class FeedbackService {
  
   constructor(private httpClient:HttpClient) { }
  
-  public createFeedback(feedback:Feedback):Observable<any>{
-    return this.httpClient.post(this.apiUrl+"/api/feedback",feedback);
-  }
+  public createFeedback(feedback: Feedback, appointmentId: number): Observable<any> {
+    return this.httpClient.post(`${this.apiUrl}/api/feedback/${appointmentId}`, feedback);
+}
  
   public getAllFeedback():Observable<any>{
     return this.httpClient.get(this.apiUrl+"/api/feedback")

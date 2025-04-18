@@ -23,12 +23,12 @@ public class FeedbackController {
     // Constructor injection
     public FeedbackController(FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
-    }
+    } 
 
-    @PostMapping("/api/feedback")
-    public ResponseEntity<?> createFeedback(@RequestBody Feedback feedback) {
+    @PostMapping("/api/feedback/{appointmentId}")
+    public ResponseEntity<?> createFeedback(@RequestBody Feedback feedback,@PathVariable long appointmentId) {
         try {
-            Feedback savedFeedback = feedbackService.createFeedback(feedback);
+            Feedback savedFeedback = feedbackService.createFeedback(feedback,appointmentId);
             return ResponseEntity.status(201).body(savedFeedback);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(403).body(e.getMessage());

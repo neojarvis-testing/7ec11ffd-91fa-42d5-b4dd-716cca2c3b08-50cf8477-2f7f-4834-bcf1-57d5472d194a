@@ -31,6 +31,7 @@ import { AdminviewreportsComponent } from './adminviewreports/adminviewreports.c
 import { ChartsModule } from 'ng2-charts';
 import { MapComponent } from './map/map.component';
 import { FooterComponent } from './footer/footer.component';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
  
 @NgModule({
@@ -59,7 +60,8 @@ import { FooterComponent } from './footer/footer.component';
     AdminNotificationComponent,
     AdminviewreportsComponent,
     MapComponent,
-    FooterComponent
+    FooterComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
