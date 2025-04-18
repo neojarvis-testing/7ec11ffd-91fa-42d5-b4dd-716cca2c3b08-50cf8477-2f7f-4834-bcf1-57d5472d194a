@@ -164,18 +164,23 @@ button:last-of-type:hover {
   max-width: 80%;
   text-align: center;
 }
-
+ 
 .popup-content.logout h2 {
   font-size: 20px;
   margin-bottom: 15px;
 }
-
+ 
+.popup-content.logout .button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Added gap to ensure space between buttons */
+}
+ 
 .popup-content.logout button {
   width: 120px;
-  margin: 5px;
   padding: 10px;
 }
-
+ 
 /* Animation for popup */
 @keyframes fadeIn {
   from {
@@ -187,3 +192,4 @@ button:last-of-type:hover {
     transform: scale(1);
   }
 }
+ 

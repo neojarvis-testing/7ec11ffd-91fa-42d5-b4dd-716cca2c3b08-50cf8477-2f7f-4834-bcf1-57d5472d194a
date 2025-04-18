@@ -1,10 +1,12 @@
 <!-- registration.component.html -->
- 
+
 <!-- Registration Form (visible only when OTP has not been sent) -->
+<br><br><br>
 <div *ngIf="!otpSent">
-  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" novalidate>
+  <!-- Note: registrationForm is a FormGroup defined in your component -->
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
     <h4 class="text-center mb-4">Register</h4>
- 
+
     <!-- Username Field -->
     <div class="form-group mb-3">
       <label for="username">Username</label>
@@ -12,54 +14,63 @@
         <input
           type="text"
           id="username"
-          name="username"
+          formControlName="username"
           class="form-control"
-          [(ngModel)]="user.username"
-          required
-          (blur)="onUsernameBlur()"
-          #username="ngModel"
           placeholder="Enter your username"
+          (blur)="onUsernameBlur()"
         />
-        <span *ngIf="!usernameExists && user.username && username.touched && username.valid"
-              class="feedback-tick text-success position-absolute"
-              style="left: 12px; top: 50%; transform: translateY(-50%);">
+        <span
+          *ngIf="!usernameExists && registrationForm.get('username')?.value && registrationForm.get('username')?.touched && registrationForm.get('username')?.valid"
+          class="feedback-tick text-success position-absolute"
+          style="left: 12px; top: 50%; transform: translateY(-50%);"
+        >
           &#10004;
         </span>
       </div>
-      <div *ngIf="username.invalid && username.touched">
-        <small *ngIf="username.errors?.required" class="text-danger">Username is required.</small>
+      <div *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
+        <small
+          *ngIf="registrationForm.get('username')?.errors?.required"
+          class="text-danger"
+        >
+          Username is required.
+        </small>
       </div>
+      <div *ngIf="registrationForm.get('username')?.errors?.pattern" class="text-danger">
+        Username cannot contain spaces.
+      </div>      
       <div *ngIf="usernameExists">
         <small class="text-danger">Username already exists.</small>
       </div>
     </div>
- 
+
     <!-- Email Field -->
     <div class="form-group mb-3">
       <label for="email">Email</label>
       <div class="input-with-feedback position-relative">
-      <input
-        type="email"
-        id="email"
-        name="email"
-        class="form-control"
-        [(ngModel)]="user.email"
-        required
-        pattern="[a-z0-9._%+-]+@[-a-z0-9.]+\.[a-z]{2,}"
-        (blur)="onEmailBlur()"
-        #email="ngModel"
-        placeholder="Enter your email"
-      />
- 
-        <span *ngIf="!emailExists && user.email && email.touched && email.valid"
-              class="feedback-tick text-success position-absolute"
-              style="left: 12px; top: 50%; transform: translateY(-50%);">
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Enter your email"
+          (blur)="onEmailBlur()"
+        />
+        <span
+          *ngIf="!emailExists && registrationForm.get('email')?.value && registrationForm.get('email')?.touched && registrationForm.get('email')?.valid"
+          class="feedback-tick text-success position-absolute"
+          style="left: 12px; top: 50%; transform: translateY(-50%);"
+        >
           &#10004;
         </span>
       </div>
-      <div *ngIf="email.invalid && email.touched">
-        <small *ngIf="email.errors?.required" class="text-danger">Email is required.</small>
-        <small *ngIf="email.errors?.email || email.errors?.pattern" class="text-danger">
+      <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+        <small *ngIf="registrationForm.get('email')?.errors?.required" class="text-danger">
+          Email is required.
+        </small>
+        <small
+          *ngIf="registrationForm.get('email')?.errors?.pattern || registrationForm.get('email')?.errors?.email"
+          class="text-danger"
+        >
           Enter a valid email.
         </small>
       </div>
@@ -67,51 +78,52 @@
         <small class="text-danger">Email is already registered.</small>
       </div>
     </div>
- 
-        <!-- Password Field -->
+
+    <!-- Password Field -->
     <div class="form-group mb-3">
       <label for="password">Password</label>
       <input
         type="password"
         id="password"
-        name="password"
+        formControlName="password"
         class="form-control"
-        [(ngModel)]="user.password"
-        required
-        minlength="8"
-        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$"
-        #password="ngModel"
         placeholder="Create a password"
       />
-      <div *ngIf="password.invalid && password.touched">
-        <small *ngIf="password.errors?.required" class="text-danger">Password is required.</small>
-        <small *ngIf="password.errors?.minlength" class="text-danger">
+      <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+        <small *ngIf="registrationForm.get('password')?.errors?.required" class="text-danger">
+          Password is required.
+        </small>
+        <small *ngIf="registrationForm.get('password')?.errors?.minlength" class="text-danger">
           Password must be at least 8 characters long.
         </small>
-        <small *ngIf="password.errors?.pattern" class="text-danger">
+        <small *ngIf="registrationForm.get('password')?.errors?.pattern" class="text-danger">
           Must include uppercase, lowercase, number, and special character.
         </small>
       </div>
     </div>
- 
- 
+
     <!-- Confirm Password Field -->
     <div class="form-group mb-3">
       <label for="confirmPassword">Confirm Password</label>
       <input
         type="password"
         id="confirmPassword"
-        name="confirmPassword"
+        formControlName="confirmPassword"
         class="form-control"
-        [(ngModel)]="confirmPassword"
-        required
         placeholder="Re-enter your password"
       />
-      <div *ngIf="confirmPassword !== user.password && confirmPassword.length > 0">
+      <!-- Option 1: Use a custom validator on the entire FormGroup -->
+      <div *ngIf="registrationForm.errors?.passwordMismatch && registrationForm.get('confirmPassword')?.touched">
         <small class="text-danger">Passwords do not match.</small>
       </div>
+      <!-- Option 2: Inline check if not using a group-level validator -->
+      <!--
+      <div *ngIf="registrationForm.get('confirmPassword')?.value !== registrationForm.get('password')?.value && registrationForm.get('confirmPassword')?.touched">
+         <small class="text-danger">Passwords do not match.</small>
+      </div>
+      -->
     </div>
- 
+
     <!-- Mobile Number Field -->
     <div class="form-group mb-3">
       <label for="mobileNumber">Mobile Number</label>
@@ -119,24 +131,24 @@
         <input
           type="text"
           id="mobileNumber"
-          name="mobileNumber"
+          formControlName="mobileNumber"
           class="form-control"
-          [(ngModel)]="user.mobileNumber"
-          required
-          pattern="^[0-9]{10}$"
-          (blur)="onMobileBlur()"
-          #mobileNumber="ngModel"
           placeholder="Enter your 10-digit mobile number"
+          (blur)="onMobileBlur()"
         />
-        <span *ngIf="!mobileExists && user.mobileNumber && mobileNumber.touched && mobileNumber.valid"
-              class="feedback-tick text-success position-absolute"
-              style="left: 12px; top: 50%; transform: translateY(-50%);">
+        <span
+          *ngIf="!mobileExists && registrationForm.get('mobileNumber')?.value && registrationForm.get('mobileNumber')?.touched && registrationForm.get('mobileNumber')?.valid"
+          class="feedback-tick text-success position-absolute"
+          style="left: 12px; top: 50%; transform: translateY(-50%);"
+        >
           &#10004;
         </span>
       </div>
-      <div *ngIf="mobileNumber.invalid && mobileNumber.touched">
-        <small *ngIf="mobileNumber.errors?.required" class="text-danger">Mobile number is required.</small>
-        <small *ngIf="mobileNumber.errors?.pattern" class="text-danger">
+      <div *ngIf="registrationForm.get('mobileNumber')?.invalid && registrationForm.get('mobileNumber')?.touched">
+        <small *ngIf="registrationForm.get('mobileNumber')?.errors?.required" class="text-danger">
+          Mobile number is required.
+        </small>
+        <small *ngIf="registrationForm.get('mobileNumber')?.errors?.pattern" class="text-danger">
           Enter a valid 10-digit mobile number.
         </small>
       </div>
@@ -144,44 +156,41 @@
         <small class="text-danger">Mobile number already exists.</small>
       </div>
     </div>
- 
+
     <!-- User Role Field -->
     <div class="form-group mb-3">
       <label for="userRole">User Role</label>
-      <select
-        id="userRole"
-        name="userRole"
-        class="form-control"
-        [(ngModel)]="user.userRole"
-        required
-        #userRole="ngModel"
-      >
+      <select id="userRole" formControlName="userRole" class="form-control">
         <option value="" disabled>Select Role</option>
         <option value="Admin">Admin</option>
         <option value="User">User</option>
       </select>
-      <div *ngIf="userRole.invalid && userRole.touched">
-        <small *ngIf="userRole.errors?.required" class="text-danger">
+      <div *ngIf="registrationForm.get('userRole')?.invalid && registrationForm.get('userRole')?.touched">
+        <small *ngIf="registrationForm.get('userRole')?.errors?.required" class="text-danger">
           User role is required.
         </small>
       </div>
     </div>
- 
+
     <!-- "Send OTP & Register" Button -->
     <div class="text-center">
-      <button type="submit" class="btn btn-primary"
-              [disabled]="registerForm.invalid || confirmPassword !== user.password">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="registrationForm.invalid || (registrationForm.get('confirmPassword')?.value !== registrationForm.get('password')?.value)"
+      >
         Send OTP & Register
       </button>
     </div>
   </form>
 </div>
- 
+
 <!-- OTP Verification Popup -->
 <div *ngIf="otpSent" class="modal">
   <div class="modal-overlay"></div>
   <div class="modal-content">
-    <form (ngSubmit)="verifyOtp()" novalidate>
+    <!-- Assume otpForm is a FormGroup defined in your component -->
+    <form [formGroup]="otpForm" (ngSubmit)="verifyOtp()" novalidate>
       <h4 class="mb-3">OTP Confirmation</h4>
       <p class="mb-2">
         An OTP has been sent to <strong>{{ getMaskedEmail() }}</strong>
@@ -193,19 +202,30 @@
         <input
           type="text"
           class="form-control"
-          [(ngModel)]="otp"
-          name="otp"
+          formControlName="otp"
           placeholder="Enter OTP"
-          required
         />
-        <div *ngIf="!otp && otpSubmitted" class="text-danger mt-1">
+        <div *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched" class="text-danger mt-1">
           OTP is required.
         </div>
       </div>
       <div class="modal-buttons">
         <button type="submit" class="btn btn-success me-2">Verify OTP</button>
-        <button *ngIf="otpTime <= 0" type="button" class="btn btn-link" (click)="resendOtp()">Resend OTP</button>
-        <button type="button" class="btn btn-secondary" (click)="closeOtpPopup()">Cancel</button>
+        <button
+          *ngIf="otpTime <= 0"
+          type="button"
+          class="btn btn-link"
+          (click)="resendOtp()"
+        >
+          Resend OTP
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeOtpPopup()"
+        >
+          Cancel
+        </button>
       </div>
     </form>
   </div>

@@ -27,19 +27,22 @@
                             <a href="#"><i class="bi bi-person-circle"></i></a>
                             <div class="dropdown-menu">
                                 <button (click)="fetchUserDetails()">My Profile</button>
-                                <button (click)="logout()">Logout</button>
+                                <button (click)="showLogoutPopup = true">Logout</button>
                             </div>
                         </li>
                         <!-- Updated bell icon to navigate to usernotification -->
                         <li>
-                            <a style="cursor: pointer;" (click)="navigateToNotifications()"><i class="bi bi-bell"></i></a>
+                            <a style="cursor: pointer;" (click)="navigateToNotifications()">
+                                <i class="bi bi-bell"></i>
+                               
+                            </a>
                         </li>
                     </ul>
                 </nav>  
             </div>
         </div>
     </header>
-
+ 
     <!-- Profile Modal Popup -->
     <div class="popup-overlay" *ngIf="showProfilePopup">
         <div class="popup-content">
@@ -52,8 +55,19 @@
             <button (click)="closeProfilePopup()">Close</button>
         </div>
     </div>
+ 
+    <!-- Logout Confirmation Modal -->
+    <div class="popup-overlay" *ngIf="showLogoutPopup">
+        <div class="popup-content">
+            <h2>Confirm Logout</h2>
+            <p>Are you sure you want to logout?</p>
+            <div class="button-group">
+                <button (click)="confirmLogout()">Yes</button>
+                <button (click)="closeLogoutPopup()">No</button>
+            </div>
+        </div>
+    </div>
 </body>
-
+ 
 <router-outlet></router-outlet>
-
-
+ 

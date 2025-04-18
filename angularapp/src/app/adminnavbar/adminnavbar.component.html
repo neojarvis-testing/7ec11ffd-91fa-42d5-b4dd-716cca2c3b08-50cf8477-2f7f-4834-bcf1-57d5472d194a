@@ -33,7 +33,7 @@
       </nav>
     </div>
   </div>
-
+ 
   <!-- Profile Modal Popup -->
   <div class="popup-overlay" *ngIf="showProfilePopup">
     <div class="popup-content">
@@ -46,15 +46,19 @@
       <button (click)="closeProfilePopup()">Close</button>
     </div>
   </div>
-
+ 
   <!-- Logout Confirmation Modal -->
   <div class="popup-overlay" *ngIf="showLogoutPopup">
-    <div class="popup-content">
+    <div class="popup-content logout">
       <h2>Confirm Logout</h2>
       <p>Are you sure you want to logout?</p>
-      <button (click)="confirmLogout()">Yes</button>
-      <button (click)="closeLogoutPopup()">No</button>
+      <div class="button-group">
+        <button (click)="confirmLogout()">Yes</button>
+        <button (click)="closeLogoutPopup()">No</button>
+      </div>
     </div>
   </div>
 </nav>
 <router-outlet></router-outlet>
+ 
+ 

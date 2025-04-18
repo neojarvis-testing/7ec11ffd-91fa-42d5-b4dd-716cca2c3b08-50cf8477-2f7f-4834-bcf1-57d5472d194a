@@ -21,7 +21,7 @@ import { UseraddfeedbackComponent } from './useraddfeedback/useraddfeedback.comp
 import { UsernavbarComponent } from './usernavbar/usernavbar.component';
 import { UserviewappointmentComponent } from './userviewappointment/userviewappointment.component';
 import { UserviewfeedbackComponent } from './userviewfeedback/userviewfeedback.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { RouterModule } from '@angular/router';
 import { AdminviewdescriptionComponent } from './adminviewdescription/adminviewdescription.component';
@@ -67,7 +67,8 @@ import { FooterComponent } from './footer/footer.component';
     HttpClientModule,
     FormsModule,
     RouterModule,
-    ChartsModule
+    ChartsModule,
+    ReactiveFormsModule
     
   ],
   providers: [

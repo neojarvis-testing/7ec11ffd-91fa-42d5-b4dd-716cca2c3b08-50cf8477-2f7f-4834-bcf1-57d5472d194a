@@ -1,16 +1,14 @@
 <div class="login-container">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h4>Login</h4><br><br>
+
     <label for="username">Username:</label>
     <input
       type="text"
       id="username"
-      name="username"
-      ngModel
-      required
-      #username="ngModel"
+      formControlName="username"
     />
-    <div *ngIf="username.invalid && username.touched" class="error">
+    <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error">
       Username is required.
     </div>
 
@@ -18,13 +16,20 @@
     <input
       type="password"
       id="password"
-      name="password"
-      ngModel
-      required
-      #password="ngModel"
+      formControlName="password"
     />
-    <div *ngIf="password.invalid && password.touched" class="error">
-      Password is required.
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error">
+      <span *ngIf="loginForm.get('password')?.errors?.required">Password is required.</span>
+      <span *ngIf="loginForm.get('password')?.errors?.pattern">
+        Password must include:
+        <ul>
+          <li>At least one uppercase letter</li>
+          <li>At least one lowercase letter</li>
+          <li>At least one number</li>
+          <li>At least one special character ( $, !, %, *, ?, &amp;, #)</li>
+          <li>Minimum length of 8 characters</li>
+        </ul>
+      </span>
     </div>
 
     <button type="submit" [disabled]="loginForm.invalid">Login</button>

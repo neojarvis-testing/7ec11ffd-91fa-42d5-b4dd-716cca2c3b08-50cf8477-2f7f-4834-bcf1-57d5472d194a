@@ -2,11 +2,8 @@ package com.examly.springapp.service;
  
 import java.util.List;
 import java.util.Optional;
- 
 import org.springframework.stereotype.Service;
- 
 import com.examly.springapp.model.Appointment;
-import com.examly.springapp.model.Feedback;
 import com.examly.springapp.model.Notification;
 import com.examly.springapp.model.User;
 import com.examly.springapp.model.VehicleMaintenance;
@@ -14,7 +11,6 @@ import com.examly.springapp.repository.AppointmentRepo;
 import com.examly.springapp.repository.NotificationRepo;
 import com.examly.springapp.repository.UserRepo;
 import com.examly.springapp.repository.VehicleServiceRepo;
- 
 import jakarta.persistence.EntityNotFoundException;
  
 @Service

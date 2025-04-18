@@ -4,7 +4,6 @@ import com.examly.springapp.model.Notification;
 import com.examly.springapp.repository.NotificationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
- 
 import java.util.List;
  
 @Service

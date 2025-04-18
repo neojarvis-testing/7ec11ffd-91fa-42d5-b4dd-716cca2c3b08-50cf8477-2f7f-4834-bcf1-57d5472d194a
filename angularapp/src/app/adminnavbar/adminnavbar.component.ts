@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { AppointmentService } from '../services/appointment.service';
 import { AuthUser } from '../models/auth-user.model';
 import { User } from '../models/user.model';
-import { Subscription, interval } from 'rxjs';
+import { Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-adminnavbar',
@@ -98,7 +98,7 @@ export class AdminnavbarComponent implements OnInit, OnDestroy {
 
   public confirmLogout(): void {
     this.authService.logout(); // Call logout logic
-    this.router.navigate(['/login']); // Redirect to login page
+    this.router.navigate(['/home']); // Redirect to login page
     this.showLogoutPopup = false; // Close modal
   }
 

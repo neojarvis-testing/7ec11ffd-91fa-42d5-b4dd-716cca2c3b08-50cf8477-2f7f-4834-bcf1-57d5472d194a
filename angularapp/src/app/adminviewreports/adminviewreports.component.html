@@ -1,6 +1,8 @@
 <body>
   <div class="container">
-    <h2>Admin View Reports</h2>
+    <div class="card-heading">
+      <h1>Admin View Reports</h1>
+    </div>
     <button *ngIf="selectedChart" (click)="clearSelection()">Back to Dashboard</button>
     <div class="dashboard-grid" *ngIf="!selectedChart">
       <!-- Bar Chart -->
@@ -99,3 +101,4 @@
  
   </div>
   </body>
+ 

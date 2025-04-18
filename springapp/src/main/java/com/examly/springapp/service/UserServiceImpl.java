@@ -4,22 +4,18 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-
 import com.examly.springapp.exceptions.DuplicateUserException;
 import com.examly.springapp.model.AuthUser;
 import com.examly.springapp.model.LoginDTO;
 import com.examly.springapp.model.User;
 import com.examly.springapp.repository.UserRepo;
-
 import jakarta.persistence.EntityNotFoundException;
-import com.examly.springapp.config.JwtUtils;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -94,17 +90,6 @@ public class UserServiceImpl implements UserService {
         return userRepo.getUserByName(name);
     }
 
-    @Override
-    public User createUser(User user) {
-        // Unimplemented functionality.
-        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
-    }
-
-    @Override
-    public AuthUser loginUser(LoginDTO user) {
-        // Unimplemented functionality.
-        throw new UnsupportedOperationException("Unimplemented method 'loginUser'");
-    }
 
     public boolean usernameExists(String username) {
         return userRepo.existsByUsername(username);

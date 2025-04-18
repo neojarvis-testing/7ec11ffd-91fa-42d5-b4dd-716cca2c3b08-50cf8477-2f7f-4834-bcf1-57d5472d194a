@@ -5,7 +5,7 @@ body {
   padding: 0;
   background-color: #f4f4f4;
 }
-
+ 
 .navbar {
   background: linear-gradient(135deg, #333, #444);
   color: #fff;
@@ -17,12 +17,12 @@ body {
   box-sizing: border-box;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
+ 
 .navbar h1 {
   margin: 0;
   font-size: 24px;
 }
-
+ 
 .admin-section nav ul {
   list-style-type: none;
   margin: 0;
@@ -30,11 +30,11 @@ body {
   display: flex;
   gap: 20px;
 }
-
+ 
 .admin-section nav ul li {
   position: relative;
 }
-
+ 
 .admin-section nav ul li a {
   color: #fff;
   text-decoration: none;
@@ -42,25 +42,26 @@ body {
   display: block;
   transition: background-color 0.3s, box-shadow 0.3s, border-radius 0.3s, transform 0.2s;
 }
-
+ 
 .admin-section nav ul li a:hover {
   background-color: #575757;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   transform: scale(1.05);
 }
-
+ 
 .admin-section nav ul li a i {
   font-size: 20px;
   vertical-align: middle;
 }
-
+ 
 /* Dropdown and Hover Card */
 .hover-card .card,
 .profile-dropdown .dropdown-menu {
   display: none;
   position: absolute;
   top: 100%;
+  right: 0;
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -68,12 +69,12 @@ body {
   padding: 10px;
   animation: fadeIn 0.3s ease;
 }
-
+ 
 .hover-card:hover .card,
 .profile-dropdown:hover .dropdown-menu {
   display: block;
 }
-
+ 
 .card button,
 .dropdown-menu button {
   background-color: transparent;
@@ -88,14 +89,14 @@ body {
   margin: 5px 0;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
+ 
 .card button:hover,
 .dropdown-menu button:hover {
-  background-color: #007bff;
+  background-color: #575757;
   color: white;
   transform: scale(1.05);
 }
-
+ 
 /* Profile Modal Popup */
 .popup-overlay {
   position: fixed;
@@ -109,7 +110,7 @@ body {
   align-items: center;
   z-index: 1000;
 }
-
+ 
 .popup-content {
   background-color: white;
   padding: 20px;
@@ -120,39 +121,45 @@ body {
   text-align: center;
   animation: fadeIn 0.3s ease;
 }
-
+ 
 .popup-content h2 {
   margin-top: 0;
 }
-
+ 
 .popup-content p {
   margin: 10px 0;
 }
-
+ 
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Added gap to ensure spacing between buttons */
+}
+ 
 button {
   margin-top: 15px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #575757;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
+ 
 button:hover {
-  background-color: #0056b3;
+  background-color: #575757;
   transform: scale(1.05);
 }
-
+ 
 button:last-of-type {
   background-color: #dc3545;
 }
-
+ 
 button:last-of-type:hover {
   background-color: #c82333;
 }
-
+ 
 /* Animation for popup */
 @keyframes fadeIn {
   from {
@@ -164,3 +171,21 @@ button:last-of-type:hover {
     transform: scale(1);
   }
 }
+ 
+/* Notification Badge */
+.notification-badge {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+ 

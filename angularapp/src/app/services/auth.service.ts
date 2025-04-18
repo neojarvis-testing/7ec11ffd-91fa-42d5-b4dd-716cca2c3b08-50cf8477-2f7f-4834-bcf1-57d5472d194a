@@ -36,9 +36,10 @@ export class AuthService {
           localStorage.setItem('username', response.username);
           localStorage.setItem('userId', response.userId);
           console.log('Local storage after login:', localStorage);
-          // this.router.navigate(["/home"]);
+          this.router.navigate(["/home"]);
       }, error => {
         console.error('Login failed:', error);
+        alert('Invalid credentials. Please re-enter the correct username and password to login.');
       });
   }
 

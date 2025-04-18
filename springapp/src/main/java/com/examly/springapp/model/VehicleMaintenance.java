@@ -4,6 +4,7 @@ import jakarta.persistence.GenerationType;
 
 import java.io.Serializable;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;

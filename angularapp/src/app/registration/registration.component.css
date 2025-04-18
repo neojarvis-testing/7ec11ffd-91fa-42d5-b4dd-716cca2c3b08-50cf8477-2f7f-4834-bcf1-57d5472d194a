@@ -24,9 +24,9 @@ body {
 
 /* --- Container Styling --- */
 .container {
-    margin-top: 70px; /* Ensures content starts below the navbar */
+  margin-top: 70px; /* Ensures content starts below the navbar */
   padding: 20px; /* Adds internal spacing */
- 
+  position: relative;
 }
 
 /* --- Form Container --- */

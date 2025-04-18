@@ -1,51 +1,45 @@
- 
 <div class="container">
   <h2>{{ serviceId ? 'Edit Service' : 'Add Service' }}</h2>
-  <form #serviceForm="ngForm" (ngSubmit)="addService(serviceForm)">
+  <form [formGroup]="serviceForm" (ngSubmit)="addService()">
     <div>
       <label for="serviceName">Service Name:</label>
-      <input type="text" id="serviceName" name="serviceName" [(ngModel)]="vehiclemaintenance.serviceName" ngModel
-        required #serviceName="ngModel" />
-      <div *ngIf="serviceName.invalid && serviceName.touched">
+      <input type="text" id="serviceName" formControlName="serviceName" />
+      <div *ngIf="serviceForm.get('serviceName').invalid && serviceForm.get('serviceName').touched">
         Service Name is required.
       </div>
     </div>
  
     <div>
       <label for="servicePrice">Service Price:</label>
-      <input type="number" id="servicePrice" name="servicePrice" [(ngModel)]="vehiclemaintenance.servicePrice" ngModel
-        required min="0" #servicePrice="ngModel" />
-      <div *ngIf="servicePrice.invalid && servicePrice.touched">
+      <input type="number" id="servicePrice" formControlName="servicePrice" />
+      <div *ngIf="serviceForm.get('servicePrice').invalid && serviceForm.get('servicePrice').touched">
         Service Price is required and must be a positive number.
       </div>
     </div>
  
     <div>
       <label for="vehicleType">Type of Vehicle:</label>
-      <select id="vehicleType" name="vehicleType" [(ngModel)]="vehiclemaintenance.typeOfVehicle" ngModel required
-        #vehicleType="ngModel">
-        <option value="" disabled selected>Select Vehicle Type</option>
+      <select id="vehicleType" formControlName="typeOfVehicle">
+        <option value="" disabled>Select Vehicle Type</option>
         <option value="Bike">Bike</option>
         <option value="Car">Car</option>
         <option value="Truck">Truck</option>
         <option value="Auto">Auto</option>
         <option value="Bus">Bus</option>
       </select>
-      <div *ngIf="vehicleType.invalid && vehicleType.touched">
+      <div *ngIf="serviceForm.get('typeOfVehicle').invalid && serviceForm.get('typeOfVehicle').touched">
         Please select a vehicle type.
       </div>
     </div>
  
     <div>
       <label for="description">Description:</label>
-      <textarea id="description" name="description" [(ngModel)]="vehiclemaintenance.description" ngModel
-        required #description="ngModel" rows="4" cols="60" placeholder="Service Description"></textarea>
-      <div *ngIf="description.invalid && description.touched">
+      <textarea id="description" formControlName="description" rows="4" cols="60" placeholder="Describe Service"></textarea>
+      <div *ngIf="serviceForm.get('description').invalid && serviceForm.get('description').touched">
         Description is required.
       </div>
     </div>
-   
-   
+ 
     <button type="submit" [disabled]="serviceForm.invalid">{{ serviceId ? 'Update Service' : 'Add Service' }}</button>
   </form>
 </div>
@@ -54,5 +48,3 @@
   <p>{{ serviceId ? 'Service Updated Successfully' : 'Service Added Successfully' }}</p>
   <button (click)="closePopup()">Ok</button>
 </div>
- 
- 

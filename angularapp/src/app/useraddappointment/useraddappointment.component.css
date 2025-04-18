@@ -1,55 +1,152 @@
+/* General Styling */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
-.header {
-  text-align: center;
-  margin-top: 20px;
-  color: #007bff;
+ 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
 }
-.section-container {
-  padding: 20px;
-}
-.available-services {
-  background: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-}
-.search-container {
-  margin-bottom: 20px;
-}
-.search-container input {
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 10px;
-}
-#servicesTable {
-  margin-top: 20px;
-}
-#servicesTable thead th {
-  text-align: center;
-}
-#servicesTable tbody td {
-  text-align: center;
-}
-
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ 
+/* Header Card Styling */
+.header-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
   border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+ 
+.header {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #333;
+  font-weight: bold;
+}
+ 
+/* Search Bar Styling */
+.search-bar .input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+ 
+.search-bar .form-control {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+ 
+.search-bar .btn-primary {
+  border-radius: 0;
+  background-color: #575757;
+  color: #fff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+ 
+.search-bar .btn-primary:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+ 
+.input-group-text {
+  background-color: #f8f8f8;
+  border: none;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.input-group-text i {
+  font-size: 1.2rem;
+  color: #333;
+}
+ 
+/* Service Cards */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+ 
+.card .card-title {
+  font-weight: bold;
+  color: #333;
+}
+ 
+.card .card-text {
+  color: #666;
+}
+ 
+.card-footer {
+  background: none;
+  border-top: none;
+}
+ 
+/* Buttons */
+.btn-primary {
+  background-color: #575757;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #fff;
+}
+ 
+.btn-primary:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+ 
+.fa-calendar-plus {
+  margin-right: 5px;
+}
+ 
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+ 
+.btn-success:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+ 
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+ 
+.popup-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-width: 90%;
   text-align: center;
 }
-.error {
-  color: red;
-  font-size: 12px;
-}
-.carousel-inner img {
-  height: 450px;
-  object-fit: cover;
-}
+ 
