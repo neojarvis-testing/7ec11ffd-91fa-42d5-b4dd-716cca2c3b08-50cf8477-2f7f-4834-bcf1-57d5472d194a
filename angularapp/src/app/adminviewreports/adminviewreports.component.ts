@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from '../models/appointment.model';
 import { AppointmentService } from '../services/appointment.service';
-import { ChartConfiguration, ChartOptions, ChartType } from 'chart.js';
- 
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { Color, Label } from 'ng2-charts';
+
 @Component({
   selector: 'app-adminviewreports',
   templateUrl: './adminviewreports.component.html',
   styleUrls: ['./adminviewreports.component.css']
 })
 export class AdminviewreportsComponent implements OnInit {
- 
+
   appointments: Appointment[] = [];
   selectedChart: string | null = null;
- 
+
   constructor(private appointmentService: AppointmentService) { }
- 
+
   ngOnInit(): void {
     this.loadAppointments();
   }
- 
- 
+
   // Bar Chart
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -28,14 +28,24 @@ export class AdminviewreportsComponent implements OnInit {
         display: true,
         position: 'top',
       }
-    }
+    },
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,  // Ensures labels start from 0
+            stepSize: 1         // Force labels to use whole numbers
+          },
+        },
+      ],
+    },
   };
-  barChartLabels: string[] = [];
+  barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
-  barChartData: ChartConfiguration['data']['datasets'] = [
-    { data: [], label: 'Service Price', backgroundColor: [] }
+  barChartData: ChartDataSets[] = [
+    { data: [], label: 'Services', backgroundColor: [] }
   ];
- 
+
   // Pie Chart
   pieChartOptions: ChartOptions = {
     responsive: true,
@@ -46,102 +56,125 @@ export class AdminviewreportsComponent implements OnInit {
       }
     }
   };
-  pieChartLabels: string[] = [];
+  pieChartLabels: Label[] = [];
   pieChartData: number[] = [];
   pieChartType: ChartType = 'pie';
-  pieChartColors: any[] = [{ backgroundColor: [] }];
- 
+  pieChartColors: Color[] = [{ backgroundColor: [] }];
+
   // New Charts
-  vehicleTypeChartLabels: string[] = [];
+  vehicleTypeChartLabels: Label[] = [];
   vehicleTypeChartData: number[] = [];
   vehicleTypeChartType: ChartType = 'pie';
-  vehicleTypeChartColors: any[] = [{ backgroundColor: [] }];
- 
-  locationChartLabels: string[] = [];
+  vehicleTypeChartColors: Color[] = [{ backgroundColor: [] }];
+
+  locationChartLabels: Label[] = [];
   locationChartData: number[] = [];
   locationChartType: ChartType = 'pie';
-  locationChartColors: any[] = [{ backgroundColor: [] }];
- 
-  userRoleChartLabels: string[] = [];
+  locationChartColors: Color[] = [{ backgroundColor: [] }];
+
+  userRoleChartLabels: Label[] = [];
   userRoleChartData: number[] = [];
   userRoleChartType: ChartType = 'pie';
-  userRoleChartColors: any[] = [{ backgroundColor: [] }];
- 
+  userRoleChartColors: Color[] = [{ backgroundColor: [] }];
+
+  // Line Chart for Number of Services Booked
+  public servicesByDateOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        type: 'time',
+        time: {
+          unit: 'day'
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Date'
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,  // Ensures labels start from 0
+          stepSize: 1         // Force labels to use whole numbers
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Number of Services'
+        }
+      }]
+    }
+  };
+  public servicesByDateLabels: Label[] = [];
+  public servicesByDateType: ChartType = 'line';
+  public servicesByDateLegend = true;
+  public servicesByDateData: ChartDataSets[] = [{
+    data: [],
+    label: 'Number of Services Booked',
+    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    borderColor: 'rgba(75, 192, 192, 1)',
+    borderWidth: 2,
+    fill: false
+  }];
+
   public loadAppointments() {
     this.appointmentService.getAppointments().subscribe(data => {
       this.appointments = data;
+      console.log('Appointments:', this.appointments); // Debugging line
       this.updateCharts();
+      this.processAppointmentData();
     });
   }
- 
+
   public updateCharts() {
-    const serviceNames = this.appointments.map(a => a.service.serviceName);
-    const servicePrices = this.appointments.map(a => a.service.servicePrice);
-    const statusCounts = this.getStatusCounts();
-    const vehicleTypeCounts = this.getVehicleTypeCounts();
-    const locationCounts = this.getLocationCounts();
-   
- 
+    const serviceCounts = this.getCounts(this.appointments.map(a => a.service.serviceName));
+    console.log('Service Counts:', serviceCounts); // Debugging line
+    const statusCounts = this.getCounts(this.appointments.map(a => a.status));
+    const vehicleTypeCounts = this.getCounts(this.appointments.map(a => a.service.typeOfVehicle));
+    const locationCounts = this.getCounts(this.appointments.map(a => a.location));
+
     // Update Bar Chart
-    this.barChartLabels = serviceNames;
-    this.barChartData[0].data = servicePrices;
-    this.barChartData[0].backgroundColor = this.generateColors(servicePrices.length);
- 
+    this.barChartLabels = Object.keys(serviceCounts);
+    this.barChartData[0].data = Object.values(serviceCounts);
+    this.barChartData[0].backgroundColor = this.generateColors(Object.keys(serviceCounts).length);
+
     // Update Pie Chart
     this.pieChartLabels = Object.keys(statusCounts);
     this.pieChartData = Object.values(statusCounts);
-    this.pieChartColors[0].backgroundColor = this.generateColors(this.pieChartData.length);
- 
+    this.pieChartColors[0].backgroundColor = this.generateColors(Object.keys(statusCounts).length);
+
     // Update Vehicle Type Chart
     this.vehicleTypeChartLabels = Object.keys(vehicleTypeCounts);
     this.vehicleTypeChartData = Object.values(vehicleTypeCounts);
-    this.vehicleTypeChartColors[0].backgroundColor = this.generateColors(this.vehicleTypeChartData.length);
- 
+    this.vehicleTypeChartColors[0].backgroundColor = this.generateColors(Object.keys(vehicleTypeCounts).length);
+
     // Update Location Chart
     this.locationChartLabels = Object.keys(locationCounts);
     this.locationChartData = Object.values(locationCounts);
-    this.locationChartColors[0].backgroundColor = this.generateColors(this.locationChartData.length);
- 
-   
+    this.locationChartColors[0].backgroundColor = this.generateColors(Object.keys(locationCounts).length);
   }
- 
-  public getStatusCounts() {
-    const statusCounts: { [key: string]: number } = {};
+
+  public processAppointmentData() {
+    const servicesByDate: { [key: string]: number } = {};
+
     this.appointments.forEach(appointment => {
-      if (statusCounts[appointment.status]) {
-        statusCounts[appointment.status]++;
-      } else {
-        statusCounts[appointment.status] = 1;
-      }
+      const date = new Date(appointment.appointmentDate).toISOString().split('T')[0];
+
+      if (!servicesByDate[date]) servicesByDate[date] = 0;
+      servicesByDate[date] += 1;
     });
-    return statusCounts;
+
+    const sortedDates = Object.keys(servicesByDate).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
+
+    this.servicesByDateLabels = sortedDates;
+    this.servicesByDateData[0].data = sortedDates.map(date => servicesByDate[date]);
   }
- 
-  public getVehicleTypeCounts() {
-    const vehicleTypeCounts: { [key: string]: number } = {};
-    this.appointments.forEach(appointment => {
-      if (vehicleTypeCounts[appointment.service.typeOfVehicle]) {
-        vehicleTypeCounts[appointment.service.typeOfVehicle]++;
-      } else {
-        vehicleTypeCounts[appointment.service.typeOfVehicle] = 1;
-      }
-    });
-    return vehicleTypeCounts;
+
+  public getCounts(arr: string[]): { [key: string]: number } {
+    return arr.reduce((acc, value) => {
+      acc[value] = (acc[value] || 0) + 1;
+      return acc;
+    }, {});
   }
- 
-  public getLocationCounts() {
-    const locationCounts: { [key: string]: number } = {};
-    this.appointments.forEach(appointment => {
-      if (locationCounts[appointment.location]) {
-        locationCounts[appointment.location]++;
-      } else {
-        locationCounts[appointment.location] = 1;
-      }
-    });
-    return locationCounts;
-  }
- 
- 
+
   public generateColors(count: number): string[] {
     const colors: string[] = [];
     for (let i = 0; i < count; i++) {
@@ -149,11 +182,11 @@ export class AdminviewreportsComponent implements OnInit {
     }
     return colors;
   }
- 
+
   public selectChart(chart: string) {
     this.selectedChart = chart;
   }
- 
+
   public clearSelection() {
     this.selectedChart = null;
   }

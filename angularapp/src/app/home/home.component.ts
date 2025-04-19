@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public currentImage: string;
   public role: string = 'guest';
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private cdr: ChangeDetectorRef) {
     this.currentImage = this.images[0];
   }
 
@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     const storedRole = localStorage.getItem('userRole');
     this.role = storedRole ? storedRole : 'guest';
     console.log('User Role:', this.role);
+
+    // Manually trigger change detection to ensure the component renders immediately
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy(): void {

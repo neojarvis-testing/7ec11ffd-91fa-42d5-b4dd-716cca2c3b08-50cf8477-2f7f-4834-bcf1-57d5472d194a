@@ -29,7 +29,7 @@ public class Notification implements Serializable{
  
     private String message;
     private boolean isRead; // To track if the notification has been read
-    private LocalDateTime timestamp; // Timestamp of when the notification was created
+    // private String timestamp; // Timestamp of when the notification was created
  
     @ManyToOne
     @JoinColumn(name = "userId")

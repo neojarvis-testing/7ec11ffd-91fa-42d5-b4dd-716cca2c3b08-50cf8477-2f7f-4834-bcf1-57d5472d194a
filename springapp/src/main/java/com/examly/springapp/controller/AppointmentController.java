@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,17 +91,18 @@ public class AppointmentController {
     // New Endpoint: Request Payment for an Appointment
     @PutMapping("/api/appointment/{appointmentId}/request-payment")
     public ResponseEntity<?> requestPayment(@PathVariable Long appointmentId) {
-    try {
-        ((AppointmentServiceImpl) appointmentService).requestPayment(appointmentId);
-        // Return a JSON response
-        return ResponseEntity.ok().body(Map.of("message", "Payment request sent successfully."));
-    } catch (EntityNotFoundException e) {
-        return ResponseEntity.status(404).body(Map.of("error", e.getMessage()));
-    } catch (Exception e) {
-        return ResponseEntity.status(500).body(Map.of("error", "Error requesting payment: " + e.getMessage()));
+        try {
+            ((AppointmentServiceImpl) appointmentService).requestPayment(appointmentId);
+            // Return a JSON response
+            return ResponseEntity.ok().body(Map.of("message", "Payment request sent successfully."));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(404).body(Map.of("error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", "Error requesting payment: " + e.getMessage()));
+        }
     }
-}
-// Get the count of unread appointments
+
+    // Get the count of unread appointments
     @GetMapping("/unread-count")
     public ResponseEntity<Map<String, Integer>> getUnreadCount() {
         int unreadCount = appointmentService.countUnreadAppointments();

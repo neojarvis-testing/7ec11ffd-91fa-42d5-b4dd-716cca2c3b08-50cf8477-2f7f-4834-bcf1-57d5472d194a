@@ -17,7 +17,7 @@ public class UserPrinciple implements UserDetails{
     private String password;
     private List<GrantedAuthority> authorities = new ArrayList<>();
  
- 
+
     public UserPrinciple(User user){
         this.username = user.getUsername();
         this.password = user.getPassword();

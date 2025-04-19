@@ -71,6 +71,7 @@ export class UserviewappointmentComponent implements OnInit, AfterViewInit, OnDe
   // Search appointments based on text input
   public searchData(): void {
     const sub = this.appointmentService.getAppointmentsByUser(this.userId).subscribe(data => {
+      this.getAppointments();
       this.appointments = data.filter(b =>
         JSON.stringify(b).toLowerCase().includes(this.inp.toLowerCase())
       );

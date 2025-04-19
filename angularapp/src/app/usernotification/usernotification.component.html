@@ -3,6 +3,7 @@
   <ul>
     <li *ngFor="let notification of notifications; let i = index" class="notification-item">
       <div class="notification-header">
+        <!-- Cross icon to delete a notification -->
         <i class="bi bi-x close-icon" (click)="removeNotification(i)"></i>
       </div>
       <div class="notification-message">{{ notification.message }}</div>
@@ -14,5 +15,5 @@
     </li>
   </ul>
 </div>
-
+ 
 <app-footer></app-footer>

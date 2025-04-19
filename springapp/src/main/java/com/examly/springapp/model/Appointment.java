@@ -3,6 +3,7 @@ package com.examly.springapp.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,5 +37,8 @@ public class Appointment implements Serializable{
     @JoinColumn(name="userId")
     // @JsonIgnore
     private User user;
+
+    @Column(name = "is_payment_requested", nullable = false)
+    private Boolean isPaymentRequested = false;
        
 }

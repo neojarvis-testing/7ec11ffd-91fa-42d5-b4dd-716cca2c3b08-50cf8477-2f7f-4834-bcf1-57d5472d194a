@@ -1,12 +1,9 @@
-<!-- registration.component.html -->
-
 <!-- Registration Form (visible only when OTP has not been sent) -->
 <br><br><br>
 <div *ngIf="!otpSent">
-  <!-- Note: registrationForm is a FormGroup defined in your component -->
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
     <h4 class="text-center mb-4">Register</h4>
-
+ 
     <!-- Username Field -->
     <div class="form-group mb-3">
       <label for="username">Username</label>
@@ -42,7 +39,7 @@
         <small class="text-danger">Username already exists.</small>
       </div>
     </div>
-
+ 
     <!-- Email Field -->
     <div class="form-group mb-3">
       <label for="email">Email</label>
@@ -78,17 +75,25 @@
         <small class="text-danger">Email is already registered.</small>
       </div>
     </div>
-
+ 
     <!-- Password Field -->
     <div class="form-group mb-3">
       <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        formControlName="password"
-        class="form-control"
-        placeholder="Create a password"
-      />
+      <div class="input-with-feedback position-relative">
+        <input
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="Create a password"
+        />
+        <i
+          class="bi"
+          [ngClass]="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"
+          (click)="togglePasswordVisibility()"
+          style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+        ></i>
+      </div>
       <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
         <small *ngIf="registrationForm.get('password')?.errors?.required" class="text-danger">
           Password is required.
@@ -101,29 +106,30 @@
         </small>
       </div>
     </div>
-
+ 
     <!-- Confirm Password Field -->
     <div class="form-group mb-3">
       <label for="confirmPassword">Confirm Password</label>
-      <input
-        type="password"
-        id="confirmPassword"
-        formControlName="confirmPassword"
-        class="form-control"
-        placeholder="Re-enter your password"
-      />
-      <!-- Option 1: Use a custom validator on the entire FormGroup -->
+      <div class="input-with-feedback position-relative">
+        <input
+          [type]="isConfirmPasswordVisible ? 'text' : 'password'"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          class="form-control"
+          placeholder="Re-enter your password"
+        />
+        <i
+          class="bi"
+          [ngClass]="isConfirmPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"
+          (click)="toggleConfirmPasswordVisibility()"
+          style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+        ></i>
+      </div>
       <div *ngIf="registrationForm.errors?.passwordMismatch && registrationForm.get('confirmPassword')?.touched">
         <small class="text-danger">Passwords do not match.</small>
       </div>
-      <!-- Option 2: Inline check if not using a group-level validator -->
-      <!--
-      <div *ngIf="registrationForm.get('confirmPassword')?.value !== registrationForm.get('password')?.value && registrationForm.get('confirmPassword')?.touched">
-         <small class="text-danger">Passwords do not match.</small>
-      </div>
-      -->
     </div>
-
+ 
     <!-- Mobile Number Field -->
     <div class="form-group mb-3">
       <label for="mobileNumber">Mobile Number</label>
@@ -156,7 +162,7 @@
         <small class="text-danger">Mobile number already exists.</small>
       </div>
     </div>
-
+ 
     <!-- User Role Field -->
     <div class="form-group mb-3">
       <label for="userRole">User Role</label>
@@ -171,7 +177,7 @@
         </small>
       </div>
     </div>
-
+ 
     <!-- "Send OTP & Register" Button -->
     <div class="text-center">
       <button
@@ -185,6 +191,7 @@
   </form>
 </div>
 
+ 
 <!-- OTP Verification Popup -->
 <div *ngIf="otpSent" class="modal">
   <div class="modal-overlay"></div>
@@ -230,3 +237,5 @@
     </form>
   </div>
 </div>
+ 
+ 

@@ -118,4 +118,8 @@ button[type="submit"]:hover {
     opacity: 1;
   }
 }
+
+.error{
+  color: red;
+}
  

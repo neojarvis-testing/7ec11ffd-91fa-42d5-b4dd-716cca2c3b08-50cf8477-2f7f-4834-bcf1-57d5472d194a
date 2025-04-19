@@ -20,12 +20,12 @@ export class AdminnavbarComponent implements OnInit, OnDestroy {
   showProfilePopup: boolean = false; // Control visibility of the profile popup
   showLogoutPopup: boolean = false; // Control visibility of the logout popup
   user: User = { email: "", password: "", username: "", mobileNumber: "", userRole: "" }; // Store user details
+  
 
   private subscriptions: Subscription = new Subscription(); // Manage multiple subscriptions
   private notificationInterval: any; // For setInterval
 
   constructor(
-    private userStore: UserStoreService,
     private authService: AuthService,
     private userService: UserService,
     private router: Router,
@@ -34,14 +34,6 @@ export class AdminnavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadUserFromLocalStorage();
-    const userSubscription = this.userStore.user$.subscribe((user: AuthUser | null) => {
-      if (user) {
-        this.userName = user.username;
-        this.userRole = user.userRole;
-      }
-    });
-    this.subscriptions.add(userSubscription);
-
     // Fetch notification count
     this.fetchNotificationCount();
 
@@ -53,7 +45,6 @@ export class AdminnavbarComponent implements OnInit, OnDestroy {
     const storedUser = localStorage.getItem('authUser');
     if (storedUser) {
       const user: AuthUser = JSON.parse(storedUser);
-      this.userStore.setUser(user);
     }
   }
 

@@ -4,7 +4,7 @@
     <div>
       <label for="serviceName">Service Name:</label>
       <input type="text" id="serviceName" formControlName="serviceName" />
-      <div *ngIf="serviceForm.get('serviceName').invalid && serviceForm.get('serviceName').touched">
+      <div class="error" *ngIf="serviceForm.get('serviceName').invalid && serviceForm.get('serviceName').touched">
         Service Name is required.
       </div>
     </div>

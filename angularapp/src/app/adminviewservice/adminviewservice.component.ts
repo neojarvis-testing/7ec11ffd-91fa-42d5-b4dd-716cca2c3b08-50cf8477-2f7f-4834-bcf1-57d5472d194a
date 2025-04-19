@@ -48,9 +48,19 @@ export class AdminviewserviceComponent implements OnInit, OnDestroy {
   }
 
   public deleteService(serviceId: number): void {
-    const deleteSubscription = this.vehicleService.deleteService(serviceId).subscribe(() => {
-      this.getAllServices();
+    const deleteSubscription = this.vehicleService.deleteService(serviceId).subscribe({
+      next: () => {
+        this.getAllServices();
+      },
+      error: (err) => {
+        if (err.status === 400) { // Assuming status code 400 means 'service already booked'
+          alert('Service already booked.');
+        } else {
+          alert('Service already booked so cannot be deleted');
+        }
+      }
     });
+  
     this.subscriptions.add(deleteSubscription);
   }
 

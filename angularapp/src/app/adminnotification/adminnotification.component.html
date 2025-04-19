@@ -1,5 +1,6 @@
 <div class="notification-container">
   <h2>New Appointments</h2>
+  <!-- Table for displaying notifications -->
   <table class="notification-table">
     <thead>
       <tr>
@@ -9,23 +10,34 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Loop through the appointments array -->
       <tr *ngFor="let appointment of appointments; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ appointment.user?.username }} has booked an appointment.</td>
         <td>
-          <button class="request-payment-btn" (click)="requestPayment(appointment)">Request Payment</button>
-          <button class="show-profile-btn" (click)="showUserProfile(appointment.user.userId)">Show Profile</button>
+          <!-- Request Payment Button -->
+          <button *ngIf="appointment?.status !== 'Approved'" class="request-payment-btn"
+            (click)="requestPayment(appointment)"
+            [disabled]="!appointment?.appointmentId || !appointment?.user?.userId">
+            Request Payment
+          </button>
+          <!-- Show Profile Button -->
+          <button class="show-profile-btn" (click)="showUserProfile(appointment.user.userId)">
+            Show Profile
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
- 
+
   <!-- Display User Details Popup -->
   <div class="overlay" *ngIf="selectedUserDetails">
     <div class="user-details-popup">
       <div class="user-details-header">
         <h3>User Details</h3>
-        <button class="close-popup-btn" (click)="closeUserDetails()">X</button>
+        <button class="close-popup-btn" (click)="closeUserDetails()" aria-label="Close User Details Popup">
+          X
+        </button>
       </div>
       <div class="user-details-content">
         <p><strong>Username:</strong> {{ selectedUserDetails.username }}</p>
@@ -36,7 +48,7 @@
       </div>
     </div>
   </div>
- 
+
   <!-- Payment Popup -->
   <div class="payment-popup" *ngIf="showPaymentPopup">
     <div class="popup-content">

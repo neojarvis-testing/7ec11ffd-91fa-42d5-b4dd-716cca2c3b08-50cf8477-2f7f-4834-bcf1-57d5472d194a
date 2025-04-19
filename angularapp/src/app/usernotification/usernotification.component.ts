@@ -3,7 +3,7 @@ import { NotificationService } from '../services/notification.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-
+ 
 @Component({
   selector: 'app-usernotification',
   templateUrl: './usernotification.component.html',
@@ -12,29 +12,27 @@ import { Subscription } from 'rxjs';
 export class UserNotificationComponent implements OnInit, OnDestroy {
   notifications: any[] = [];
   username: string = ''; // Store the username here
-
+ 
   private subscriptions: Subscription = new Subscription(); // Manage multiple subscriptions
-
+ 
   constructor(
     private notificationService: NotificationService,
     private authService: AuthService,
     private router: Router
   ) {}
-
+ 
   ngOnInit(): void {
-    this.username = this.authService.getUsername() || 'Guest'; // Fetch the username and use 'Guest' as fallback
+    // Fetch the username and use 'Guest' as fallback
+    this.username = this.authService.getUsername() || 'Guest';
     this.fetchNotifications();
   }
-
+ 
   ngOnDestroy(): void {
     // Unsubscribe from all active subscriptions to prevent memory leaks
     this.subscriptions.unsubscribe();
   }
-
-  public fetchUsername(): void {
-    this.username = this.authService.getUsername(); // Replace with actual method to retrieve username
-  }
-
+ 
+  // Fetch the notifications for the logged-in user
   public fetchNotifications(): void {
     const userId = Number(this.authService.getUserId());
     if (userId) {
@@ -51,14 +49,31 @@ export class UserNotificationComponent implements OnInit, OnDestroy {
       console.error('User ID not found. Unable to fetch notifications.');
     }
   }
-
+ 
+  // Handle payment button click
   public handlePayment(notification: any): void {
     console.log(`Processing payment for notification: ${notification.message}`);
     alert('Redirecting to payment page...');
     this.router.navigate(['/userviewappointment']);
   }
-
+ 
+  // Remove a notification by its index and delete it from the backend
   public removeNotification(index: number): void {
-    this.notifications.splice(index, 1); // Simply remove the notification from the array
+    const notification = this.notifications[index]; // Get the notification to be removed
+    if (!notification || !notification.notificationId) {
+      console.error('Notification ID not found. Unable to delete notification.');
+      return;
+    }
+ 
+    const deleteSubscription = this.notificationService.deleteNotification(notification.notificationId).subscribe(
+      () => {
+        console.log(`Notification with ID ${notification.notificationId} deleted successfully.`);
+        this.notifications.splice(index, 1); // Remove the notification from the UI
+      },
+      (error: any) => {
+        console.error('Error deleting notification:', error);
+      }
+    );
+    this.subscriptions.add(deleteSubscription); // Add the subscription to the tracker
   }
 }

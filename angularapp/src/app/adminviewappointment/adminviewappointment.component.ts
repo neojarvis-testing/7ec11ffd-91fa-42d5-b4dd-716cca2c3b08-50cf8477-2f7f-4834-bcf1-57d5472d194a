@@ -55,13 +55,20 @@ export class AdminviewappointmentComponent implements OnInit, OnDestroy {
   }
  
   public deleteAppointment(appointmentId: number): void {
-    const deleteSubscription = this.appointmentService.deleteAppointment(appointmentId).subscribe(data1 => {
-      this.showDeletePopup = false;
-      this.appointmentId = null;
-      this.loadAppointments();
-    });
+    const deleteSubscription = this.appointmentService.deleteAppointment(appointmentId).subscribe(
+      data1 => {
+        // Success scenario
+        this.showDeletePopup = false;
+        this.appointmentId = null;
+        this.loadAppointments();
+      },
+      error => {
+        alert('Cannot cancel, payment processed.');
+      }
+    );
     this.subscriptions.add(deleteSubscription);
   }
+  
  
   public showPopup(id: number): void {
     this.appointmentId = id;

@@ -23,5 +23,9 @@ public class NotificationService {
     public void deleteNotification(Long notificationId) {
         notificationRepo.deleteById(notificationId);
     }
+
+    public List<Notification> getAllNotifications() {
+        return notificationRepo.findAll(); // Fetches all notifications from the database
+    }
+
 }
- 

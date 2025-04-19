@@ -61,7 +61,8 @@
                 <button class="btn btn-success btn-sm" (click)="feedback(appointment.appointmentId)">Give Feedback</button>
               </div>
               <div *ngIf="appointment.status === 'Completed'">
-                <button class="btn btn-success btn-sm">Thank you</button>
+                <!-- <button class="btn btn-success btn-sm">Thank you</button> -->
+                Thank You for your feedback!
               </div>
             </div>
           </td>

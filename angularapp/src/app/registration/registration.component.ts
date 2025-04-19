@@ -4,70 +4,74 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user.model';
 import { Subscription } from 'rxjs';
-
+ 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
-
+ 
   // Reactive form groups for registration & OTP verification
   registrationForm!: FormGroup;
   otpForm!: FormGroup;
-
+ 
+  // Properties to toggle password visibility
+  isPasswordVisible: boolean = false;
+  isConfirmPasswordVisible: boolean = false;
+ 
   // OTP-related properties
   otpSent: boolean = false;             // When true, shows the OTP verification UI
   otpSubmitted: boolean = false;          // Flags an OTP submission attempt for error messages
   otpTime: number = 30;                   // OTP timer in seconds (set to 30 seconds)
   otpTimeDisplay: string = '';            // Timer display in mm:ss format
   timerInterval: any;
-
+ 
   // Duplicate check flags for username, email, and mobile number
   usernameExists: boolean = false;
   emailExists: boolean = false;
   mobileExists: boolean = false;
-
+ 
   private subscriptions: Subscription = new Subscription();
-
+ 
   constructor(
-    private authService: AuthService, 
-    private router: Router, 
+    private authService: AuthService,
+    private router: Router,
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder
   ) {}
-
+ 
   ngOnInit(): void {
     // Define the registration reactive form with custom password matching validator.
     this.registrationForm = this.fb.group({
       username: ['', [
-        Validators.required, 
+        Validators.required,
         Validators.pattern('^\\S+$') // No whitespaces allowed
       ]],
       email: ['', [
-        Validators.required, 
+        Validators.required,
         Validators.pattern('[a-z0-9._%+-]+@[-a-z0-9.]+\\.[a-z]{2,}')
       ]],
       password: ['', [
-        Validators.required, 
+        Validators.required,
         Validators.minLength(8),
         Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/)
       ]],
       confirmPassword: ['', Validators.required],
       mobileNumber: ['', [
-        Validators.required, 
+        Validators.required,
         Validators.pattern('^[6-9][0-9]{9}$') // Must start with 6, 7, 8, or 9 and have 10 digits
       ]],
       userRole: ['', Validators.required]
     }, { validators: this.matchPasswords });
-    
-
+   
+ 
     // Define the OTP verification form.
     this.otpForm = this.fb.group({
       otp: ['', Validators.required]
     });
   }
-
+ 
   ngOnDestroy(): void {
     // Clear the OTP timer interval
     if (this.timerInterval) {
@@ -76,14 +80,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     // Unsubscribe from all active subscriptions.
     this.subscriptions.unsubscribe();
   }
-
+ 
   // Custom validator to match password and confirm password fields
   matchPasswords(group: AbstractControl): { [key: string]: boolean } | null {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
-
+ 
   public onUsernameBlur(): void {
     const username = this.registrationForm.get('username')?.value;
     if (username) {
@@ -94,7 +98,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       this.subscriptions.add(usernameSubscription);
     }
   }
-
+ 
   public onEmailBlur(): void {
     const email = this.registrationForm.get('email')?.value;
     console.log(email);
@@ -106,7 +110,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       this.subscriptions.add(emailSubscription);
     }
   }
-
+ 
   public onMobileBlur(): void {
     const mobileNumber = this.registrationForm.get('mobileNumber')?.value;
     if (mobileNumber) {
@@ -117,14 +121,14 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       this.subscriptions.add(mobileSubscription);
     }
   }
-
+ 
   // Called when the registration form submits.
   public onSubmit(): void {
     // If the form is invalid, do not proceed.
     if (this.registrationForm.invalid) {
       return;
     }
-
+ 
     // Construct the user object from form values.
     const user: User = {
       username: this.registrationForm.get('username')?.value,
@@ -133,7 +137,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       password: this.registrationForm.get('password')?.value,
       userRole: this.registrationForm.get('userRole')?.value
     };
-
+ 
     const otpSubscription = this.authService.sendOtp(user.email)
       .subscribe(
         response => {
@@ -152,7 +156,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       );
     this.subscriptions.add(otpSubscription);
   }
-
+ 
   public startOtpTimer(): void {
     // Reset the timer to 30 seconds and start the countdown.
     this.otpTime = 30;
@@ -168,13 +172,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       }
     }, 1000);
   }
-
+ 
   public updateOtpTimeDisplay(): void {
     const minutes = Math.floor(this.otpTime / 60);
     const seconds = this.otpTime % 60;
     this.otpTimeDisplay = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
-
+ 
   // Called when the OTP form is submitted.
   public verifyOtp(): void {
     this.otpSubmitted = true;
@@ -183,7 +187,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       return;
     }
     const otpValue = this.otpForm.get('otp')?.value;
-
+ 
     // Rebuild the user object from registrationForm values.
     const user: User = {
       username: this.registrationForm.get('username')?.value,
@@ -192,7 +196,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       password: this.registrationForm.get('password')?.value,
       userRole: this.registrationForm.get('userRole')?.value
     };
-
+ 
     const verifySubscription = this.authService.verifyOtpAndRegister(user, otpValue)
       .subscribe(
         res => {
@@ -208,7 +212,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       );
     this.subscriptions.add(verifySubscription);
   }
-
+ 
   public resendOtp(): void {
     const email = this.registrationForm.get('email')?.value;
     const resendSubscription = this.authService.sendOtp(email)
@@ -223,7 +227,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       );
     this.subscriptions.add(resendSubscription);
   }
-
+ 
   // Returns a masked version of the user's email.
   public getMaskedEmail(): string {
     const email = this.registrationForm.get('email')?.value;
@@ -234,11 +238,28 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     const visibleChars = local.length > 4 ? local.slice(-4) : local;
     return '****' + visibleChars + '@' + domain;
   }
-
+ 
   public closeOtpPopup(): void {
     this.otpSent = false;
     if (this.timerInterval) {
       clearInterval(this.timerInterval);
     }
   }
+ 
+    // Method to toggle the visibility of the password field
+  togglePasswordVisibility(): void {
+    this.isPasswordVisible = !this.isPasswordVisible;
+  }
+ 
+  // Method to toggle the visibility of the confirm password field
+  toggleConfirmPasswordVisibility(): void {
+    this.isConfirmPasswordVisible = !this.isConfirmPasswordVisible;
+  }
+ 
 }
+ 
+ 
+ 
+ 
+ 
+ 

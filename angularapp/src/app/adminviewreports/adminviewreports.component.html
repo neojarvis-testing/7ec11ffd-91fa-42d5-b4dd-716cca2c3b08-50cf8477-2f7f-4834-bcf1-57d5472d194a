@@ -1,3 +1,15 @@
+
+
+
+
+
+
+
+
+
+
+
+
 <body>
   <div class="container">
     <div class="card-heading">
@@ -6,8 +18,8 @@
     <button *ngIf="selectedChart" (click)="clearSelection()">Back to Dashboard</button>
     <div class="dashboard-grid" *ngIf="!selectedChart">
       <!-- Bar Chart -->
-      <div class="chart-container" (click)="selectChart('bar')">
-        <h3>Service Prices</h3>
+      <div class="chart-box" (click)="selectChart('bar')">
+        <h3>Services</h3>
         <canvas baseChart
                 [datasets]="barChartData"
                 [labels]="barChartLabels"
@@ -15,9 +27,9 @@
                 [chartType]="barChartType">
         </canvas>
       </div>
- 
+
       <!-- Pie Chart -->
-      <div class="chart-container" (click)="selectChart('pie')">
+      <div class="chart-box" (click)="selectChart('pie')">
         <h3>Appointment Status Distribution</h3>
         <canvas baseChart
                 [data]="pieChartData"
@@ -27,9 +39,9 @@
                 [colors]="pieChartColors">
         </canvas>
       </div>
- 
+
       <!-- Vehicle Type Chart -->
-      <div class="chart-container" (click)="selectChart('vehicleType')">
+      <div class="chart-box" (click)="selectChart('vehicleType')">
         <h3>Vehicle Type Distribution</h3>
         <canvas baseChart
                 [data]="vehicleTypeChartData"
@@ -39,9 +51,9 @@
                 [colors]="vehicleTypeChartColors">
         </canvas>
       </div>
- 
+
       <!-- Location Chart -->
-      <div class="chart-container" (click)="selectChart('location')">
+      <div class="chart-box" (click)="selectChart('location')">
         <h3>Appointment Locations</h3>
         <canvas baseChart
                 [data]="locationChartData"
@@ -51,13 +63,23 @@
                 [colors]="locationChartColors">
         </canvas>
       </div>
- 
-   
+
+      <!-- Line Chart -->
+      <div class="chart-box" (click)="selectChart('line')">
+        <h3>Number of Services Booked</h3>
+        <canvas baseChart
+                [datasets]="servicesByDateData"
+                [labels]="servicesByDateLabels"
+                [options]="servicesByDateOptions"
+                [legend]="servicesByDateLegend"
+                [chartType]="servicesByDateType">
+        </canvas>
+      </div>
     </div>
- 
+
     <!-- Selected Chart View -->
-    <div *ngIf="selectedChart === 'bar'" class="chart-container">
-      <h3>Service Prices</h3>
+    <div *ngIf="selectedChart === 'bar'" class="chart-box">
+      <h3>Services</h3>
       <canvas baseChart
               [datasets]="barChartData"
               [labels]="barChartLabels"
@@ -65,8 +87,8 @@
               [chartType]="barChartType">
       </canvas>
     </div>
- 
-    <div *ngIf="selectedChart === 'pie'" class="chart-container">
+
+    <div *ngIf="selectedChart === 'pie'" class="chart-box">
       <h3>Appointment Status Distribution</h3>
       <canvas baseChart
               [data]="pieChartData"
@@ -76,8 +98,8 @@
               [colors]="pieChartColors">
       </canvas>
     </div>
- 
-    <div *ngIf="selectedChart === 'vehicleType'" class="chart-container">
+
+    <div *ngIf="selectedChart === 'vehicleType'" class="chart-box">
       <h3>Vehicle Type Distribution</h3>
       <canvas baseChart
               [data]="vehicleTypeChartData"
@@ -87,8 +109,8 @@
               [colors]="vehicleTypeChartColors">
       </canvas>
     </div>
- 
-    <div *ngIf="selectedChart === 'location'" class="chart-container">
+
+    <div *ngIf="selectedChart === 'location'" class="chart-box">
       <h3>Appointment Locations</h3>
       <canvas baseChart
               [data]="locationChartData"
@@ -98,7 +120,16 @@
               [colors]="locationChartColors">
       </canvas>
     </div>
- 
+
+    <div *ngIf="selectedChart === 'line'" class="chart-box">
+      <h3>Number of Services Booked</h3>
+      <canvas baseChart
+              [datasets]="servicesByDateData"
+              [labels]="servicesByDateLabels"
+              [options]="servicesByDateOptions"
+              [legend]="servicesByDateLegend"
+              [chartType]="servicesByDateType">
+      </canvas>
+    </div>
   </div>
-  </body>
- 
+</body>
